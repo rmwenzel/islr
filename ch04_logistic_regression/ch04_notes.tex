@@ -1,0 +1,689 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ch04\_notes}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Table of Contents{}
+
+{{4~~}Logistic Regression}
+
+{{4.1~~}An Overview of Classification}
+
+{{4.2~~}Why Not Linear Regression?}
+
+{{4.3~~}Logistic Regression}
+
+{{4.3.1~~}The Logistic Model}
+
+{{4.3.2~~}Estimating the Regression Coefficients}
+
+{{4.3.3~~}Making Predictions}
+
+{{4.3.4~~}Multiple Logistic Regression}
+
+{{4.3.5~~}Logistic Regression for more than two response classes}
+
+{{4.4~~}Linear Discriminant Analysis}
+
+{{4.4.1~~}Bayes Theorem for Classification}
+
+{{4.4.2~~}Linear Discriminant Analysis for p=1}
+
+{{4.4.3~~}Linear Discriminant Analysis for p \textgreater{} 1}
+
+{{4.4.4~~}Quadratic Discriminant Analysis}
+
+{{4.5~~}A Comparison of Classification Methods}
+
+{{4.6~~}Footnotes}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{logistic-regression}{%
+\section{Logistic Regression}\label{logistic-regression}}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{an-overview-of-classification}{%
+\subsection{An Overview of
+Classification}\label{an-overview-of-classification}}
+
+    \begin{itemize}
+\item
+  In \textbf{\emph{classification}} we consider paired data
+  \((\mathbf{X}, Y)\), where \(Y\) is a \textbf{\emph{qualitative
+  variable}}, that is, a finite random variable.
+\item
+  The values \(Y\) takes are called \textbf{\emph{classes}}
+\end{itemize}
+
+    \hypertarget{why-not-linear-regression}{%
+\subsection{Why Not Linear
+Regression?}\label{why-not-linear-regression}}
+
+    Because a linear regression model implies an ordering on the values of
+the response and in general there is no natural ordering on the values
+of a qualitative variable
+
+    \hypertarget{logistic-regression}{%
+\subsection{Logistic Regression}\label{logistic-regression}}
+
+    \hypertarget{the-logistic-model}{%
+\subsubsection{The Logistic Model}\label{the-logistic-model}}
+
+    \begin{itemize}
+\item
+  Consider a quantitiative predictor \(X\) binary response variable
+  \(Y \in {0,1}\)
+\item
+  We want to model the conditional probability of \(Y=1\) given \(X\)
+\end{itemize}
+
+\[ P(X) := P\left(Y=1 | X\right)\]
+
+\begin{itemize}
+\tightlist
+\item
+  We model \(P(X)\) with the \textbf{\emph{logistic function}}
+\end{itemize}
+
+\[ P(X) = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}} \]
+
+\begin{itemize}
+\tightlist
+\item
+  The logistic model can be considered a linear model for the
+  \textbf{\emph{log-odds}} or \textbf{\emph{logit}}
+\end{itemize}
+
+\[\log\left(\frac{P(X)}{1 - P(X)}\right) = \beta_0 + \beta_1 X\]
+
+    \hypertarget{estimating-the-regression-coefficients}{%
+\subsubsection{Estimating the Regression
+Coefficients}\label{estimating-the-regression-coefficients}}
+
+    \begin{itemize}
+\tightlist
+\item
+  The likelihood function for the logistic regression parameter
+  \(\boldsymbol{\beta} = (\beta_0, \beta_1)\) is
+\end{itemize}
+
+\begin{align*}
+\ell(\boldsymbol{\beta}) &= \prod_{i = 1}^n p(x_i)\\
+&= \prod_{i: y_i = 1}p(x_i) \prod_{i: y_i = 0} (1 - p(x_i))
+\end{align*}
+
+\begin{itemize}
+\tightlist
+\item
+  The maximum likelihood estimate (MLE) for the regression parameter is
+\end{itemize}
+
+\[ \hat{\boldsymbol{\beta}} = \underset{\boldsymbol{\beta}\in \mathbb{R}^2}{\text{argmax}\,} \ell(\boldsymbol{\beta})\]
+
+\begin{itemize}
+\tightlist
+\item
+  There isn't a closed form solution for \(\hat{\boldsymbol{\beta}}\) so
+  \href{https://en.wikipedia.org/wiki/Logistic_regression\#Maximum_likelihood_estimation}{it
+  must be found using numerical methods}
+\end{itemize}
+
+    \hypertarget{making-predictions}{%
+\subsubsection{Making Predictions}\label{making-predictions}}
+
+    \begin{itemize}
+\tightlist
+\item
+  The MLE \(\hat{\boldsymbol{\beta}}\) results in an estimate for the
+  conditional probability \(\hat{P}(X)\) which can be used to predict
+  the class \(Y\)
+\end{itemize}
+
+    \hypertarget{multiple-logistic-regression}{%
+\subsubsection{Multiple Logistic
+Regression}\label{multiple-logistic-regression}}
+
+    \begin{itemize}
+\item
+  Multiple logistic regression considers the case of multiple predictors
+  \(\mathbf{X} = (X_1,\dots, X_p)^\top\).
+\item
+  If we write the predictors as
+  \(\mathbf{X} = (1, X_1, \dots, X_p)^\top\), and the parameter
+  \(\boldsymbol(\beta) = (\beta_0, \dots, \beta_p)^\top\) then multiple
+  logistic regression models
+\end{itemize}
+
+\[p(X) = \frac{\exp(\boldsymbol{\beta}^\top \mathbf{X})}{1 + \exp(\boldsymbol{\beta}^\top \mathbf{X})} \]
+
+    \hypertarget{logistic-regression-for-more-than-two-response-classes}{%
+\subsubsection{Logistic Regression for more than two response
+classes}\label{logistic-regression-for-more-than-two-response-classes}}
+
+    \begin{itemize}
+\tightlist
+\item
+  This isn't used often (a
+  \href{https://en.wikipedia.org/wiki/Softmax_function}{softmax} is
+  often used)
+\end{itemize}
+
+    \hypertarget{linear-discriminant-analysis}{%
+\subsection{Linear Discriminant
+Analysis}\label{linear-discriminant-analysis}}
+
+    This is a method for modeling the conditional probability of a
+qualitative response \(Y\) given quantitative predictors \(\mathbf{X}\)
+when \(Y\) takes more than two values. It is useful because:
+
+\begin{itemize}
+\item
+  Parameter estimates for logistic regression are suprisingly unstable
+  when the classes are well separated, but LDA doesn't have this problem
+\item
+  If \(n\) is small and the \(X_i\) are approximately normal in the
+  classes (i.e.~the conditional \(X_i | Y = k\) is approximately normal)
+  LDA is more stable
+\item
+  LDA can accomodate more than two clases
+\end{itemize}
+
+    \hypertarget{bayes-theorem-for-classification}{%
+\subsubsection{Bayes Theorem for
+Classification}\label{bayes-theorem-for-classification}}
+
+    \begin{itemize}
+\item
+  Consider a quantitiative input \(\mathbf{X}\) and qualitative response
+  \(Y \in {1, \dots K}\).
+\item
+  Let \(\pi_k := \mathbb{P}(Y = k)\) be the prior probability that
+  \(Y=k\), let \(p_k(x) := \mathbb{P}(Y = k\ |\ X = x)\) be the
+  posterior probability that \(Y = k\), and let
+  \(f_k(x):= \mathbb{P}(X = x\ |\ Y = k)\). Then Bayes' theorem says:
+\end{itemize}
+
+\[ p_k(x) = \frac{\pi_k f_k(x)}{\sum_{l}\pi_l f_l(x)} \]
+
+\begin{itemize}
+\tightlist
+\item
+  We can form an estimate \(\hat{p}_k(x)\) for \(p_k(x)\) with estimates
+  of \(\pi_k\) and \(f_k(x)\) for each k, and for \(x\) predicts 25
+\end{itemize}
+
+\[\hat{y} = \underset{1 \leqslant k \leqslant K}{\text{argmax}\,} \hat{p}_k(x) \]
+
+    \hypertarget{linear-discriminant-analysis-for-p1}{%
+\subsubsection{Linear Discriminant Analysis for
+p=1}\label{linear-discriminant-analysis-for-p1}}
+
+    \begin{itemize}
+\item
+  Assume that the conditional \$ X\textbar{} Y = k
+  \sim \text{Normal}(\mu\_k, \sigma\_k\^{}2)\$ and that the variances
+  are equal across classes
+  \(\sigma_1^2 = \cdots = \sigma_K^2 = \sigma^2\).
+\item
+  The Bayes classifier predicts \(Y = k\) where \(p_k(x)\) is largest or
+  equivalently \begin{align*}
+  \hat{y}
+  &= \underset{1 \leqslant k \leqslant K}{\text{argmax}\ } \delta_k(x)\\
+  \end{align*} where
+  \[ \delta_k(x) := \left(\frac{\mu_k}{\sigma^2}\right) - \frac{\mu_k^2}{2\sigma^2} + \log(\pi_k)\]
+  is the \textbf{\emph{discriminant function}}26.
+\item
+  The LDA classifier 27 estimates the parameters \begin{align*}
+  \hat{\mu}_k &= \frac{1}{n_k}\sum_{i: y_i = k} x_i\\
+  \hat{\sigma}_k &= \frac{1}{n-K} \sum_{k = 1}^K \sum_{i: y_i = k} \left(x_i - \hat{\mu}_k\right)^2
+  \end{align*} Where \(n_k\) is the number of observations in class
+  \(k\) 28 and predicts
+\end{itemize}
+
+\begin{align*}
+\hat{y} &= \underset{1 \leqslant k \leqslant K}{\text{argmax}\ } \hat{\sigma}_k(x)) \\
+\end{align*}
+
+    \hypertarget{linear-discriminant-analysis-for-p-1}{%
+\subsubsection{Linear Discriminant Analysis for p \textgreater{}
+1}\label{linear-discriminant-analysis-for-p-1}}
+
+    \begin{itemize}
+\item
+  Assume that the conditional
+  \((\mathbf{X}| Y = k) \sim \text{Normal}(\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)\)
+  and that the covariance matrices are equal across classes
+  \(\boldsymbol{\Sigma}_1 = \cdots = \boldsymbol{\Sigma}_K = \boldsymbol{\Sigma}\).
+\item
+  The discriminant functions are
+\end{itemize}
+
+\[\sigma_k(x) = x^\top\boldsymbol{\Sigma}^{-1}\mu_k - \frac{1}{2}\mu_k {\Sigma}^{-1} \mu_k + \log(\pi_k)\]
+
+\begin{itemize}
+\item
+  LDA estimates \(\boldsymbol{\mu}_k\) and \(\boldsymbol{\Sigma}_k\)
+  componentwise \begin{align*}
+  (\hat{\mu}_k)_j &= \frac{1}{n_k}\sum_{i: y_i = k} x_{ij}\\
+  (\hat{\sigma}_k)_j &= \frac{1}{n-K} \sum_{k = 1}^K \sum_{i: y_i = k} \left(x_{ij} - (\hat{\mu}_k)_j\right)^2
+  \end{align*} for \(1 \leqslant j \leqslant p\) as above and predicts
+  \begin{align*}
+  \hat{y} &= \underset{1 \leqslant k \leqslant K}{\text{argmax}\ } \hat{\sigma}_k(x)) \\
+  \end{align*} as above
+\item
+  Confusion matrices help analyze misclassifications for an LDA model 29
+\item
+  The Bayes decision boundary may not be agreeable in every context so
+  sometimes a different decsision boundary (threshold) is used.
+\item
+  An ROC curve is useful for vizualising true vs false positives over
+  different decision thresholds in the binary response case.
+\end{itemize}
+
+    \hypertarget{quadratic-discriminant-analysis}{%
+\subsubsection{Quadratic Discriminant
+Analysis}\label{quadratic-discriminant-analysis}}
+
+    \begin{itemize}
+\item
+  Assume that the conditional
+  \((\mathbf{X}| Y = k) \sim \text{Normal}(\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)\)
+  but assume that the covariance matrices \(\boldsymbol{\Sigma}_k\) are
+  not equal across classes
+\item
+  The discriminant functions are now quadratic in \(x\)
+\end{itemize}
+
+\[\sigma_k(x) = x^\top\boldsymbol{\Sigma}_k^{-1}\mu_k - \frac{1}{2}\mu_k {\Sigma}_k^{-1} \mu_k + \log(\pi_k)\]
+
+\begin{itemize}
+\tightlist
+\item
+  QDA has more degrees of freedom than LDA 30 so generally has lower
+  bias but higher variance.
+\end{itemize}
+
+    \hypertarget{a-comparison-of-classification-methods}{%
+\subsection{A Comparison of Classification
+Methods}\label{a-comparison-of-classification-methods}}
+
+    \begin{itemize}
+\item
+  So far our classification methods are KNN, logistic regression
+  (LogReg), LDA and QDA
+\item
+  LDA and LogReg both produce linear decision boundaries. They often
+  give similar performance results, although LDA tends to outperform
+  when the conditionals \(X | Y = k\) are normally distributed, and not
+  when they aren't
+\item
+  As a non-parametric approach, KNN produces a non-linear decision
+  boundary, so tends to outperform LDA and LogReg when the true decision
+  boundary is highly non-linear. It doesn't help with selecting
+  important predictors
+\item
+  With a quadratic decision boundary, QDA is a compromise between the
+  non-linear KNN and the linear LDA/LogReg
+\end{itemize}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{footnotes}{%
+\subsection{Footnotes}\label{footnotes}}
+
+    \hypertarget{foot25}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{24}
+\tightlist
+\item
+  Recall that that the Bayes classifier predicts
+\end{enumerate}
+
+\[\hat{y} = \underset{1 \leqslant k \leqslant K}{\text{argmax}\,} p_k(x) \]
+
+So we can think of LDA as an esimate of the Bayes Classifier ↩
+
+\hypertarget{foot26}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{25}
+\tightlist
+\item
+  The Bayes decision boundary corresponds to the parameter values
+  \(\boldsymbol{\mu} = (\mu_1, \dots, \mu_K)\),
+  \(\boldsymbol{\sigma} = (\sigma_1, \dots, \sigma_K)\) such that
+  \(\delta_k(x) = \delta_j(x)\) for all \(1 \leqslant j,k \leqslant K\).
+  The Bayes classifier assigns a class \(y\) to an input \(x\) based on
+  where \(x\) falls with respect to this boundary.
+\end{enumerate}
+
+For the case \(K=2\), this is equivalent to assigning \(x\) to class 1
+if \(2x(\mu_1 - \mu_2) > \mu_1^2 - \mu_2^2\). ↩
+
+\hypertarget{foot27}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{26}
+\tightlist
+\item
+  The functions \(\hat{\delta}_k(x)\) are called
+  \textbf{\emph{discriminant}} functions, and since they're linear in
+  \(x\), the method is called linear discriminant analysis. ↩
+\end{enumerate}
+
+\hypertarget{foot28}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{27}
+\tightlist
+\item
+  \(\hat{\mu}_k\) is the average of all observation inputs in the
+  \(k\)-th class, and \(\hat{\sigma}_k\) is a weighted average of the
+  samples variances over the \(K\) classes,\\
+  ↩
+\end{enumerate}
+
+\hypertarget{foot29}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{28}
+\tightlist
+\item
+  False positives and false negatives in the binary case. ↩
+\end{enumerate}
+
+\hypertarget{foot30}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{29}
+\tightlist
+\item
+  \(K\binom{p}{2}\) for QDA versus \(\binom{p}{2}\) for LDA. ↩
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

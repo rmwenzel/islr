@@ -1,0 +1,1209 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ch06\_notes}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Table of Contents{}
+
+{{6~~}Linear Model Selection and Regularization}
+
+{{6.1~~}Subset Selection}
+
+{{6.1.1~~}Best Subset Selection}
+
+{{6.1.1.1~~}Advantages}
+
+{{6.1.1.2~~}Disadvantages}
+
+{{6.1.2~~}Stepwise Selection}
+
+{{6.1.2.1~~}Forward Stepwise Selection}
+
+{{6.1.2.2~~}Backward Stepwise Selection}
+
+{{6.1.2.3~~}Hybrid Approaches}
+
+{{6.1.3~~}Choosing the Optimal Model}
+
+{{6.1.3.1~~}\(C_p\), AIC, BIC and Adjusted \(R^2\)}
+
+{{6.1.3.2~~}Validation and Cross-Validation}
+
+{{6.2~~}Shrinkage Methods}
+
+{{6.2.1~~}Ridge Regression}
+
+{{6.2.2~~}The Lasso}
+
+{{6.2.3~~}Selecting the Tuning Parameter}
+
+{{6.3~~}Dimension Reduction Methods}
+
+{{6.3.1~~}Principal Components Regression}
+
+{{6.3.2~~}Partial Least Squares}
+
+{{6.4~~}Considerations in High Dimensions}
+
+{{6.4.1~~}High-Dimensional Data}
+
+{{6.4.2~~}What Goes Wrong in High Dimensions?}
+
+{{6.4.3~~}Regression in High Dimensions}
+
+{{6.4.4~~}Interpreting Results in High Dimensions}
+
+{{6.5~~}Footnotes}
+
+{{6.5.1~~}blah}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{linear-model-selection-and-regularization}{%
+\section{Linear Model Selection and
+Regularization}\label{linear-model-selection-and-regularization}}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    Alternatives to the least squares fitting procedures can yield better
+
+\begin{itemize}
+\tightlist
+\item
+  prediction accuracy
+\item
+  model interpretability
+\end{itemize}
+
+    \hypertarget{subset-selection}{%
+\subsection{Subset Selection}\label{subset-selection}}
+
+    Methods for selecting a subset of the predictors to improve test
+performance
+
+    \hypertarget{best-subset-selection}{%
+\subsubsection{Best Subset Selection}\label{best-subset-selection}}
+
+    Algorithm: Best Subset Selection (BSS) for linear regression
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Let \(\mathcal{M}_0\) denote the null model35
+\item
+  For \(1 \leqslant k \leqslant p\):
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Fit all \(\binom{p}{k}\) linear regression models with \(k\)
+    predictors
+  \item
+    Let \(\mathcal{M}_k = \underset{\text{models}}{\text{argmin}}\ RSS\)
+  \end{enumerate}
+\item
+  Choose the best model \(\mathcal{M}_i, 1 \leqslant i \leqslant p\)
+  based on estimated test error 36
+\end{enumerate}
+
+For logistic regression, in step 2.A., let
+\(\mathcal{M}_k = \underset{\text{models}}{\text{argmin}}\ D(y, \hat{y})\)
+where \(D(y, \hat{y})\) is the \textbf{\emph{deviance}}37 of the model
+
+    \hypertarget{advantages}{%
+\paragraph{Advantages}\label{advantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Slightly faster than brute force. Model evaluation is \(O(p)\) as
+  opposed to \(O(2^p)\) for brute force.
+\item
+  Conceptually simple
+\end{itemize}
+
+    \hypertarget{disadvantages}{%
+\paragraph{Disadvantages}\label{disadvantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Still very slow. Fitting is \(O(2^p)\) as for brute force
+\item
+  Overfitting and high variance of coefficient estimates when \(p\) is
+  large
+\end{itemize}
+
+    \hypertarget{stepwise-selection}{%
+\subsubsection{Stepwise Selection}\label{stepwise-selection}}
+
+    \hypertarget{forward-stepwise-selection}{%
+\paragraph{Forward Stepwise
+Selection}\label{forward-stepwise-selection}}
+
+    \hypertarget{algorithm-forward-stepwise-selection-fss-for-linear-regression38}{%
+\subparagraph{\texorpdfstring{Algorithm: \textbf{\emph{Forward Stepwise
+Selection}} (FSS) for linear
+regression38}{Algorithm: Forward Stepwise Selection (FSS) for linear regression38}}\label{algorithm-forward-stepwise-selection-fss-for-linear-regression38}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Let \(\mathcal{M}_0\) denote the null model
+\item
+  For \(0 \leqslant k \leqslant p - 1\):
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Fit all \(p-k\) linear regression models that augment model
+    \(\mathcal{M}_k\) with one additional predictor
+  \item
+    Let
+    \(\mathcal{M}_{k+1} = \underset{\text{models}}{\text{argmin}}\ RSS\)
+  \end{enumerate}
+\item
+  Choose the best model \(\mathcal{M}_i, 1 \leqslant i \leqslant p\)
+  based on estimated test error
+\end{enumerate}
+
+    \hypertarget{advantages}{%
+\subparagraph{Advantages}\label{advantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Faster than BSS. Fitting is \(O(p^2)\) and evaluation is \(O(p)\)
+\item
+  Can be applied in the high-dimensional setting \(n < p\)
+\end{itemize}
+
+    \hypertarget{disadvantages}{%
+\subparagraph{Disadvantages}\label{disadvantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Evaluation is more challenging since it compares models with different
+  numbers of predictors.
+\item
+  Searches less of the parameter space, hence may be suboptimal
+\end{itemize}
+
+    \hypertarget{backward-stepwise-selection}{%
+\paragraph{Backward Stepwise
+Selection}\label{backward-stepwise-selection}}
+
+    \hypertarget{algorithm-backward-stepwise-selection-bkss-for-linear-regression-39-is}{%
+\subparagraph{Algorithm: Backward Stepwise Selection (BKSS) for linear
+regression 39
+is}\label{algorithm-backward-stepwise-selection-bkss-for-linear-regression-39-is}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Let \(\mathcal{M}_p\) denote the full model 40
+\item
+  For \(k = p, p-1, \dots, 1\):
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Fit all \(k\) linear regression models of \(k-1\) predictors that
+    contain all but one of the predictors in \(\mathcal{M}_k\).
+  \item
+    Let
+    \(\mathcal{M}_{k-1} = \underset{\text{models}}{\text{argmin}}\ RSS\)
+  \end{enumerate}
+\item
+  Choose the best model \(\mathcal{M}_i, 1 \leqslant i \leqslant p\)
+  based on estimated test error
+\end{enumerate}
+
+    \hypertarget{advantages}{%
+\subparagraph{Advantages}\label{advantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  As fast as FSS
+\end{itemize}
+
+    \hypertarget{disadvantages}{%
+\subparagraph{Disadvantages}\label{disadvantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Same disadvantages as FSS
+\item
+  Cannot be used when \(n < p\)
+\end{itemize}
+
+    \hypertarget{hybrid-approaches}{%
+\paragraph{Hybrid Approaches}\label{hybrid-approaches}}
+
+    Other approaches exist which may add variables sequentially (as with
+FSS) but may also remove variables (as with BSS). These methods strike a
+balance between optimality (e.g.~BSS) and speed (FSS/BSS)
+
+    \hypertarget{choosing-the-optimal-model}{%
+\subsubsection{Choosing the Optimal
+Model}\label{choosing-the-optimal-model}}
+
+    Two common approaches to estimating the test error:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Estimate indirectly by adjusting the training error to account for
+  overfitting bias
+\item
+  Estimate directly using a validation approach
+\end{enumerate}
+
+    \hypertarget{c_p-aic-bic-and-adjusted-r2}{%
+\paragraph{\texorpdfstring{\(C_p\), AIC, BIC and Adjusted
+\(R^2\)}{C\_p, AIC, BIC and Adjusted R\^{}2}}\label{c_p-aic-bic-and-adjusted-r2}}
+
+    \begin{itemize}
+\item
+  Train MSE underestimates test MSE and decreases as \(p\) increases, so
+  it cannot be used to select from models with different numbers of
+  predictors. However we may adjust the training error to account for
+  the model size, and use this to estimate the test MSE
+\item
+  For least squares models, the \textbf{\emph{\(C_p\)}} estimate41 of
+  the test MSE for a model with \(d\) predictors is
+  \[ C_p = \frac{1}{n}(RSS + 2d\hat{\sigma}^2) \]
+
+  where \(\hat{\sigma} = \hat{\mathbb{V}}(\epsilon)\).
+\item
+  For maximum likelihood models42, the \textbf{\emph{Akaike Information
+  Criterion}} (AIC) estimate of the test MSE is
+\end{itemize}
+
+\[ AIC = \frac{1}{n\hat{\sigma}^2}(RSS + 2d\hat{\sigma}^2) \]
+
+\begin{itemize}
+\tightlist
+\item
+  For least squares models, the \textbf{\emph{Bayes Information
+  Criterion}} (BIC) estimate43 of the test MSE is
+\end{itemize}
+
+\[ BIC = \frac{1}{n}(RSS + \log(n)d\hat{\sigma}^2) \]
+
+\begin{itemize}
+\tightlist
+\item
+  For least squares models, the \textbf{\emph{adjusted \(R^2\)}}
+  statistic44 is
+\end{itemize}
+
+\[AdjR^2 = 1 - \frac{RSS/(n - d - 1)}{TSS/(n - 1)}\]
+
+    \hypertarget{validation-and-cross-validation}{%
+\paragraph{Validation and
+Cross-Validation}\label{validation-and-cross-validation}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Instead using adjusted training error to estimate test error
+  indirectly, we can directly estimate using validation or
+  cross-validation
+\item
+  In the past this was computationally prohibitive but advances in
+  computation have made this method very attractive.
+\item
+  In this approach, we can select a model using the
+  \textbf{\emph{one-standard-error}} rule, i.e.~selecting the model for
+  which the estimated standard error is within one standard error of the
+  \(p\) vs.~error curve.
+\end{itemize}
+
+    \hypertarget{shrinkage-methods}{%
+\subsection{Shrinkage Methods}\label{shrinkage-methods}}
+
+    Methods for constraining or \textbf{\emph{regularizing}} the coefficient
+estimates, i.e.~\textbf{\emph{shrinking}} them towards zero. This can
+significantly reduce their variance.
+
+    \hypertarget{ridge-regression}{%
+\subsubsection{Ridge Regression}\label{ridge-regression}}
+
+    \begin{itemize}
+\item
+  Ridge regression introduces an \(L^2\)-penalty45 for the training
+  error and estimates
+  \[\hat{\beta}^R = RSS+\lambda\|\tilde{\beta}\|_2^2\] where \(\lambda\)
+  is a \textbf{\emph{tuning parameter}}46 and
+  \(\tilde{\beta} = (\beta_1, \dots, \beta_p)\)47.
+\item
+  The term \(\lambda\|\beta\|_2^2\) is called a \textbf{\emph{shrinkage
+  penalty}}
+\item
+  Selecting a good value for \(\lambda\) is critical, see section 6.2.3
+\item
+  Standardizing the predictors \(X_i \mapsto \frac{X_i - \mu_i}{s_i}\)
+  is advised.
+\end{itemize}
+
+    \hypertarget{advantages}{%
+\subparagraph{Advantages}\label{advantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Takes advantage of bias-variance tradeoff by decreasing flexibility 48
+  thus decreasing variance.
+\item
+  Preferable to least squares in situations when the latter has high
+  variance (close to linear relationship, \(p \lesssim n\)
+\item
+  In contrast to least squares, works when \(p > n\)
+\end{itemize}
+
+    \hypertarget{disadvantages}{%
+\subparagraph{Disadvantages}\label{disadvantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Lower variance means higher bias.
+\item
+  Will not eliminate any predictors which can be an issue for
+  interpretation when \(p\) is large.
+\end{itemize}
+
+    \hypertarget{the-lasso}{%
+\subsubsection{The Lasso}\label{the-lasso}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Lasso regression introduces an \(L^1\)-penalty 49 for the training
+  error and estimates
+\end{itemize}
+
+\[\hat{\beta}^R = RSS+\lambda\|\tilde{\beta}\|^2_1\]
+
+    \hypertarget{advantages}{%
+\subparagraph{Advantages}\label{advantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Same advantages as ridge regression.
+\item
+  Improves over ridge regression by yielding \textbf{\emph{sparse
+  models}} (i.e.~performs variable selection) when \(\lambda\) is
+  sufficiently large
+\end{itemize}
+
+    \hypertarget{disadvantages}{%
+\subparagraph{Disadvantages}\label{disadvantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Lower variance means higher bias.
+\end{itemize}
+
+    \hypertarget{another-formulation-for-ridge-regression-and-the-lasso}{%
+\subparagraph{Another Formulation for Ridge Regression and the
+Lasso}\label{another-formulation-for-ridge-regression-and-the-lasso}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Ridge Regression is equivalent to the quadratic optimization problem:
+\end{itemize}
+
+\begin{align*}
+\min&\ RSS + \|\tilde{\beta}\|_2\\
+\text{s.t.}&\ \| \tilde{\beta} \|_2^2 \leqslant s
+\end{align*}
+
+\begin{itemize}
+\tightlist
+\item
+  Lasso Regression is equivalent to the quadratic optimization problem:
+\end{itemize}
+
+\begin{align*}
+\min&\ RSS + \|\tilde{\beta}\|_1\\
+\text{s.t.}&\ \| \tilde{\beta} \|_1 \leqslant s
+\end{align*}
+
+    \hypertarget{bayesian-interpretation-for-ridge-and-lasso-regression}{%
+\subparagraph{Bayesian Interpretation for Ridge and Lasso
+Regression}\label{bayesian-interpretation-for-ridge-and-lasso-regression}}
+
+    Given Gaussian errors, and simple assumptions on the prior \(p(\beta)\),
+ridge and lasso regression emerge as solutions
+
+\begin{itemize}
+\item
+  If the \(\beta_i \sim \text{Normal}(0, h(\lambda))\) iid for some
+  function \(h=h(\lambda)\) then the \textbf{\emph{posterior mode}} for
+  \(\beta\) (i.e.~\(\underset{\beta}{\text{argmax}} p(\beta| X, Y)\)) is
+  the ridge regression solution
+\item
+  If the \(\beta_i \sim \text{Laplace}(0, h(\lambda))\) iid then the
+  posterior mode is the lasso regression solution.
+\end{itemize}
+
+    \hypertarget{selecting-the-tuning-parameter}{%
+\subsubsection{Selecting the Tuning
+Parameter}\label{selecting-the-tuning-parameter}}
+
+    Compute the cross-validation error \(CV_{(n),i}\) for for a ``grid''
+(evenly-spaced discrete set) of values \(\lambda_i\), and choose
+
+\[ \lambda = \underset{i}{\text{argmin}\ CV_{(n),i}}\]
+
+    \hypertarget{dimension-reduction-methods}{%
+\subsection{Dimension Reduction
+Methods}\label{dimension-reduction-methods}}
+
+    \begin{itemize}
+\item
+  \textbf{\emph{Dimension reduction}} methods transform the predictors
+  \(X_1, \dots, X_p\) into a smaller set of predictors
+  \(Z_1, \dots, Z_M\), \(M < p\).
+\item
+  When \(p >> n\), \(M << p\) can greatly reduce the variance of the
+  coefficient estimates.
+\item
+  In this section we consider linear transformations
+
+  \[Z_m = \sum_{j = 1}^p \phi_{jm}X_j\]
+
+  and a least squares regression model
+
+  \[ Y = \mathbf{Z}\theta + \epsilon \]
+
+  where \(\mathbf{Z} = (1,Z_1, \dots, Z_M)\)
+\end{itemize}
+
+    \hypertarget{principal-components-regression}{%
+\subsubsection{Principal Components
+Regression}\label{principal-components-regression}}
+
+    \textbf{\emph{Principal Components Analysis}} is a popular unsupervised
+approach 50 that can be used for dimensional reduction
+
+    \hypertarget{an-overview-of-principal-components-analysis}{%
+\subparagraph{An Overview of Principal Components
+Analysis}\label{an-overview-of-principal-components-analysis}}
+
+    \begin{itemize}
+\item
+  The \textbf{\emph{principal components}} of a data matrix
+  \(n\times p\) matrix \(\mathbf{X}\) can be seen
+  (\href{https://en.wikipedia.org/wiki/Principal_component_analysis}{among
+  many different perspectives}) as the
+  \href{https://en.wikipedia.org/wiki/Principal_component_analysis\#Computing_PCA_using_the_covariance_method}{right
+  singular eigenvectors} \(v_1, \dots, v_p\) of the \(p\times p\) sample
+  covariance matrix \(C\),
+  i.e.~\href{https://en.wikipedia.org/wiki/Singular_value_decomposition}{the
+  eigenvectors of \(C^{\top}C\)}) ordered by decreasing absolute value
+  of the corresponding eigenvalues.
+\item
+  Let \(\sigma_1^2,\dots, \sigma_k^2\) be the singular values of \(C\)
+  (\href{https://people.cs.pitt.ed0u/~milos/courses/cs3750-Fall2007/lectures/PCA.pdf}{the
+  squares of the eigenvalues of \(C^{\top}C\)}) and let
+  \(v_1, \dots, v_p\) be the corresponding eigenvectors of \(C\). Then
+  \(\sigma_i^2\) is the variance of the data along the direction
+  \(v_i\), and \(\sigma_1^2\) is the direction of maximal variance.
+\end{itemize}
+
+    \hypertarget{the-principal-components-regression-approach}{%
+\subparagraph{The Principal Components Regression
+Approach}\label{the-principal-components-regression-approach}}
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{\emph{Principal Components Regression}} takes
+  \(Z_1,\dots, Z_M\) to be the first \(M\) principal components of
+  \(\mathbf{X}\) and then fits a least squares model on these
+  components.
+\item
+  The assumption is that, since the principal components correspond to
+  the directions of greatest variation of the data, they show the most
+  association with \(Y\). Furthermore, they are ordered by decreasing
+  magnitude of association.
+\item
+  Typically \(M\) is chosen by cross-validation.
+\end{itemize}
+
+    Advantages
+
+    \begin{itemize}
+\item
+  If the assumption holds then the least squares model on
+  \(Z_1, \dots, Z_M\) will perform better than \(X_1, \dots, X_p\),
+  since it will contain most of the information related to the response
+  51, and by choosing \(M<<p\) we can mitigate overfitting.
+\item
+  Decreased variance of coefficient estimates relative to OLS regression
+\end{itemize}
+
+    Disadvantages
+
+    \begin{itemize}
+\tightlist
+\item
+  Is not a feature selection method, since each \(Z_i\) is a linear
+  function of the predictors
+\end{itemize}
+
+    Recommendations
+
+    \begin{itemize}
+\tightlist
+\item
+  Data should usually be standarized prior to finding the principal
+  components.
+\end{itemize}
+
+    \hypertarget{partial-least-squares}{%
+\subsubsection{Partial Least Squares}\label{partial-least-squares}}
+
+    A supervised dimension reduction method which
+\href{https://en.wikipedia.org/wiki/Partial_least_squares_regression}{proceeds
+roughly as follows}
+
+\begin{itemize}
+\tightlist
+\item
+  Standardize the variables
+\item
+  Compute \(Z_1\) by setting \(\phi_{j1} = \hat{\beta_j}\) the ordinary
+  least squares estimate 52
+\item
+  For \$ 1 \textless{} m \textless{} M\$, \(Z_m\) is determined by
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Adjust the data \(X_j = \epsilon_j\) where \(\epsilon_j\) is the
+    residual from regression of \(Z_{m - 1}\) onto \(X_j\)
+  \item
+    Compute \(Z_m\) in the same fashion as \(Z_1\) on the adjusted data
+  \end{itemize}
+\end{itemize}
+
+As with PCR, \(M\) is chosen by cross-validation
+
+    \hypertarget{advantages}{%
+\subparagraph{Advantages}\label{advantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  Decreased variance of coefficient estimates relative to OLS regression
+\item
+  Supervised dimension reduction may reduce bias
+\end{itemize}
+
+    \hypertarget{disadvantages}{%
+\subparagraph{Disadvantages}\label{disadvantages}}
+
+    \begin{itemize}
+\tightlist
+\item
+  May increase variance relative to PCR (which is unsupervised).
+\item
+  May be no better than PCR in practice
+\end{itemize}
+
+    \hypertarget{considerations-in-high-dimensions}{%
+\subsection{Considerations in High
+Dimensions}\label{considerations-in-high-dimensions}}
+
+    \hypertarget{high-dimensional-data}{%
+\subsubsection{High-Dimensional Data}\label{high-dimensional-data}}
+
+    Low dimensional means \(p << n\), high dimensional is \(p \gtrsim n\)
+
+    \hypertarget{what-goes-wrong-in-high-dimensions}{%
+\subsubsection{What Goes Wrong in High
+Dimensions?}\label{what-goes-wrong-in-high-dimensions}}
+
+    \begin{itemize}
+\item
+  If \(p \gtrsim n\), then linear models will create a perfect fit,
+  hence overfit (usually badly)
+\item
+  \(C_p\), \(AIC\), \(BIC\), and \(R^2\) approaches don't work in well
+  in this setting
+\end{itemize}
+
+    \hypertarget{regression-in-high-dimensions}{%
+\subsubsection{Regression in High
+Dimensions}\label{regression-in-high-dimensions}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Regularization or shrinkage plays a key role in high-dimensional
+  problems.
+\item
+  Appropriate tuning parameter selection is crucial for good predictive
+  performance.
+\item
+  The test error tends to increase as the dimensionality of the problem
+  increases if the additional features aren't truly associated with the
+  response (the curse of dimensionality)
+\end{enumerate}
+
+    \hypertarget{interpreting-results-in-high-dimensions}{%
+\subsubsection{Interpreting Results in High
+Dimensions}\label{interpreting-results-in-high-dimensions}}
+
+    \begin{itemize}
+\item
+  Multicollinearity problem is maximal in high dimensional setting
+\item
+  This makes interpretation difficult, since models obtained from highly
+  multicollinear data fail to identify which features are ``preferred''
+\item
+  Care must be taken to measure performance 53
+\end{itemize}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{footnotes}{%
+\subsection{Footnotes}\label{footnotes}}
+
+    \hypertarget{foot35}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{34}
+\tightlist
+\item
+  This is the model that predicts \(\hat{y} = \overline{y}\),
+  i.e.~\(\hat{\beta_i} = 0\) for \(i > 1\) and
+  \(\hat{\beta_0} = \overline{y}\). ↩
+\end{enumerate}
+
+\hypertarget{foot36}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{35}
+\tightlist
+\item
+  Estimates of test error can come from CV, \(C_p (AIC)\), \(BIC\) or
+  adjusted \(R^2\) ↩
+\end{enumerate}
+
+\hypertarget{foot37}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{36}
+\tightlist
+\item
+  Here \(D(y, \hat{y}) = -2\log(p(y\ |\ \hat{\beta})\) where
+  \(\hat{\beta}\) is the MLE for \(\beta\).The author's definition of
+  deviance can be found in the comment on the
+  \href{https://en.wikipedia.org/wiki/Deviance_(statistics)}{Wikipedia
+  entry} if \(\hat{\theta}_0\) ↩
+\end{enumerate}
+
+\hypertarget{foot38}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{37}
+\tightlist
+\item
+  As with BSS, we can use FSS for logistic regression by replacing
+  \(RSS\) with the deviance in step 2B. ↩
+\end{enumerate}
+
+\hypertarget{foot38}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{38}
+\tightlist
+\item
+  As with BSS, we can use BackSS for logistic regression by replacing
+  \(RSS\) with the deviance in step 2B. ↩
+\end{enumerate}
+
+\hypertarget{foot40}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{39}
+\tightlist
+\item
+  Here full means contains all \(p\) predictors. ↩
+\end{enumerate}
+
+\hypertarget{foot41}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{40}
+\tightlist
+\item
+  Thus \(C_p\) is RSS plus a penalty which depends on the number of
+  predictors and the estimate of the error variance. One can show that
+  if \(\hat{\sigma}^2\) is unbiased then then \(C_p\) is unbiased. ↩
+\end{enumerate}
+
+\hypertarget{foot42}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{41}
+\tightlist
+\item
+  For Gaussian errors, the least squares estimate is the
+  maximumlikelihood estimate so in that case \(C_p\) and \(AIC\) are
+  proportional. ↩
+\end{enumerate}
+
+\hypertarget{foot43}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{42}
+\tightlist
+\item
+  The BIC places a heavier penalty than \(C_p\) when \(n > 7\) due to
+  the \(\log(n)d\hat{\sigma}^2\) term. The book says this means BIC
+  places a heavier penalty than \(C_p\) on models with many variables
+  although this isn't clear. It would seem it places a penalty on large
+  numbers of observation (unless somehow larger numbers of observations
+  are correlated with larger numbers of predictors). ↩
+\end{enumerate}
+
+\hypertarget{foot44}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{43}
+\tightlist
+\item
+  \(C_p, AIC\) and \(BIC\) are all estimates of the test \(MSE\) so
+  smaller values are better. By contrast, larger values of adjusted
+  \(R^2\), but this is equivalent to minimizing \(RSS/(n - d - 1)\)
+  which likely can be thought of as a test MSE estimate.
+\end{enumerate}
+
+Note that curiously, adjusted \(R^2\) is not defined when \(d = n - 1\).
+↩
+
+\hypertarget{foot45}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{44}
+\tightlist
+\item
+  Here \(L^2\) is a reference to the
+  \href{https://en.wikipedia.org/wiki/Lp_space}{\(L^p\) norm} (denoted
+  \(\| \cdot \|_2\)) when \(p=2\) (see also p216), which is just the
+  standard Euclidean norm. ↩
+\end{enumerate}
+
+\hypertarget{foot46}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{45}
+\tightlist
+\item
+  The tuning parameter \(\lambda\) is actually a Lagrange multiplier
+  used to turn the constrained optimization problem
+\end{enumerate}
+
+\[
+\begin{align*}
+\min&\ RSS\\
+\text{s.t.}&\ \| \tilde{\beta} \|_2^2 \leqslant s
+\end{align*}
+\]
+
+into the unconstrained optimization problem
+
+\[
+\begin{align*}
+\min&\ RSS + \lambda\| \tilde{\beta} \|_2^2
+\end{align*}
+\]
+
+see Section \ref{another-formulation-for-ridge-regression-and-the-lasso}
+↩
+
+\hypertarget{foot47}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{46}
+\tightlist
+\item
+  We use \(\tilde{\beta}\) instead of \(\beta\) because we don't want to
+  shrink the intercept \(\beta_0\). If the data have been centered about
+  their mean then \(\hat{\beta}_0 = \overline{y}\) ↩
+\end{enumerate}
+
+\hypertarget{foot48}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{47}
+\tightlist
+\item
+  Flexibility decreases because the shrinkage penalty effectively
+  decreases the size of the parameter space? ↩
+\end{enumerate}
+
+\hypertarget{foot49}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{48}
+\tightlist
+\item
+  The \href{https://en.wikipedia.org/wiki/Taxicab_geometry}{\(L^1\)
+  norm} is \(\|\tilde{\beta}\|_1 = \sum_{i=1}^p |\beta_p|\) ↩
+\end{enumerate}
+
+\hypertarget{foot50}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{49}
+\tightlist
+\item
+  Unsupervised since it only takes the predictors \(\mathbf{X}\) and not
+  the response \(\mathbf{Y}\) as input. ↩
+\end{enumerate}
+
+\hypertarget{foot51}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{50}
+\tightlist
+\item
+  Under certain assumptions, PCA is an
+  \href{https://en.wikipedia.org/wiki/Principal_component_analysis\#PCA_and_information_theory}{optimal
+  dimension reduction method from an information theoretic perspective}
+  ↩
+\end{enumerate}
+
+\hypertarget{foot52}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{51}
+\tightlist
+\item
+  One can show that \(\hat{\beta}_j \sim \text{corr}(Y, X_j)\), so
+  \(Z_1\) effectively weights the variables by correlation.
+\end{enumerate}
+
+The intuition is, that at each iteration, the residuals (hence the
+variable \(Z_m\)) contain information not accounted for by the previous
+variable \(Z_{m - 1}\). ↩
+
+\hypertarget{foot53}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{52}
+\tightlist
+\item
+  For example SSE, \(p\)-values, and \(R^2\) statistics from the
+  training data are useless in this setting. Thus it is important to
+  e.g.~evaluate performance on an independent test set or use
+  Section \ref{resampling-methods} ↩
+\end{enumerate}
+
+    \hypertarget{blah}{%
+\subsubsection{blah}\label{blah}}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

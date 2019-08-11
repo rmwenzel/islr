@@ -1,0 +1,1116 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ch03\_notes}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{linear-regression}{%
+\section{Linear Regression}\label{linear-regression}}
+
+    \hypertarget{simple-linear-regression}{%
+\subsection{Simple Linear Regression}\label{simple-linear-regression}}
+
+    \begin{itemize}
+\tightlist
+\item
+  For data (X, Y), \(X, Y\in\mathbb{R}\), \textbf{\emph{simple linear
+  regression}} models \(Y\) as a linear function of \(X\)
+\end{itemize}
+
+\[Y = \beta_0 + \beta_1 X + \epsilon\]
+
+and predicts
+
+\[\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X\]
+
+where \(\hat{\beta}_i\) is the estimate for \(\beta_i\).
+
+    \hypertarget{estimating-the-coefficients}{%
+\subsubsection{Estimating the
+Coefficients}\label{estimating-the-coefficients}}
+
+    Estimates of the coefficients \(\beta_0, \beta_1\) arize from minimizing
+\textbf{\emph{residual sum of squares}}
+
+\[RSS = \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - \hat{y}_i)^2\]
+
+using calculus one finds estimates7
+
+\begin{align*}
+\hat{\beta}_1 &= \frac{\sum_i (x_i - \overline{x})(y_i - \overline{y})}{\sum_i (x_i - \overline{x}) ^2}\\
+\hat{\beta}_0 &= \overline{y}-\hat{\beta}_1\overline{x}
+\end{align*}
+
+These are sometimes called the \textbf{\emph{least squares estimates}}.
+
+    \hypertarget{assessing-the-accuracy-of-the-coefficent-estimates}{%
+\subsubsection{Assessing the Accuracy of the Coefficent
+Estimates}\label{assessing-the-accuracy-of-the-coefficent-estimates}}
+
+    \begin{itemize}
+\item
+  The \textbf{\emph{population regression line}}8 is the line given by
+  \[ Y = \beta_0 + \beta_1 X \] and the \textbf{\emph{least squares
+  regression line}} is the line given by
+  \[ Y = \hat{\beta}_0 + \hat{\beta}_1 X \]
+\item
+  The least squares estimate is an unbiased estimator 9
+\item
+  Assuming errors \(\epsilon_i\) are uncorrelated with common variance
+  \(\sigma^2=\mathbb{V}(\epsilon)\), the standard errors of
+  \(\hat{\beta}_0, \hat{\beta}_1\) are
+\end{itemize}
+
+\[
+\mathbf{se}(\hat{\beta}_0) = \sigma\sqrt{\left[\frac{1}{n} + \frac{\overline{x}}{\sum_i (x_i - \overline{x})^2}\right]}
+\]
+
+\[
+\mathbf{se}(\hat{\beta}_1) = \sigma\sqrt{\frac{1}{\sum_i (x_i - \overline{x})^2}}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  The estimated standard errors
+  \(\hat{\mathbf{se}}(\hat{\beta}_0), \hat{\mathbf{se}}(\hat{\beta}_0)\)
+  are found by estimating \(\sigma\) with the \textbf{\emph{residual
+  standard error}} 10
+\end{itemize}
+
+\[ \hat{\sigma} = RSE := \sqrt{\frac{RSS}{n-2}} \]
+
+\begin{itemize}
+\tightlist
+\item
+  Approximate \(1 - \alpha\) \textbf{\emph{confidence intervals}} 11 for
+  the least squares estimators are
+\end{itemize}
+
+\[ \hat{\beta_i} \pm t_{\alpha/2}\hat{\mathbf{se}}(\hat{\beta}_i)
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Most common hypothesis tests for the least squares estimates are
+\end{itemize}
+
+\[H_0: \beta_i = 0\] \[H_a: \beta_i \neq 0\]
+
+the rejection region is
+
+\[\{ x\in \mathbb{R}\ |\ T > t \}\]
+
+where \(t\) is the test-statistic 12
+
+\[ t = \frac{\hat{\beta}_i - \beta_i}{\hat{\mathbf{se}}(\hat{\beta_i})} \]
+
+    \hypertarget{assessing-the-accuracy-of-the-model}{%
+\subsubsection{Assessing the Accuracy of the
+Model}\label{assessing-the-accuracy-of-the-model}}
+
+    Quality of fit (model accuracy) is commonly assessed using \(RSE\) and
+the \(R^2\) statistic.
+
+    \hypertarget{residual-standard-errors}{%
+\subsubsection{Residual Standard
+Errors}\label{residual-standard-errors}}
+
+    \begin{itemize}
+\item
+  The RSE is a measure of the overall difference between the observed
+  responses \(y_i\) and the predicted responses \(\hat{y}_i\). Thus it
+  provides a measure of \emph{lack-of-fit} of the model -- higher RSE
+  indicates worse fit.
+\item
+  RSE is measured in units of \(Y\) so it provides an absolute measure
+  of lack of fit, which is sometimes difficult to interpret
+\end{itemize}
+
+    \hypertarget{r2-statistic}{%
+\subsubsection{\texorpdfstring{\(R^2\)
+Statistic}{R\^{}2 Statistic}}\label{r2-statistic}}
+
+    \begin{itemize}
+\tightlist
+\item
+  The \(R^2\) statistic is
+\end{itemize}
+
+\[ R^2 = \frac{TSS - RSS}{TSS}\]
+
+where \(TSS = \sum_i (y_i - \overline{y})^2\) is the \textbf{\emph{total
+sum of squares}}.
+
+\begin{itemize}
+\item
+  \(TSS\) measures the total variability in \(Y\), while \(RSS\)
+  measures the variability left after modeling \(Y\) by \(f(X)\). Thus,
+  \(R^2\) measures the proportion of variability in \(Y\) that can be
+  explained by the model. \(R^2\) is dimensionless so it provides a good
+  relative measure of lack-of-fit.
+\item
+  As \(R^2 \rightarrow 1\), the model explains more of the variability
+  in \(Y\). As \(R^2 \rightarrow 0\), the model explains less 13. What
+  constitutes a good \(R^2\) value depends on context
+\item
+  We can also think of \(R^2\) as a measure of the linear relationship
+  between \(Y\) and \(X\). Another such measure is the correlation
+  \(\text{corr}(X,Y)\), which is estimated by the sample correlation
+  \(r\). In the case of simple linear regression, \(R^2 = r^2\).
+\end{itemize}
+
+    \hypertarget{multiple-linear-regression}{%
+\subsection{Multiple Linear
+Regression}\label{multiple-linear-regression}}
+
+    \begin{itemize}
+\item
+  For data (X, Y),
+  \(X=(X_1,\dots,X_p)^T\in\mathbb{R}^p\),\(Y\in\mathbb{R}\),
+  \textbf{\emph{multiple linear regression}} models \(Y\) as a linear
+  function 14 of \(X\)
+  \[Y = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p + \epsilon\] and
+  predicts
+  \[\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \cdots + \hat{\beta}_p X_p  + \epsilon \]
+  where \(\hat{\beta}_i\) is the estimate of \(\beta_i\)
+\item
+  If we form the \(n \times (p + 1)\) matrix \(\mathbf{X}\) with rows
+  \((1, X_{i1}, \dots, X_{ip})\), response vector \(Y=(Y_1,\dots,Y_n)\),
+  parameter vector \(\beta = (\beta_0, \dots, \beta_p)\) and noise
+  vector \(\epsilon = (\epsilon_1, \dots, \epsilon_n)\) then the model
+  can be written in matrix form
+\end{itemize}
+
+\[ Y = \mathbf{X}\beta + \epsilon \]
+
+    \hypertarget{estimating-the-regression-coefficients}{%
+\subsubsection{Estimating the Regression
+Coefficients}\label{estimating-the-regression-coefficients}}
+
+    \begin{itemize}
+\item
+  RSS is defined and estimates \(\hat{\beta}_i\) for the parameters
+  \(\beta_i\) are chosen to minimize RSS 15 as in the
+  Section \ref{estimating-the-coefficients}.
+\item
+  If the data matrix \(\mathbf{X}\) has full rank, then the estimate 16
+  \(\hat{\beta}\) for the parameter vector is
+\end{itemize}
+
+\[ \hat{\beta} = (\mathbf{X}^\top \mathbf{X})^{-1}\mathbf{X}^\top \beta \]
+
+    \hypertarget{important-questions}{%
+\subsubsection{Important Questions}\label{important-questions}}
+
+    \hypertarget{is-there-a-relationship-between-the-response-and-predictors}{%
+\paragraph{Is There a Relationship Between the Response and
+Predictors?}\label{is-there-a-relationship-between-the-response-and-predictors}}
+
+    \begin{itemize}
+\tightlist
+\item
+  One way to answer this question is a hypothesis test
+\end{itemize}
+
+\begin{align*}
+H_0:& \beta_i = 0 &\text{for all}\ 1 \leqslant i \leqslant p\\
+H_a:& \beta_i \neq 0&\text{for some}\ 1 \leqslant i \leqslant p
+\end{align*}
+
+\begin{itemize}
+\item
+  The test statistic is the \textbf{\emph{\(F\)-statistic}}17
+  \[ F = \frac{(TSS - RSS)/p}{RSS/(n - p - 1)} \]
+
+  where \(TSS, RSS\) are defined as in simple linear regression.
+\item
+  Assuming the model is correct,
+  \[ \mathbb{E}\left(\frac{RSS}{n-p-1}\right) = \sigma^2 \]
+
+  where again, \(\sigma^2 = \mathbb{V}(\epsilon)\). Further assuming
+  \(H_0\) is true,
+  \[ \mathbb{E}\left(\frac{TSS - TSS}{p}\right) = \sigma^2 \]
+
+  hence \(H_0 \Rightarrow F \approx 1\) and \(H_a \Rightarrow F > 1\)18.
+\item
+  Another way to answer this question is a hypothesis test on a subset
+  of the predictors of size \(q\) \begin{align*}
+  H_0:& \beta_{i} = 0 &\text{for all}\ p - q + 1 \leqslant i \leqslant p\\
+  H_a:& \beta_i \neq 0  &\text{for some}\ p - q + 1  \leqslant i \leqslant p
+  \end{align*} where \(RSS_0\) is the residual sum of squares for a
+  second model ommitting the last \(q\) predictors. The \(F\)-statistic
+  is
+\end{itemize}
+
+\[ F = \frac{(RSS_0 - RSS)/p}{RSS/(n - p - 1)} \]
+
+\begin{itemize}
+\tightlist
+\item
+  These hypothesis tests help us conclude that at least one of the
+  predictors is related to the response (the second test narrows it down
+  a bit), but don't indicate which ones.
+\end{itemize}
+
+    \hypertarget{deciding-on-important-variables}{%
+\paragraph{Deciding on Important
+Variables}\label{deciding-on-important-variables}}
+
+    \begin{itemize}
+\item
+  The task of finding which predictors are related to the response is
+  sometimes known as \textbf{\emph{variable selection}}.19
+\item
+  Various statistics can be used to judge the quality of models using
+  different subsets of the predictors. Examples are
+  \textbf{\emph{Mallows \(C_p\) criterion}}, \textbf{\emph{Akaike
+  Information Criterion (AIC)}}, \textbf{\emph{Bayesian Information
+  Criterion}} and \textbf{\emph{adjusted \(R^2\)}}.
+\item
+  Since the number of distinct linear regression models grows
+  exponentially with \(p\) exhaustive search is infeasible unless \(p\)
+  is small. Common approaches to consider a smaller set of possible
+  models are
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{\emph{Forward Selection}} Start with \textbf{\emph{the null
+    model}} \(M_0\) (an intercept but no predictors). Fit \(p\) simple
+    regressions and add to the null model the one with lowest \(RSS\),
+    resulting in a new model \(M_1\). Iterate until a stopping rule is
+    reached.
+  \item
+    \textbf{\emph{Backward Selection}} Start with a model \(M_p\)
+    consisting of all predictors. Remove the variable with largest
+    \(p\)-value, resulting in a new model \(M_{p-1}\). Iterate until a
+    stopping rule is reached.
+  \item
+    \textbf{\emph{Mixed Selection}} Proceed with forward selection, but
+    remove any predictors whose \(p\)-value is too large.
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{model-fit}{%
+\paragraph{Model Fit}\label{model-fit}}
+
+    \begin{itemize}
+\item
+  As in simple regression, \(RSE\) and \(R^2\) are two common measures
+  of model fit
+\item
+  In multiple regression, \(R^2 = Corr(Y, \hat{Y})^2\), with the same
+  interpretation as in simple regression. The model \(\hat{Y}\)
+  maximizes \(R^2\) among all linear models.
+\item
+  \(R^2\) increases monotonically in the number of predictors, but small
+  increases indicate the low relative value of the corresponding
+  predictor.
+\item
+  In multiple regression
+\end{itemize}
+
+\[ RSS = \sqrt{\frac{RSS}{n - p - 1}} \]
+
+\begin{itemize}
+\tightlist
+\item
+  Visualization can be helpful in assessing model fit, e.g.~by
+  suggesting the inclusion of \textbf{\emph{interaction}} terms
+\end{itemize}
+
+    \hypertarget{predictions}{%
+\paragraph{Predictions}\label{predictions}}
+
+    There are 3 types of uncertainty associated with predicting \(Y\) by
+\(\hat{Y}\)
+
+\begin{itemize}
+\item
+  \textbf{\emph{Estimation Error}}. \(\hat{Y} = \hat{f}(X)\) is only an
+  estimate \(f(X)\). This error is reducible. We can compute confidence
+  intervals to quantify it.
+\item
+  \textbf{\emph{Model Bias}}. A linear form for \(f(X)\) may be
+  inappropriate. This error is also reducible
+\item
+  \textbf{\emph{Noise}}. The noise term \(\epsilon\) is a random
+  variable. This error is irreducible. We can compute
+  \textbf{\emph{predeiction intervals}} to quantify it.
+\end{itemize}
+
+    \hypertarget{other-considerations-in-the-regression-model}{%
+\subsection{Other Considerations In the Regression
+Model}\label{other-considerations-in-the-regression-model}}
+
+    \hypertarget{qualitative-predictors}{%
+\subsubsection{Qualitative Predictors}\label{qualitative-predictors}}
+
+    \begin{itemize}
+\item
+  If the \(i\)-th predictor \(X_i\) is a factor (qualitative) with \(K\)
+  \textbf{\emph{levels}} (that is \(K\) possible values) then we model
+  it by \(K-1\) indicator variables (sometimes called a
+  \textbf{\emph{dummy variables}}).
+\item
+  Two commons definitions of the dummy variables are
+\end{itemize}
+
+\[ \tilde{X}_{i} = \begin{cases} 1 & X_i = k\\ 0 & X_i \neq k \end{cases}\]
+
+\[ \tilde{X}_{i} = \begin{cases} 1 & X_i = k\\ -1 & X_i \neq k \end{cases}\]
+
+for \(1 \leqslant k \leqslant K\).
+
+\begin{itemize}
+\tightlist
+\item
+  The corresponding regression model is
+\end{itemize}
+
+\[ Y = \beta_0 + \sum_{i} \beta_i\tilde{X}_i + \epsilon \]
+
+since we can only have \(\tilde{X}_i = 1\) if \(\tilde{X}_j \neq 1\) for
+\(j \neq i\), this model can be seen as \(K\) distinct models
+
+\[ Y = \begin{cases} \beta_0 & X_i = 1 \\ \beta_0 + \beta_1 & X_i = 2 \\ \vdots & \vdots \\ \beta_0 + \beta_K & X_i = K
+\end{cases}
+\]
+
+    \hypertarget{extensions-of-the-linear-model}{%
+\subsubsection{Extensions of the Linear
+Model}\label{extensions-of-the-linear-model}}
+
+    The standard linear regression we have been discussing relies on the
+twin assumptions
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\emph{Additivity}}: The effect of \(X_i\) on \(Y\) is
+  independent of the effect of \(X_j\) for \(j\neq i\).
+\item
+  \textbf{\emph{Linearity}}: \(Y\) is linear in \(X_i\) for all \(i\).
+\end{itemize}
+
+We can extend the model by relaxing these assumptions
+
+    \hypertarget{removing-the-additive-assumption}{%
+\paragraph{Removing the Additive
+Assumption}\label{removing-the-additive-assumption}}
+
+    \begin{itemize}
+\item
+  Dropping the assumption of additivity leads to the possible inclusion
+  of \textbf{\emph{interaction}} or \textbf{\emph{synergy}} effects
+  among predictors.
+\item
+  One way to model an interaction effect between predictors \(X_i\) and
+  \(X_j\) is to include an \textbf{\emph{interaction term}},
+  \(\beta_{i + j}X_iX_j\). The non-interaction terms \(\beta_i X_i\)
+  model the \textbf{\emph{main effects}}.
+\item
+  We can perform hypothesis tests as in the standard linear model to
+  select important terms/variables. However, the
+  \textbf{\emph{hierarchical principle}} dictates that, if we include an
+  interaction effect, we should include the corresponding main effects,
+  even if the latter aren't statistically significant.
+\end{itemize}
+
+    \hypertarget{non-linear-relationships}{%
+\paragraph{Non-linear Relationships}\label{non-linear-relationships}}
+
+    \begin{itemize}
+\item
+  Dropping the assumption of linearity leads to the possible includion
+  of non-linear effects.
+\item
+  One common way to model non-linearity is to use
+  \textbf{\emph{polynomial regression}} 20, that is model \(f(X)\) with
+  a polynomial in the predictors. For example in the case of a single
+  predictor \(X\) \[Y = \beta_0 + \beta_1 X + \dots + \beta_d X^s \]
+  models \(Y\) as a degree \(d\) polynomial in \(X\)
+\item
+  In general one can model a non-linear effect of predictors \(X_i\) by
+  including a non-linear function of the \(X_i\) in the model
+\end{itemize}
+
+    \hypertarget{potential-problems}{%
+\subsubsection{Potential Problems}\label{potential-problems}}
+
+    \hypertarget{non-linearity-of-the-data}{%
+\paragraph{Non-linearity of the Data}\label{non-linearity-of-the-data}}
+
+    \textbf{\emph{Residual plots}} are a useful way of vizualizing
+non-linearity. The presence of a discernible pattern may indicate a
+problem with the linearity of the model.
+
+    \hypertarget{correlation-of-error-terms}{%
+\paragraph{Correlation of Error
+Terms}\label{correlation-of-error-terms}}
+
+    \begin{itemize}
+\item
+  Standard linear regression assumes
+  \(\text{Corr}(\epsilon_i,\epsilon_j) = 0\) for \(i\neq j\).
+\item
+  Correlated error terms frequently occur in the context of
+  \textbf{\emph{time series}}.
+\item
+  Positively correlated error terms may display \textbf{\emph{tracking}}
+  behavior (adjacent residuals may have similar values).
+\end{itemize}
+
+    \hypertarget{non-constant-variance-of-error-terms}{%
+\paragraph{Non-constant Variance of Error
+Terms}\label{non-constant-variance-of-error-terms}}
+
+    \begin{itemize}
+\item
+  Standard linear regression assumes the variance of errors is constant
+  across observations, i.e.~\(\mathbb{V}(\epsilon_i) = \sigma^2\) for
+  all \(1 \leqslant i \leqslant n\)
+\item
+  \textbf{\emph{Hetereoscedasticity}}, or variance which changes across
+  observations can be identified by a funnel shape in the residual plot.
+\item
+  One way to reduce hetereoscedasticity is to transform \(Y\) by a
+  concave function such as \(\log Y\) or \(\sqrt{Y}\).
+\item
+  Another way to do this is
+  \href{https://en.wikipedia.org/wiki/Weighted_least_squares}{\textbf{\emph{weighted
+  least squares}}}. This weights terms in \(RSS\) with weights \(w_i\)
+  inversely proportional to \(\sigma_i^2\) where
+  \(\sigma_i^2 = \mathbb{V}(\epsilon_i)\).
+\end{itemize}
+
+    \hypertarget{outliers}{%
+\paragraph{Outliers}\label{outliers}}
+
+    \begin{itemize}
+\item
+  An \textbf{\emph{outlier}} is an observation for which the value of
+  \(y_i\) given \(x_i\) is unusual, i.e.~such that the squared-error
+  \((y_i - \hat{y}_i)^2\) is large
+\item
+  Outliers can have disproportionate effects on statistics e.g.~\(R^2\),
+  which in turn affect the entire analysis (e.g.~confidence intervals,
+  hypothesis tests).
+\item
+  Residual plots can identify outliers. In practice, we plot
+  \textbf{\emph{studentized residuals}}
+\end{itemize}
+
+\[\frac{\hat{\epsilon}_i}{\hat{\mathbf{se}}(\hat{\epsilon}_i)} \]
+
+\begin{itemize}
+\tightlist
+\item
+  If an outlier is due to a data collection error it can be removed, but
+  great care should be taken when doing this.
+\end{itemize}
+
+    \hypertarget{high-leverage-points}{%
+\paragraph{High Leverage Points}\label{high-leverage-points}}
+
+    \begin{itemize}
+\item
+  A \textbf{\emph{high leverage point}} is a point with an unusual value
+  of \(x_i\).
+\item
+  High leverage points tend to have a sizable impact on \(\hat{f}\).
+\item
+  To quantify the leverage of \(x_i\), we use the \textbf{\emph{leverage
+  statistic}}. In simple linear regression this is
+\end{itemize}
+
+\[ h_i = \frac{1}{n} + \frac{(X_j - \overline{X})^2}{\sum_{j} (X_{j} - \overline{X})^2} \]
+
+    \hypertarget{collinearity}{%
+\paragraph{Collinearity}\label{collinearity}}
+
+    \begin{itemize}
+\item
+  \textbf{\emph{Collinearity}} is a linear relationship among two or
+  more predictors.
+\item
+  Collinearity reduces the accuracy of coefficient estimates 21
+\item
+  Collinearity reduces the \textbf{\emph{power}}22 of the hypothesis
+  test
+\item
+  Collinearity between two variables can be detected by the sample
+  correlation matrix \(\hat{\Sigma}\). A high value for
+  \[|(\hat{\Sigma})_{ij}| = |\hat{\text{corr}(X_i, X_j)}|\] indicates
+  high correlation between \(X_i, X_j\) hence high collinearity in the
+  data23.
+\item
+  \textbf{\emph{Multicollinearity}} is a linear relationship among more
+  than two predictors.
+\item
+  Multicollinearity can be detected using the \textbf{\emph{variance
+  inflation factor}} (VIF)24.
+  \[ VIF(\hat{\beta}_i) = \frac{1}{1-R^2_{X_i|X_{-i}}}\] where
+  \(R^2_{X_i|X_{-i}}\) is the \(R^2\) from regression of \(X_i\) onto
+  all other predictors.
+\item
+  One solution to the presence of collinearity is to drop one of the
+  problematic variables, which is usually not an issue, since
+  correlation among variables is seen as redundant.
+\item
+  Another solution is to combine the problematic variables into a single
+  predictor (e.g.~an average)
+\end{itemize}
+
+    \hypertarget{the-marketing-plan}{%
+\subsection{The Marketing Plan}\label{the-marketing-plan}}
+
+    Skip
+
+    \hypertarget{comparison-of-linear-regression-and-k-nearest-neighbors}{%
+\subsection{Comparison of Linear Regression and K-Nearest
+Neighbors}\label{comparison-of-linear-regression-and-k-nearest-neighbors}}
+
+    \begin{itemize}
+\item
+  Linear regression is a parametric model for regression (with parameter
+  \(\beta = (\beta_0, \dots, \beta_p)\)).
+\item
+  KNN regression is a popular non-parametric model, which estimates
+\end{itemize}
+
+\[\hat{f}(x_0) = \frac{1}{K}\sum_{x_i\in\mathcal{N}_0} y_i \]
+
+\begin{itemize}
+\item
+  In general, a parametric model will outperform a non-parametric model
+  if the parametric estimation \(\hat{f}\) is close to the true \(f\).
+\item
+  KNN regression suffers from the \textbf{\emph{curse of
+  dimensionality}} - as the dimension increases the data become sparse.
+  Effectively this is a reduction in sample size, hence KNN performance
+  commonly decreases as the dimension \(p\) increases.
+\item
+  In general parametric methods outperform non-parametric methods when
+  there is a small number of observations per predictor.
+\item
+  Even if performance of KNN and linear regression is comparable, the
+  latter may be favored for interpretability.
+\end{itemize}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{footnotes}{%
+\subsection{Footnotes}\label{footnotes}}
+
+    \hypertarget{foot7}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  The value \((\hat{\beta}_0, \hat{\beta}_1)\) is the local minimum in
+  \(\mathbb{R}^2\) of the ``loss function'' given by RSS ↩
+\end{enumerate}
+
+\hypertarget{foot8}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Here estimate means the same as ``estimator'', found elsewhere in the
+  statistics literature. The population regression line is given by the
+  ``true'' (population) values \((\beta_0, \beta_1)\) of the parameter,
+  while the least squares line is given by the estimator
+  \((\hat{\beta}_0, \hat{\beta}_1)\) ↩
+\end{enumerate}
+
+\hypertarget{foot9}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  In other words,
+  \(\mathbb{E}\left((\hat{\beta}_0, \hat{\beta}_1)\right) = (\beta_0, \beta_1)\)
+  ↩
+\end{enumerate}
+
+\hypertarget{foot10}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  The factor \(\frac{1}{n-2}\) is a correction to make this an unbiased
+  estimator, the quantity \(n - 2\) is known as the ``degrees of
+  freedom''. Note this is a special case of \(n - p - 1\) degrees of
+  freedom for \(p\) predictors where \(p = 1\). ↩
+\end{enumerate}
+
+\hypertarget{foot11}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  This appears to be based on the assumption (no doubt proved in the
+  literature) that the least squares estimators are asymptotically
+  t-distributed,
+  \(\hat{\beta}_i \approx Student_{n-2}(\beta_i, \hat{\mathbf{se}}(\hat{\beta}_i))\).
+  ↩
+\end{enumerate}
+
+\hypertarget{foot12}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
+\item
+  This is the Wald test for the statistic \(T\), which (by footnote 4)
+  has \(T \approx Student_{n - 2}(0, 1)\). ↩
+\end{enumerate}
+
+\hypertarget{foot13}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+  This can happen if either the model is wrong (i.e.~a linear form for
+  \(f(X)\) isn't a good choice) or because \(\mathbb{V}(\epsilon)\) is
+  large. ↩
+\end{enumerate}
+
+\hypertarget{foot14}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+  This estimation method is known as \textbf{\emph{Ordinary Least
+  Squares (OLS)}}. The estimate is the solution to the quadratic
+  minimzation problem
+\end{enumerate}
+
+\[ \hat{\beta} = \underset{\beta}{\text{argmin}\,} || y - \mathbf{X}\beta ||^2 \]
+
+↩
+
+\hypertarget{foot15}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  The estimate is any solution to the quadratic minimzation problem
+\end{enumerate}
+
+\[ \hat{\beta} = \underset{\beta}{\text{argmin}\,} || y - \mathbf{X}\beta ||^2 \]
+
+which can be found by solving the normal equations
+
+\[\mathbf{X}^\top\mathbf{X}\hat{\beta} = \mathbf{X}^\top y\]
+
+↩
+
+\hypertarget{foot16}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{15}
+\tightlist
+\item
+  If \(\mathbf{X}\) has full rank then \(\mathbf{X}^\top\mathbf{X}\) is
+  invertible and the normal equations have a unique solution
+\end{enumerate}
+
+↩
+
+\hypertarget{foot17}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{16}
+\tightlist
+\item
+  Assuming the \(\epsilon_i\) are normally distributed,
+  \(\epsilon_i \sim N(\mu_i, \sigma^2)\) where
+  \(\mu = \beta_0 + \sum \beta_i X_i\)), the \(F\)-statistic has an
+  \href{https://en.wikipedia.org/wiki/F-distribution}{\(F\)-distribution}
+  with \(p, n-p\) degrees of freedom (\(F\) has this asymptotic
+  distribution even without the normality assumption).
+\end{enumerate}
+
+The use of the \(F\) statistic
+\href{https://en.wikipedia.org/wiki/F-test\#Formula_and_calculation}{arises
+from ANOVA} among the predictors, which is beyond our scope. There is
+some qualitative discussion of the motivation for the \(F\) statistic on
+page 77 of the text. It is an appropriate statistic in the case \(p\) i
+↩
+
+\hypertarget{foot18}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{17}
+\tightlist
+\item
+  How much \(F > 1\) should be before we rejct \(H_0\) depends on \(n\)
+  and \(p\). If \(n\) is large, \(F\) need not be much greater than 1,
+  and if it's small, ↩
+\end{enumerate}
+
+\hypertarget{foot19}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{18}
+\tightlist
+\item
+  This is discussed extensively in chapter 6. ↩
+\end{enumerate}
+
+\hypertarget{foot20}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{19}
+\tightlist
+\item
+  This is discussed in chapter 7. ↩
+\end{enumerate}
+
+\hypertarget{foot21}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{20}
+\tightlist
+\item
+  This is due to issues identifying the global minimum of \(RSS\). In
+  the example in the text, in the presence of collinearity, the global
+  minimum is in a long ``valley''. The coefficient estimates are very
+  sensitive to the data -- small changes in the data yeild large changes
+  in the estimates. ↩
+\end{enumerate}
+
+\hypertarget{foot22}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{21}
+\tightlist
+\item
+  The power of the test is the probability of correctly rejecting
+  \(H_0: \beta_i = 0\), i.e.~correctly accepting
+  \(H_a: \beta_i \neq 0\). Since it uncreases uncertainty of the
+  coefficient estimates, it increases \(\hat{se}(\hat{\beta_i})\), hence
+  reduces the \(t\)-statistic, making it less likely \(H_0\) is
+  rejected. ↩
+\end{enumerate}
+
+\hypertarget{foot23}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{22}
+\tightlist
+\item
+  However, the converse is not true -- absence of such entries in the
+  sample correlation matrix doesn't indicate absence of collinearity.
+  The matrix only detects pairwise correlation, and a predictor may
+  correlate two or more other predictors. ↩
+\end{enumerate}
+
+\hypertarget{foot24}{}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{23}
+\tightlist
+\item
+  This is defined the ratio of the (sample) variance of
+  \(\hat{\beta_i}\) when fitting the full model divided by the variance
+  of \(\hat{\beta_i}\) when fit on it's own. It can be computed using
+  the given formula. ↩
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
