@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # An Introduction to Statistical Learning
 
 Code and exercises from 
