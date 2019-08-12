@@ -16,3 +16,6 @@ author:
   url:               https://rmwenzel.com
   email:             rmwenzel@uw.edu
 
+
+plugins:
+  - jekyll-katex
