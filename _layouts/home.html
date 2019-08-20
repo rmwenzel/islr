@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<div>
+	<a href='http://faculty.marshall.usc.edu/gareth-james/ISL/'> <img src='{{site.baseurl}}/assets/images/islr_cover.jpg' alt='islr_cover.jpg', aligned='middle'> </a>
+</div>
+
+<div>
+	<h2> Chapters </h2>
+	<ul>
+		{% assign chapters = site.data.chapters | sort %}
+		{% for chapter in chapters %}
+			<li>
+				<a href='{{site.baseurl}}/{{chapter[0]}}'> {{ chapter[1].name }} </a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+
+<div>
+	{{ content }}
+</div>

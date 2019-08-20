@@ -1,0 +1,14 @@
+name: 5. Resampling Methods
+exercises:
+  - tag: _conceptual_exercises
+    name: 1-4. Conceptual Exercises
+  - tag: _exercise_05
+    name: 5. Estimate the test error of a logistic regression model
+  - tag: _exercise_06
+    name: 6. Bootstrap estimates of standard errors of logistic regression coefficient estimates
+  - tag: _exercise_07
+    name: 7. Estimate the LOOCV error
+  - tag: _exercise_08
+    name: 8. Cross-validation on simulated data
+  - tag: _exercise_09
+    name: 9. Estimate of standard error of sample mean of <code> medv </code> in <code> Boston </code> data set

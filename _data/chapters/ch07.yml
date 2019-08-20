@@ -1,0 +1,16 @@
+name: 7. Moving Beyond Linearity
+exercises:
+  - tag: _conceptual_exercises
+    name: 1-5. Conceptual Exercises
+  - tag: _exercise_06
+    name: 6. Using polynomial and step function regression to predict <code> wage </code> using <code> age </code> in <code> Wage </code> dataset
+  - tag: _exercise_07
+    name: 7. Using non-linear multiple regression to predict <code> wage </code> in <code> Wage </code> dataset
+  - tag: _exercise_08
+    name: 8. Investigating non-linear relationships in <code> Auto </code> dataset
+  - tag: _exercise_09
+    name: 9. Nonlinear models for predicting <code> nox </code> using <code> dis </code> in <code> Boston </code> dataset
+  - tag: _exercise_10
+    name: 10. Predicting <code> Outstate </code> in <code> College </code> dataset with FSS and GAM
+  - tag: _exercise_11
+    name: 11. Exploring backfitting for multiple linear regression

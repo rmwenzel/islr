@@ -1,0 +1,14 @@
+name: 9. Support Vector Machines
+exercises:
+  - tag: _conceptual_exercises
+    name: 
+  - tag: _exercise_04
+    name: 4. Comparing polynomial, radial, and linear kernel SVMs on a simulated dataset
+  - tag: _exercise_05
+    name: 5. Nonlinear decision boundary with logistic regression and nonlinear feature transformation
+  - tag: _exercise_06
+    name: 6. SVCs for barely linearly separable data
+  - tag: _exercise_07
+    name: 7. Using SVMs to classify mileage in <code> Auto </code> dataset
+  - tag: _exercise_08
+    name: 8. Using SVMs to classify <code> Purchase </code> in <code> OJ </code> dataset

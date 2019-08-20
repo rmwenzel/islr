@@ -1,0 +1,16 @@
+name: 8. Tree-Based Methods
+exercises:
+  - tag: _conceptual_exercises
+    name: 1-6. Conceptual Exercises
+  - tag: _exercise_07
+    name: 7. Plotting test error for parameter values of random forest model in chapter 8 lab
+  - tag: _exercise_08
+    name: 8. Predicting <code> Sales </code> in <code> Carseats </code> dataset
+  - tag: _exercise_09
+    name: 9. Using tree based methods on the <code> OJ </code> dataset
+  - tag: _exercise_10
+    name: 10. Boosting to predict <code> Salary </code> in <code> Hitters </code> dataset
+  - tag: _exercise_11
+    name: 11. Predicting <code> Purchase </code> in <code> Caravan </code> dataset with a boosted tree classifier
+
+

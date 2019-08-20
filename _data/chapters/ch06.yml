@@ -1,0 +1,12 @@
+name: 6. Linear Model Selection and Regularization
+exercises:
+  - tag: _conceptual_exercises
+    name: 1-7. Conceptual Exercises
+  - tag: _exercise_08
+    name: 8. Feature Selection on Simulated Data
+  - tag: _exercise_09
+    name: 9. Predicting <code> Apps </code> in <code> College </code> dataset
+  - tag: _exercise_10
+    name: 10. Exploring test error on a simulated dataset
+  - tag: _exercise_11
+    name: 11. Predicting <code> crim </code> in <code> Boston </code> dataset

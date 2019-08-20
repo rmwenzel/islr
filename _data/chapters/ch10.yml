@@ -1,0 +1,14 @@
+name: 10. Unsupervised Learning
+exercises:
+  - tag: _conceptual_exercises
+    name: 1-6. Conceptual Exercises
+  - tag: _exercise_07
+    name: 7. Comparison of correlation based distance and Euclidean distance on <code> USArrests </code> dataset.
+  - tag: _exercise_08
+    name: 8. Calculating PVE for <code> USArrests </code> dataset
+  - tag: _exercise_09
+    name: 9. Hierarchical Clustering on <code> USArrests </code> dataset
+  - tag: _exercise_10
+    name: 10. PCA and K-means on simulated data
+  - tag: _exercise_11
+    name: 11. Hierarchical clustering on gene expression dataset

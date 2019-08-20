@@ -1,0 +1,10 @@
+name: 4. Logistic Regression
+exercises:
+  - tag: _conceptual_exercises
+    name: 1-9. Conceptual Exercises
+  - tag: _exercise_10
+    name: 10. Classifying <code> Direction </code> in the <code> Weekly </code> dataset
+  - tag: _exercise_11
+    name: 11. Classifying high/low <code> mpg </code> cars in <code> Auto </code> dataset
+  - tag: _exercise_13
+    name: 13. Classifying high crime rate using the <code> Boston </code> dataset

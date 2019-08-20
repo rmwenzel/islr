@@ -1,0 +1,22 @@
+name: 3. Linear Regression
+exercises:
+  - tag: _conceptual_exercises
+    name: 1-7. Conceptual Exercises
+  - tag: _exercise_08
+    name: 8. Simple Regression of <code> `mpg` </code> on <code> `horsepower` </code> in <code> `auto` </code> dataset
+  - tag: _exercise_09
+    name: 9. Multiple regression of <code> `mpg` </code> on numerical features in <code> `auto` </code> dataset
+  - tag: _exercise_10
+    name: 10. Multiple regression of <code> `Sales` </code> on <code> `Price` </code>,  <code> `Urban` </code>, and <code> `US ` </code> features in <code> `Carseats` </code> dataset
+  - tag: _exercise_11
+    name: 11. The t-statistic for null hypothesis in simple linear regression with no intercept
+  - tag: _exercise_12
+    name: 12. Simple regression without an intercept
+  - tag: _exercise_13
+    name: 13. Regression models on simulated data
+  - tag: _exercise_14
+    name: 14. The collinearity problem
+  - tag: _exercise_15
+    name: 15. Regression models for the <code> Boston </code> Dataset
+    
+      
