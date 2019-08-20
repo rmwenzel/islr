@@ -5,7 +5,11 @@ Code and exercises from
 
 <img src='ISL_cover.jpg' alt='ISL_cover.jpg'></img>
 
-The book and course uses R but I'm using Python 3.
+The book and course uses R but I'm using Python 3. 
+
+## Website
+
+Everything is displayed nicely and readably on [the project website](https://rmwenzel/islr)
 
 ## Datasets
 
