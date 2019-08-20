@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      5. Resampling Methods &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">5. Resampling Methods</h1>
+  	
+<h1 id="exercise-5-estimate-the-test-error-of-a-logistic-regression-model">Exercise 5: Estimate the test error of a logistic regression model</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#prepare-the-data" data-toc-modified-id="Prepare-the-data-1">Prepare the data</a></span><ul class="toc-item"><li><span><a href="#add-constant" data-toc-modified-id="Add-constant-1.1">Add constant</a></span></li><li><span><a href="#convert-default-student-to-numerical-values" data-toc-modified-id="Convert-default,-student-to-numerical-values-1.2">Convert <code>default</code>, <code>student</code> to numerical values</a></span></li></ul></li><li><span><a href="#a" data-toc-modified-id="a.-2">a.</a></span></li><li><span><a href="#b" data-toc-modified-id="b.-3">b.</a></span><ul class="toc-item"><li><span><a href="#i" data-toc-modified-id="i.-3.1">i.</a></span></li><li><span><a href="#ii" data-toc-modified-id="ii.-3.2">ii.</a></span></li><li><span><a href="#iii" data-toc-modified-id="iii.-3.3">iii.</a></span></li><li><span><a href="#iv" data-toc-modified-id="iv.-3.4">iv.</a></span></li><li><span><a href="#c" data-toc-modified-id="c.-3.5">c.</a></span></li><li><span><a href="#d" data-toc-modified-id="d.-3.6">d.</a></span></li></ul></li></ul>
+</div>
+
+<h2 id="prepare-the-data">Prepare the data</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">default</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"../../datasets/Default.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">default</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>default</th>
+      <th>student</th>
+      <th>balance</th>
+      <th>income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>No</td>
+      <td>No</td>
+      <td>729.526495</td>
+      <td>44361.625074</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>No</td>
+      <td>Yes</td>
+      <td>817.180407</td>
+      <td>12106.134700</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>No</td>
+      <td>No</td>
+      <td>1073.549164</td>
+      <td>31767.138947</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>No</td>
+      <td>No</td>
+      <td>529.250605</td>
+      <td>35704.493935</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>No</td>
+      <td>No</td>
+      <td>785.655883</td>
+      <td>38463.495879</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">default</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Int64Index: 10000 entries, 1 to 10000
+Data columns (total 4 columns):
+default    10000 non-null object
+student    10000 non-null object
+balance    10000 non-null float64
+income     10000 non-null float64
+dtypes: float64(2), object(2)
+memory usage: 390.6+ KB
+</code></pre></div></div>
+
+<h3 id="add-constant">Add constant</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s">'const'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">default</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">columns</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">'const'</span><span class="p">)</span>
+<span class="n">default</span> <span class="o">=</span> <span class="n">default</span><span class="p">[[</span><span class="s">'const'</span><span class="p">]</span> <span class="o">+</span> <span class="n">columns</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">default</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>const</th>
+      <th>default</th>
+      <th>student</th>
+      <th>balance</th>
+      <th>income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>No</td>
+      <td>No</td>
+      <td>729.526495</td>
+      <td>44361.625074</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>817.180407</td>
+      <td>12106.134700</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>No</td>
+      <td>No</td>
+      <td>1073.549164</td>
+      <td>31767.138947</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>No</td>
+      <td>No</td>
+      <td>529.250605</td>
+      <td>35704.493935</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>No</td>
+      <td>No</td>
+      <td>785.655883</td>
+      <td>38463.495879</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="convert-default-student-to-numerical-values">Convert <code class="highlighter-rouge">default</code>, <code class="highlighter-rouge">student</code> to numerical values</h3>
+
+<p>Let Yes=1, No=0</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s">'default'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">==</span><span class="s">'Yes'</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">default</span><span class="p">[</span><span class="s">'default'</span><span class="p">]]</span>
+<span class="n">default</span><span class="p">[</span><span class="s">'student'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">==</span><span class="s">'Yes'</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">default</span><span class="p">[</span><span class="s">'student'</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">default</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>const</th>
+      <th>default</th>
+      <th>student</th>
+      <th>balance</th>
+      <th>income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>729.526495</td>
+      <td>44361.625074</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>817.180407</td>
+      <td>12106.134700</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1073.549164</td>
+      <td>31767.138947</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>529.250605</td>
+      <td>35704.493935</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>785.655883</td>
+      <td>38463.495879</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">default</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Int64Index: 10000 entries, 1 to 10000
+Data columns (total 5 columns):
+const      10000 non-null int64
+default    10000 non-null int64
+student    10000 non-null int64
+balance    10000 non-null float64
+income     10000 non-null float64
+dtypes: float64(2), int64(3)
+memory usage: 468.8 KB
+</code></pre></div></div>
+
+<h2 id="a">a.</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">default</span><span class="p">[[</span><span class="s">'balance'</span><span class="p">,</span> <span class="s">'income'</span><span class="p">,</span> <span class="s">'const'</span><span class="p">]],</span> <span class="n">default</span><span class="p">[</span><span class="s">'default'</span><span class="p">]</span>
+<span class="n">logit</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s">'lbfgs'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="b">b.</h2>
+
+<h3 id="i">i.</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="ii">ii.</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">logit_train_0</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s">'lbfgs'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="iii">iii.</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_pred_0</span> <span class="o">=</span> <span class="n">logit_train_0</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="iv">iv.</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="n">errs_0</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">errs_0</span><span class="p">[</span><span class="s">'err0'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_0</span><span class="p">)</span>
+<span class="n">errs_0</span><span class="p">[</span><span class="s">'err0'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.038799999999999946
+</code></pre></div></div>
+
+<h3 id="c">c.</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># train and predict</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">logit_train_1</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s">'lbfgs'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred_1</span> <span class="o">=</span> <span class="n">logit_train_1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c"># get error</span>
+<span class="n">errs_0</span><span class="p">[</span><span class="s">'err1'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_1</span><span class="p">)</span>
+<span class="n">errs_0</span><span class="p">[</span><span class="s">'err1'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.03159999999999996
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># train and predict</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">logit_train_2</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s">'lbfgs'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred_2</span> <span class="o">=</span> <span class="n">logit_train_2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c"># get error</span>
+<span class="n">errs_0</span><span class="p">[</span><span class="s">'err2'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_2</span><span class="p">)</span>
+<span class="n">errs_0</span><span class="p">[</span><span class="s">'err2'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.027200000000000002
+</code></pre></div></div>
+
+<p>These results are close to each other? Their average is</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="p">(</span><span class="n">errs_0</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">errs_0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.0325333333333333
+</code></pre></div></div>
+
+<h3 id="d">d.</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">default</span><span class="p">[[</span><span class="s">'balance'</span><span class="p">,</span> <span class="s">'income'</span><span class="p">,</span> <span class="s">'student'</span><span class="p">,</span> <span class="s">'const'</span><span class="p">]],</span> <span class="n">default</span><span class="p">[</span><span class="s">'default'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">errs_1</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">errs_1</span><span class="p">[</span><span class="s">'err'</span> <span class="o">+</span> <span class="n">stri</span><span class="o">.</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> 
+                                         <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s">'lbfgs'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">errs_1</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'err0': 0.038799999999999946,
+ 'err1': 0.03159999999999996,
+ 'err2': 0.027200000000000002}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="p">(</span><span class="n">errs_1</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">errs_1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.0325333333333333
+</code></pre></div></div>
+
+<p>The test error hasn’t changed</p>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

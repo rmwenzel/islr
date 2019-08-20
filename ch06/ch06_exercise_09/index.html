@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      6. Linear Model Selection and Regularization &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">6. Linear Model Selection and Regularization</h1>
+  	
+<h1 id="exercise-9-predicting-apps-in-college-dataset">Exercise 9: Predicting <code class="highlighter-rouge">Apps</code> in <code class="highlighter-rouge">College</code> dataset</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span></li><li><span><a href="#a-train-test-split" data-toc-modified-id="a.-Train---test-split-2">a. Train - test split</a></span></li><li><span><a href="#b-linear-regression-model" data-toc-modified-id="b.-Linear-regression-model-3">b. Linear regression model</a></span></li><li><span><a href="#c-ridge-regression-model" data-toc-modified-id="c.-Ridge-regression-model-4">c. Ridge regression model</a></span></li><li><span><a href="#d-lasso-regression-model" data-toc-modified-id="d.-Lasso-regression-model-5">d. Lasso regression model</a></span></li><li><span><a href="#e-pcr-model" data-toc-modified-id="e.-PCR-model-6">e. PCR model</a></span></li><li><span><a href="#f-pls-model" data-toc-modified-id="f.-PLS-model-7">f. PLS model</a></span></li><li><span><a href="#g-comments" data-toc-modified-id="g.-Comments-8">g. Comments</a></span><ul class="toc-item"><li><span><a href="#how-accurately-can-we-predict-applications" data-toc-modified-id="How-accurately-can-we-predict-applications?-8.1">How accurately can we predict <code>applications</code>?</a></span></li><li><span><a href="#is-there-much-difference-among-the-test-errors" data-toc-modified-id="Is-there-much-difference-among-the-test-errors-8.2">Is there much difference among the test errors</a></span></li></ul></li></ul>
+</div>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">college</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'../../datasets/College.csv'</span><span class="p">)</span>
+<span class="n">college</span> <span class="o">=</span> <span class="n">college</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s">'Unnamed: 0'</span><span class="p">:</span> <span class="s">'Name'</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="s">'columns'</span><span class="p">)</span>
+<span class="n">college</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Private</th>
+      <th>Apps</th>
+      <th>Accept</th>
+      <th>Enroll</th>
+      <th>Top10perc</th>
+      <th>Top25perc</th>
+      <th>F.Undergrad</th>
+      <th>P.Undergrad</th>
+      <th>Outstate</th>
+      <th>Room.Board</th>
+      <th>Books</th>
+      <th>Personal</th>
+      <th>PhD</th>
+      <th>Terminal</th>
+      <th>S.F.Ratio</th>
+      <th>perc.alumni</th>
+      <th>Expend</th>
+      <th>Grad.Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Abilene Christian University</td>
+      <td>Yes</td>
+      <td>1660</td>
+      <td>1232</td>
+      <td>721</td>
+      <td>23</td>
+      <td>52</td>
+      <td>2885</td>
+      <td>537</td>
+      <td>7440</td>
+      <td>3300</td>
+      <td>450</td>
+      <td>2200</td>
+      <td>70</td>
+      <td>78</td>
+      <td>18.1</td>
+      <td>12</td>
+      <td>7041</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Adelphi University</td>
+      <td>Yes</td>
+      <td>2186</td>
+      <td>1924</td>
+      <td>512</td>
+      <td>16</td>
+      <td>29</td>
+      <td>2683</td>
+      <td>1227</td>
+      <td>12280</td>
+      <td>6450</td>
+      <td>750</td>
+      <td>1500</td>
+      <td>29</td>
+      <td>30</td>
+      <td>12.2</td>
+      <td>16</td>
+      <td>10527</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Adrian College</td>
+      <td>Yes</td>
+      <td>1428</td>
+      <td>1097</td>
+      <td>336</td>
+      <td>22</td>
+      <td>50</td>
+      <td>1036</td>
+      <td>99</td>
+      <td>11250</td>
+      <td>3750</td>
+      <td>400</td>
+      <td>1165</td>
+      <td>53</td>
+      <td>66</td>
+      <td>12.9</td>
+      <td>30</td>
+      <td>8735</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Agnes Scott College</td>
+      <td>Yes</td>
+      <td>417</td>
+      <td>349</td>
+      <td>137</td>
+      <td>60</td>
+      <td>89</td>
+      <td>510</td>
+      <td>63</td>
+      <td>12960</td>
+      <td>5450</td>
+      <td>450</td>
+      <td>875</td>
+      <td>92</td>
+      <td>97</td>
+      <td>7.7</td>
+      <td>37</td>
+      <td>19016</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Alaska Pacific University</td>
+      <td>Yes</td>
+      <td>193</td>
+      <td>146</td>
+      <td>55</td>
+      <td>16</td>
+      <td>44</td>
+      <td>249</td>
+      <td>869</td>
+      <td>7560</td>
+      <td>4120</td>
+      <td>800</td>
+      <td>1500</td>
+      <td>76</td>
+      <td>72</td>
+      <td>11.9</td>
+      <td>2</td>
+      <td>10922</td>
+      <td>15</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">college</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s">'Private'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">entry</span> <span class="o">==</span> <span class="s">'No'</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">college</span><span class="p">[</span><span class="s">'Private'</span><span class="p">]]</span>
+<span class="n">college</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 777 entries, 0 to 776
+Data columns (total 19 columns):
+Name           777 non-null object
+Private        777 non-null int64
+Apps           777 non-null int64
+Accept         777 non-null int64
+Enroll         777 non-null int64
+Top10perc      777 non-null int64
+Top25perc      777 non-null int64
+F.Undergrad    777 non-null int64
+P.Undergrad    777 non-null int64
+Outstate       777 non-null int64
+Room.Board     777 non-null int64
+Books          777 non-null int64
+Personal       777 non-null int64
+PhD            777 non-null int64
+Terminal       777 non-null int64
+S.F.Ratio      777 non-null float64
+perc.alumni    777 non-null int64
+Expend         777 non-null int64
+Grad.Rate      777 non-null int64
+dtypes: float64(1), int64(17), object(1)
+memory usage: 115.4+ KB
+</code></pre></div></div>
+
+<h2 id="a-train---test-split">a. Train - test split</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">college</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Apps'</span><span class="p">,</span> <span class="s">'Name'</span><span class="p">]),</span> 
+                                                    <span class="n">college</span><span class="p">[</span><span class="s">'Apps'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h2 id="b-linear-regression-model">b. Linear regression model</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">linreg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linreg_mse_test</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">linreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="n">mses_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'mse_test'</span><span class="p">:</span> <span class="n">linreg_mse_test</span><span class="p">},</span>
+                       <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'linreg'</span><span class="p">])</span>
+<span class="n">mses_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>linreg</th>
+      <td>1.869641e+06</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="c-ridge-regression-model">c. Ridge regression model</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'alpha'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]}</span>
+<span class="n">ridge</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">Ridge</span><span class="p">(),</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                     <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">capture</span>
+
+<span class="n">ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">capture</span>
+
+<span class="n">ridge_cv_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ridge</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">ridge_cv_df</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ridge_mse_test</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">ridge</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="n">mses_df</span> <span class="o">=</span> <span class="n">mses_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'mse_test'</span><span class="p">:</span> <span class="n">ridge_mse_test</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'ridge'</span><span class="p">]))</span>
+<span class="n">mses_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>linreg</th>
+      <td>1.869641e+06</td>
+    </tr>
+    <tr>
+      <th>ridge</th>
+      <td>1.875181e+06</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="d-lasso-regression-model">d. Lasso regression model</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'alpha'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]}</span>
+<span class="n">lasso</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">Lasso</span><span class="p">(),</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">capture</span>
+
+<span class="n">lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">capture</span>
+
+<span class="n">lasso_cv_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lasso</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">lasso_cv_df</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lasso_mse_test</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lasso</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="n">mses_df</span> <span class="o">=</span> <span class="n">mses_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'mse_test'</span><span class="p">:</span> <span class="n">lasso_mse_test</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'lasso'</span><span class="p">]))</span>
+<span class="n">mses_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>linreg</th>
+      <td>1.869641e+06</td>
+    </tr>
+    <tr>
+      <th>ridge</th>
+      <td>1.875181e+06</td>
+    </tr>
+    <tr>
+      <th>lasso</th>
+      <td>1.870846e+06</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="e-pcr-model">e. PCR model</h2>
+
+<p><code class="highlighter-rouge">scikit-learn</code> doesn’t have combined PCA and regression so we’ll use the top answer to <a href="https://stats.stackexchange.com/questions/82050/principal-component-analysis-and-regression-in-python">this CrossValidated question</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">scale</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train_reduced</span><span class="p">)</span>
+<span class="n">linreg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="n">pcr_mses</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">linreg</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                         <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()]</span>   
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">college</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">b1</span><span class="p">):</span>
+    <span class="n">pcr_mses</span> <span class="o">+=</span> <span class="p">[</span><span class="o">-</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">linreg</span><span class="p">,</span> <span class="n">X_train_reduced</span><span class="p">[:,</span> <span class="p">:</span><span class="n">i</span><span class="p">],</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                              <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">pcr_mses</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>17
+</code></pre></div></div>
+
+<p>10 fold Cross-validation selects <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mo>=</mo><mn>17</mn></mrow><annotation encoding="application/x-tex">M = 17</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">7</span></span></span></span> (full PCR model with no intercept).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pcr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">pcr_mses</span><span class="p">)],</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The test error of this model is</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pcr_mse_test</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pcr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="n">mses_df</span> <span class="o">=</span> <span class="n">mses_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'mse_test'</span><span class="p">:</span> <span class="n">pcr_mse_test</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'pcr'</span><span class="p">]))</span>
+<span class="n">mses_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>linreg</th>
+      <td>1.869641e+06</td>
+    </tr>
+    <tr>
+      <th>ridge</th>
+      <td>1.875181e+06</td>
+    </tr>
+    <tr>
+      <th>lasso</th>
+      <td>1.870846e+06</td>
+    </tr>
+    <tr>
+      <th>pcr</th>
+      <td>1.869641e+06</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="f-pls-model">f. PLS model</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.cross_decomposition</span> <span class="kn">import</span> <span class="n">PLSRegression</span>
+
+<span class="c"># mse for only constant predictor same as for pcr</span>
+<span class="n">pls_mses</span> <span class="o">=</span> <span class="n">pcr_mses</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">college</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">pls_mses</span> <span class="o">+=</span> <span class="p">[</span><span class="o">-</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">PLSRegression</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="n">i</span><span class="p">),</span> 
+                                  <span class="n">X</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                                  <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">pls_mses</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>13
+</code></pre></div></div>
+
+<p>10 fold CV selects <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mo>=</mo><mn>13</mn></mrow><annotation encoding="application/x-tex">M = 13</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span></span></span></span></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pls</span> <span class="o">=</span> <span class="n">PLSRegression</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pls_mse_test</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pls</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="n">mses_df</span> <span class="o">=</span> <span class="n">mses_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'mse_test'</span><span class="p">:</span> <span class="n">pls_mse_test</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'pls'</span><span class="p">]))</span>
+<span class="n">mses_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>linreg</th>
+      <td>1.869641e+06</td>
+    </tr>
+    <tr>
+      <th>ridge</th>
+      <td>1.875181e+06</td>
+    </tr>
+    <tr>
+      <th>lasso</th>
+      <td>1.870846e+06</td>
+    </tr>
+    <tr>
+      <th>pcr</th>
+      <td>1.869641e+06</td>
+    </tr>
+    <tr>
+      <th>pls</th>
+      <td>1.862860e+06</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="g-comments">g. Comments</h2>
+
+<h3 id="how-accurately-can-we-predict-applications">How accurately can we predict <code class="highlighter-rouge">applications</code>?</h3>
+
+<p>The test mses for each model were <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>≈</mo><mn>1.86</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">\approx 1.86 \times 10^6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.48312em;vertical-align:0em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">.</span><span class="mord">8</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span>. This corresponds to an (absolute) error of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msqrt><mrow><mn>1.86</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow></msqrt><mo>≈</mo><mn>1387</mn></mrow><annotation encoding="application/x-tex">\sqrt{1.86 \times 10^6} \approx 1387 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.12661100000000003em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.913389em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">1</span><span class="mord">.</span><span class="mord">8</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span><span style="top:-2.873389em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5, -10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8, -50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0, 35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5, -221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467 s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422 s-65,47,-65,47z M834 80H400000v40H845z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.12661100000000003em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mord">8</span><span class="mord">7</span></span></span></span>. Given the distribution of <code class="highlighter-rouge">applications</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">college</span><span class="p">[</span><span class="s">'Apps'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>count      777.000000
+mean      3001.638353
+std       3870.201484
+min         81.000000
+25%        776.000000
+50%       1558.000000
+75%       3624.000000
+max      48094.000000
+Name: Apps, dtype: float64
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+
+<span class="o">%</span> <span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">college</span><span class="p">[</span><span class="s">'Apps'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a212479b0&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch06_exercise_9_38_1.png" alt="png" /></p>
+
+<p>The prediction doesn’t seem that accurate. Given that distribution is highly concentrated about the mean <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>≈</mo><mn>3000</mn></mrow><annotation encoding="application/x-tex">\approx 3000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.48312em;vertical-align:0em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span> and the upper quartile is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>≈</mo><mn>3625</mn></mrow><annotation encoding="application/x-tex">\approx 3625</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.48312em;vertical-align:0em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">6</span><span class="mord">2</span><span class="mord">5</span></span></span></span>, we can say that for most values, the prediction is off by <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⩾</mo><mtext> </mtext><mo>≈</mo><mn>30</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">\geqslant\ \approx 30\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7733399999999999em;vertical-align:-0.13667em;"></span><span class="mrel amsrm">⩾</span><span class="mspace"> </span></span><span class="base"><span class="strut" style="height:0.48312em;vertical-align:0em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.80556em;vertical-align:-0.05556em;"></span><span class="mord">3</span><span class="mord">0</span><span class="mord">%</span></span></span></span> of the true value.</p>
+
+<h3 id="is-there-much-difference-among-the-test-errors">Is there much difference among the test errors</h3>
+
+<p>No</p>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

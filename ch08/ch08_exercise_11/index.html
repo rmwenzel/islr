@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      8. Tree-based Methods &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">8. Tree-based Methods</h1>
+  	
+<h1 id="exercise-11-predicting-purchase-in-caravan-dataset-with-a-boosted-tree-classifier">Exercise 11: Predicting <code class="highlighter-rouge">Purchase</code> in <code class="highlighter-rouge">Caravan</code> dataset with a boosted tree classifier</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span></li><li><span><a href="#a-train-test-split" data-toc-modified-id="a.-Train-test-split-2">a. Train test split</a></span></li><li><span><a href="#b-fit-boosted-tree-model" data-toc-modified-id="b.-Fit-boosted-tree-model-3">b. Fit boosted tree model</a></span></li><li><span><a href="#c-predict-purchase-and-compare-with-knn-logistic-regression" data-toc-modified-id="c.-Predict-Purchase-and-compare-with-KNN,-Logistic-Regression-4">c. Predict <code>Purchase</code> and compare with KNN, Logistic Regression</a></span><ul class="toc-item"><li><span><a href="#confusion-matrix-and-precision-for-boosted-tree-model" data-toc-modified-id="Confusion-Matrix-and-precision-for-Boosted-Tree-model-4.1">Confusion Matrix and precision for Boosted Tree model</a></span></li><li><span><a href="#confusion-matrix-and-precision-for-knn-model" data-toc-modified-id="Confusion-matrix-and-precision-for-KNN-model-4.2">Confusion matrix and precision for KNN model</a></span></li><li><span><a href="#confusion-matrix-and-precision-for-logistic-regression" data-toc-modified-id="Confusion-matrix-and-precision-for-Logistic-Regression-4.3">Confusion matrix and precision for Logistic Regression</a></span></li></ul></li></ul>
+</div>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<p>Information on the dataset can be <a href="https://rdrr.io/cran/ISLR/man/Caravan.html">found here</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">'whitegrid'</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s">'ignore'</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="nb">FutureWarning</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">caravan</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'../../datasets/Caravan.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">caravan</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">caravan</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <div style="overflow:auto;">
+    <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th></th>
+        <th>MOSTYPE</th>
+        <th>MAANTHUI</th>
+        <th>MGEMOMV</th>
+        <th>MGEMLEEF</th>
+        <th>MOSHOOFD</th>
+        <th>MGODRK</th>
+        <th>MGODPR</th>
+        <th>MGODOV</th>
+        <th>MGODGE</th>
+        <th>MRELGE</th>
+        <th>...</th>
+        <th>APERSONG</th>
+        <th>AGEZONG</th>
+        <th>AWAOREG</th>
+        <th>ABRAND</th>
+        <th>AZEILPL</th>
+        <th>APLEZIER</th>
+        <th>AFIETS</th>
+        <th>AINBOED</th>
+        <th>ABYSTAND</th>
+        <th>Purchase</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>0</th>
+        <td>33</td>
+        <td>1</td>
+        <td>3</td>
+        <td>2</td>
+        <td>8</td>
+        <td>0</td>
+        <td>5</td>
+        <td>1</td>
+        <td>3</td>
+        <td>7</td>
+        <td>...</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <th>1</th>
+        <td>37</td>
+        <td>1</td>
+        <td>2</td>
+        <td>2</td>
+        <td>8</td>
+        <td>1</td>
+        <td>4</td>
+        <td>1</td>
+        <td>4</td>
+        <td>6</td>
+        <td>...</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <th>2</th>
+        <td>37</td>
+        <td>1</td>
+        <td>2</td>
+        <td>2</td>
+        <td>8</td>
+        <td>0</td>
+        <td>4</td>
+        <td>2</td>
+        <td>4</td>
+        <td>3</td>
+        <td>...</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <th>3</th>
+        <td>9</td>
+        <td>1</td>
+        <td>3</td>
+        <td>3</td>
+        <td>3</td>
+        <td>2</td>
+        <td>3</td>
+        <td>2</td>
+        <td>4</td>
+        <td>5</td>
+        <td>...</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <th>4</th>
+        <td>40</td>
+        <td>1</td>
+        <td>4</td>
+        <td>2</td>
+        <td>10</td>
+        <td>1</td>
+        <td>4</td>
+        <td>1</td>
+        <td>4</td>
+        <td>7</td>
+        <td>...</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p>5 rows × 86 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">caravan</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 5822 entries, 0 to 5821
+Data columns (total 86 columns):
+MOSTYPE     5822 non-null int64
+MAANTHUI    5822 non-null int64
+MGEMOMV     5822 non-null int64
+MGEMLEEF    5822 non-null int64
+MOSHOOFD    5822 non-null int64
+MGODRK      5822 non-null int64
+MGODPR      5822 non-null int64
+MGODOV      5822 non-null int64
+MGODGE      5822 non-null int64
+MRELGE      5822 non-null int64
+MRELSA      5822 non-null int64
+MRELOV      5822 non-null int64
+MFALLEEN    5822 non-null int64
+MFGEKIND    5822 non-null int64
+MFWEKIND    5822 non-null int64
+MOPLHOOG    5822 non-null int64
+MOPLMIDD    5822 non-null int64
+MOPLLAAG    5822 non-null int64
+MBERHOOG    5822 non-null int64
+MBERZELF    5822 non-null int64
+MBERBOER    5822 non-null int64
+MBERMIDD    5822 non-null int64
+MBERARBG    5822 non-null int64
+MBERARBO    5822 non-null int64
+MSKA        5822 non-null int64
+MSKB1       5822 non-null int64
+MSKB2       5822 non-null int64
+MSKC        5822 non-null int64
+MSKD        5822 non-null int64
+MHHUUR      5822 non-null int64
+MHKOOP      5822 non-null int64
+MAUT1       5822 non-null int64
+MAUT2       5822 non-null int64
+MAUT0       5822 non-null int64
+MZFONDS     5822 non-null int64
+MZPART      5822 non-null int64
+MINKM30     5822 non-null int64
+MINK3045    5822 non-null int64
+MINK4575    5822 non-null int64
+MINK7512    5822 non-null int64
+MINK123M    5822 non-null int64
+MINKGEM     5822 non-null int64
+MKOOPKLA    5822 non-null int64
+PWAPART     5822 non-null int64
+PWABEDR     5822 non-null int64
+PWALAND     5822 non-null int64
+PPERSAUT    5822 non-null int64
+PBESAUT     5822 non-null int64
+PMOTSCO     5822 non-null int64
+PVRAAUT     5822 non-null int64
+PAANHANG    5822 non-null int64
+PTRACTOR    5822 non-null int64
+PWERKT      5822 non-null int64
+PBROM       5822 non-null int64
+PLEVEN      5822 non-null int64
+PPERSONG    5822 non-null int64
+PGEZONG     5822 non-null int64
+PWAOREG     5822 non-null int64
+PBRAND      5822 non-null int64
+PZEILPL     5822 non-null int64
+PPLEZIER    5822 non-null int64
+PFIETS      5822 non-null int64
+PINBOED     5822 non-null int64
+PBYSTAND    5822 non-null int64
+AWAPART     5822 non-null int64
+AWABEDR     5822 non-null int64
+AWALAND     5822 non-null int64
+APERSAUT    5822 non-null int64
+ABESAUT     5822 non-null int64
+AMOTSCO     5822 non-null int64
+AVRAAUT     5822 non-null int64
+AAANHANG    5822 non-null int64
+ATRACTOR    5822 non-null int64
+AWERKT      5822 non-null int64
+ABROM       5822 non-null int64
+ALEVEN      5822 non-null int64
+APERSONG    5822 non-null int64
+AGEZONG     5822 non-null int64
+AWAOREG     5822 non-null int64
+ABRAND      5822 non-null int64
+AZEILPL     5822 non-null int64
+APLEZIER    5822 non-null int64
+AFIETS      5822 non-null int64
+AINBOED     5822 non-null int64
+ABYSTAND    5822 non-null int64
+Purchase    5822 non-null object
+dtypes: int64(85), object(1)
+memory usage: 3.8+ MB
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">caravan</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">caravan</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="a-train-test-split">a. Train test split</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">caravan</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Purchase_Yes'</span><span class="p">]),</span> <span class="n">caravan</span><span class="p">[</span><span class="s">'Purchase_Yes'</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
+<span class="n">X_train</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(1000, 85)
+</code></pre></div></div>
+
+<h2 id="b-fit-boosted-tree-model">b. Fit boosted tree model</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+
+<span class="n">boost_clf</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">boost_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GradientBoostingClassifier(criterion='friedman_mse', init=None,
+              learning_rate=0.01, loss='deviance', max_depth=3,
+              max_features=None, max_leaf_nodes=None,
+              min_impurity_decrease=0.0, min_impurity_split=None,
+              min_samples_leaf=1, min_samples_split=2,
+              min_weight_fraction_leaf=0.0, n_estimators=1000,
+              n_iter_no_change=None, presort='auto', random_state=None,
+              subsample=1.0, tol=0.0001, validation_fraction=0.1,
+              verbose=0, warm_start=False)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">feat_imp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Feature Importance'</span><span class="p">:</span> <span class="n">boost_clf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">},</span>
+                        <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'Feature Importance'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">feat_imp</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Feature Importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PBRAND</th>
+      <td>7.989783e-02</td>
+    </tr>
+    <tr>
+      <th>MOPLLAAG</th>
+      <td>7.138105e-02</td>
+    </tr>
+    <tr>
+      <th>MKOOPKLA</th>
+      <td>6.779442e-02</td>
+    </tr>
+    <tr>
+      <th>MBERARBG</th>
+      <td>6.553880e-02</td>
+    </tr>
+    <tr>
+      <th>PPERSAUT</th>
+      <td>5.104349e-02</td>
+    </tr>
+    <tr>
+      <th>MSKD</th>
+      <td>4.747047e-02</td>
+    </tr>
+    <tr>
+      <th>MINK7512</th>
+      <td>4.596157e-02</td>
+    </tr>
+    <tr>
+      <th>PPLEZIER</th>
+      <td>3.968977e-02</td>
+    </tr>
+    <tr>
+      <th>MGODOV</th>
+      <td>3.914403e-02</td>
+    </tr>
+    <tr>
+      <th>MOPLMIDD</th>
+      <td>3.819071e-02</td>
+    </tr>
+    <tr>
+      <th>APLEZIER</th>
+      <td>3.810555e-02</td>
+    </tr>
+    <tr>
+      <th>APERSAUT</th>
+      <td>3.343816e-02</td>
+    </tr>
+    <tr>
+      <th>MOSTYPE</th>
+      <td>2.926208e-02</td>
+    </tr>
+    <tr>
+      <th>PTRACTOR</th>
+      <td>2.795271e-02</td>
+    </tr>
+    <tr>
+      <th>PBYSTAND</th>
+      <td>2.634395e-02</td>
+    </tr>
+    <tr>
+      <th>ALEVEN</th>
+      <td>2.426373e-02</td>
+    </tr>
+    <tr>
+      <th>MSKC</th>
+      <td>2.391492e-02</td>
+    </tr>
+    <tr>
+      <th>MINK4575</th>
+      <td>2.262974e-02</td>
+    </tr>
+    <tr>
+      <th>MBERHOOG</th>
+      <td>2.139981e-02</td>
+    </tr>
+    <tr>
+      <th>MBERARBO</th>
+      <td>1.534339e-02</td>
+    </tr>
+    <tr>
+      <th>MFALLEEN</th>
+      <td>1.528145e-02</td>
+    </tr>
+    <tr>
+      <th>MINKGEM</th>
+      <td>1.474515e-02</td>
+    </tr>
+    <tr>
+      <th>MGEMOMV</th>
+      <td>1.381983e-02</td>
+    </tr>
+    <tr>
+      <th>MGODPR</th>
+      <td>1.217382e-02</td>
+    </tr>
+    <tr>
+      <th>MSKB2</th>
+      <td>1.195765e-02</td>
+    </tr>
+    <tr>
+      <th>MINK3045</th>
+      <td>9.918341e-03</td>
+    </tr>
+    <tr>
+      <th>MBERMIDD</th>
+      <td>9.052936e-03</td>
+    </tr>
+    <tr>
+      <th>PLEVEN</th>
+      <td>8.742057e-03</td>
+    </tr>
+    <tr>
+      <th>MOPLHOOG</th>
+      <td>8.205575e-03</td>
+    </tr>
+    <tr>
+      <th>MFWEKIND</th>
+      <td>7.063705e-03</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>MHKOOP</th>
+      <td>6.941976e-04</td>
+    </tr>
+    <tr>
+      <th>MSKB1</th>
+      <td>6.914181e-04</td>
+    </tr>
+    <tr>
+      <th>MRELOV</th>
+      <td>5.480189e-04</td>
+    </tr>
+    <tr>
+      <th>ATRACTOR</th>
+      <td>2.495046e-04</td>
+    </tr>
+    <tr>
+      <th>PMOTSCO</th>
+      <td>2.387955e-04</td>
+    </tr>
+    <tr>
+      <th>MBERBOER</th>
+      <td>2.193347e-04</td>
+    </tr>
+    <tr>
+      <th>AMOTSCO</th>
+      <td>2.157301e-04</td>
+    </tr>
+    <tr>
+      <th>MGODRK</th>
+      <td>2.125493e-04</td>
+    </tr>
+    <tr>
+      <th>PWABEDR</th>
+      <td>1.929167e-04</td>
+    </tr>
+    <tr>
+      <th>PWERKT</th>
+      <td>1.205401e-04</td>
+    </tr>
+    <tr>
+      <th>AWERKT</th>
+      <td>9.615065e-05</td>
+    </tr>
+    <tr>
+      <th>AFIETS</th>
+      <td>8.984330e-05</td>
+    </tr>
+    <tr>
+      <th>PFIETS</th>
+      <td>8.910239e-05</td>
+    </tr>
+    <tr>
+      <th>AWABEDR</th>
+      <td>3.331575e-05</td>
+    </tr>
+    <tr>
+      <th>APERSONG</th>
+      <td>2.180892e-05</td>
+    </tr>
+    <tr>
+      <th>PPERSONG</th>
+      <td>1.190193e-05</td>
+    </tr>
+    <tr>
+      <th>PWALAND</th>
+      <td>1.866996e-07</td>
+    </tr>
+    <tr>
+      <th>AWALAND</th>
+      <td>1.618010e-07</td>
+    </tr>
+    <tr>
+      <th>AWAOREG</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>AGEZONG</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>AZEILPL</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>AVRAAUT</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>AAANHANG</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>PGEZONG</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>ABESAUT</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>PAANHANG</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>PBESAUT</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>PZEILPL</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>PWAOREG</th>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>PVRAAUT</th>
+      <td>0.000000e+00</td>
+    </tr>
+  </tbody>
+</table>
+  <p>85 rows × 1 columns</p>
+</div>
+
+<h2 id="c-predict-purchase-and-compare-with-knn-logistic-regression">c. Predict <code class="highlighter-rouge">Purchase</code> and compare with KNN, Logistic Regression</h2>
+
+<h3 id="confusion-matrix-and-precision-for-boosted-tree-model">Confusion Matrix and precision for Boosted Tree model</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="n">y_act</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s">'Yes'</span> <span class="k">if</span> <span class="n">entry</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s">'No'</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">y_test</span><span class="p">],</span>
+                  <span class="n">name</span><span class="o">=</span><span class="s">'Actual'</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s">'Yes'</span> <span class="k">if</span> <span class="n">prob</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.2</span> <span class="k">else</span> <span class="s">'No'</span> <span class="k">for</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">boost_clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)],</span>
+                        <span class="n">name</span><span class="o">=</span><span class="s">'Predicted'</span><span class="p">)</span>
+<span class="n">boost_tree_conf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">y_act</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">margins</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">boost_tree_conf</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Predicted</th>
+      <th>No</th>
+      <th>Yes</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>Actual</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>4328</td>
+      <td>204</td>
+      <td>4532</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>242</td>
+      <td>48</td>
+      <td>290</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>4570</td>
+      <td>252</td>
+      <td>4822</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># fraction of people predicted to make a purchase that actually do - this is the "precision"</span>
+<span class="n">boost_tree_conf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Yes'</span><span class="p">,</span> <span class="s">'Yes'</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">boost_tree_conf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Yes'</span><span class="p">,</span> <span class="s">'No'</span><span class="p">]</span> <span class="o">+</span> <span class="n">boost_tree_conf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Yes'</span><span class="p">,</span> <span class="s">'Yes'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.16551724137931034
+</code></pre></div></div>
+
+<h3 id="confusion-matrix-and-precision-for-knn-model">Confusion matrix and precision for KNN model</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="n">knn_clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+<span class="n">knn_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_act</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s">'Yes'</span> <span class="k">if</span> <span class="n">entry</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s">'No'</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">y_test</span><span class="p">],</span>
+                  <span class="n">name</span><span class="o">=</span><span class="s">'Actual'</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s">'Yes'</span> <span class="k">if</span> <span class="n">prob</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.2</span> <span class="k">else</span> <span class="s">'No'</span> <span class="k">for</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">knn_clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)],</span>
+                        <span class="n">name</span><span class="o">=</span><span class="s">'Predicted'</span><span class="p">)</span>
+<span class="n">knn_conf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">y_act</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">margins</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">knn_conf</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Predicted</th>
+      <th>No</th>
+      <th>Yes</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>Actual</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>4340</td>
+      <td>192</td>
+      <td>4532</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>259</td>
+      <td>31</td>
+      <td>290</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>4599</td>
+      <td>223</td>
+      <td>4822</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># fraction of people predicted to make a purchase that actually do - this is the "precision"</span>
+<span class="n">knn_conf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Yes'</span><span class="p">,</span> <span class="s">'Yes'</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">knn_conf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Yes'</span><span class="p">,</span> <span class="s">'No'</span><span class="p">]</span> <span class="o">+</span> <span class="n">knn_conf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Yes'</span><span class="p">,</span> <span class="s">'Yes'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.10689655172413794
+</code></pre></div></div>
+
+<h3 id="confusion-matrix-and-precision-for-logistic-regression">Confusion matrix and precision for Logistic Regression</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">logreg_clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">logreg_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_act</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s">'Yes'</span> <span class="k">if</span> <span class="n">entry</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s">'No'</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">y_test</span><span class="p">],</span>
+                  <span class="n">name</span><span class="o">=</span><span class="s">'Actual'</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s">'Yes'</span> <span class="k">if</span> <span class="n">prob</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.2</span> <span class="k">else</span> <span class="s">'No'</span> <span class="k">for</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">logreg_clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)],</span>
+                        <span class="n">name</span><span class="o">=</span><span class="s">'Predicted'</span><span class="p">)</span>
+<span class="n">logreg_conf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">y_act</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">margins</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">logreg_conf</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Predicted</th>
+      <th>No</th>
+      <th>Yes</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>Actual</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>No</th>
+      <td>4275</td>
+      <td>257</td>
+      <td>4532</td>
+    </tr>
+    <tr>
+      <th>Yes</th>
+      <td>254</td>
+      <td>36</td>
+      <td>290</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>4529</td>
+      <td>293</td>
+      <td>4822</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># fraction of people predicted to make a purchase that actually do - this is the "precision"</span>
+<span class="n">logreg_conf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Yes'</span><span class="p">,</span> <span class="s">'Yes'</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">logreg_conf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Yes'</span><span class="p">,</span> <span class="s">'No'</span><span class="p">]</span> <span class="o">+</span> <span class="n">logreg_conf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Yes'</span><span class="p">,</span> <span class="s">'Yes'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.12413793103448276
+</code></pre></div></div>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

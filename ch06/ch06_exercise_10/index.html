@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      6. Linear Model Selection and Regularization &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">6. Linear Model Selection and Regularization</h1>
+  	
+<h1 id="exercise-10-exploring-test-error-on-a-simulated-dataset">Exercise 10: Exploring test error on a simulated dataset</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#a-aenerate-the-data" data-toc-modified-id="a.-Generate-the-data-1">a. Generate the data</a></span></li><li><span><a href="#b-train-test-split" data-toc-modified-id="b.-Train-test-split-2">b. Train test split</a></span></li><li><span><a href="#c-bss-on-training-data-and-train-error" data-toc-modified-id="c.-BSS-on-training-data-and-train-error-3">c. BSS on training data and train error</a></span></li><li><span><a href="#d-bss-test-error" data-toc-modified-id="d-bss-test-error-4">d. BSS test error</a></span></li><li><span><a href="#e-model-with-minimum-test-error" data-toc-modified-id="e.-Model-with-minimum-test-error-5">e. Model with minimum test error</a></span></li><li><span><a href="#f-comparing-best-model-and-true-model" data-toc-modified-id="f.-Comparing-best-model-and-true-model-6">f. Comparing best model and true model</a></span></li></ul>
+</div>
+
+<p>Note that this exercise has been modified to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>=</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">p=15</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">5</span></span></span></span>, to be able to complete c. in a reasonable time (BSS algorithm runtime is exponential in the number of predictors). The training error as a function of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span> is nearly constant when <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>=</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">p = 15</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">5</span></span></span></span> anyway.</p>
+
+<h2 id="a-generate-the-data">a. Generate the data</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="c"># random X, coefficients, and noise</span>
+<span class="n">X</span> <span class="o">=</span> <span class="mf">1.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">beta</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c"># randomly zero 4 entries of beta</span>
+<span class="n">beta_zeros_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">beta_zeros_indices</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">beta</span><span class="p">))])</span>
+
+<span class="c"># data generated by degree 15 polynomial model</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'X^'</span> <span class="o">+</span> <span class="n">stri</span><span class="o">.</span><span class="p">:</span> <span class="n">X</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)})</span>
+
+<span class="c"># add response</span>
+<span class="n">data</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>X^1</th>
+      <th>X^2</th>
+      <th>X^3</th>
+      <th>X^4</th>
+      <th>X^5</th>
+      <th>X^6</th>
+      <th>X^7</th>
+      <th>X^8</th>
+      <th>X^9</th>
+      <th>X^10</th>
+      <th>X^11</th>
+      <th>X^12</th>
+      <th>X^13</th>
+      <th>X^14</th>
+      <th>X^15</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.571933</td>
+      <td>0.327107</td>
+      <td>0.187083</td>
+      <td>0.106999</td>
+      <td>0.061196</td>
+      <td>0.035000</td>
+      <td>0.020018</td>
+      <td>0.011449</td>
+      <td>6.547953e-03</td>
+      <td>3.744989e-03</td>
+      <td>2.141882e-03</td>
+      <td>1.225013e-03</td>
+      <td>7.006252e-04</td>
+      <td>4.007106e-04</td>
+      <td>2.291796e-04</td>
+      <td>1.508114</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.179980</td>
+      <td>0.032393</td>
+      <td>0.005830</td>
+      <td>0.001049</td>
+      <td>0.000189</td>
+      <td>0.000034</td>
+      <td>0.000006</td>
+      <td>0.000001</td>
+      <td>1.981650e-07</td>
+      <td>3.566581e-08</td>
+      <td>6.419147e-09</td>
+      <td>1.155321e-09</td>
+      <td>2.079351e-10</td>
+      <td>3.742424e-11</td>
+      <td>6.735629e-12</td>
+      <td>-0.155696</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.095461</td>
+      <td>1.200035</td>
+      <td>1.314592</td>
+      <td>1.440084</td>
+      <td>1.577557</td>
+      <td>1.728152</td>
+      <td>1.893123</td>
+      <td>2.073843</td>
+      <td>2.271815e+00</td>
+      <td>2.488685e+00</td>
+      <td>2.726257e+00</td>
+      <td>2.986509e+00</td>
+      <td>3.271605e+00</td>
+      <td>3.583916e+00</td>
+      <td>3.926041e+00</td>
+      <td>11.183512</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.644125</td>
+      <td>0.414897</td>
+      <td>0.267245</td>
+      <td>0.172139</td>
+      <td>0.110879</td>
+      <td>0.071420</td>
+      <td>0.046003</td>
+      <td>0.029632</td>
+      <td>1.908667e-02</td>
+      <td>1.229420e-02</td>
+      <td>7.918998e-03</td>
+      <td>5.100823e-03</td>
+      <td>3.285566e-03</td>
+      <td>2.116315e-03</td>
+      <td>1.363171e-03</td>
+      <td>0.783877</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.003829</td>
+      <td>1.007672</td>
+      <td>1.011530</td>
+      <td>1.015403</td>
+      <td>1.019291</td>
+      <td>1.023193</td>
+      <td>1.027111</td>
+      <td>1.031043</td>
+      <td>1.034991e+00</td>
+      <td>1.038954e+00</td>
+      <td>1.042932e+00</td>
+      <td>1.046925e+00</td>
+      <td>1.050933e+00</td>
+      <td>1.054957e+00</td>
+      <td>1.058996e+00</td>
+      <td>4.482393</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="b-train-test-split">b. Train test split</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">capture</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'y'</span><span class="p">]),</span> 
+                                                    <span class="n">data</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span> <span class="n">train_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>((100, 15), (900, 15), (100,), (900,))
+</code></pre></div></div>
+
+<h2 id="c-bss-on-training-data-and-train-error">c. BSS on training data and train error</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">mlxtend.feature_selection</span> <span class="kn">import</span> <span class="n">ExhaustiveFeatureSelector</span> <span class="k">as</span> <span class="n">EFS</span>
+
+<span class="c"># dict for mse results</span>
+<span class="n">bss_mses</span> <span class="o">=</span> <span class="p">{</span><span class="s">'num_pred'</span><span class="p">:</span> <span class="p">[],</span> <span class="s">'best_pred_idx'</span><span class="p">:</span> <span class="p">[],</span> <span class="s">'best_mse_train'</span><span class="p">:</span> <span class="p">[]}</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+    <span class="n">efs</span> <span class="o">=</span> <span class="n">EFS</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">min_features</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">,</span>
+              <span class="n">print_progress</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">efs</span> <span class="o">=</span> <span class="n">efs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">bss_mses</span><span class="p">[</span><span class="s">'num_pred'</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">bss_mses</span><span class="p">[</span><span class="s">'best_pred_idx'</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">efs</span><span class="o">.</span><span class="n">best_idx_</span><span class="p">]</span>
+    <span class="n">bss_mses</span><span class="p">[</span><span class="s">'best_mse_train'</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="o">-</span><span class="n">efs</span><span class="o">.</span><span class="n">best_score_</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bss_mses_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bss_mses</span><span class="p">)</span>
+<span class="n">bss_mses_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>num_pred</th>
+      <th>best_pred_idx</th>
+      <th>best_mse_train</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>(8,)</td>
+      <td>0.965216</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>(7, 14)</td>
+      <td>0.960280</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>(3, 4, 14)</td>
+      <td>0.955215</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>(5, 6, 7, 8)</td>
+      <td>0.950193</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>(2, 4, 5, 6, 7)</td>
+      <td>0.932734</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>(0, 1, 2, 3, 4, 6)</td>
+      <td>0.868717</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>(0, 2, 3, 4, 5, 6, 11)</td>
+      <td>0.856748</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>(0, 2, 3, 4, 5, 6, 8, 14)</td>
+      <td>0.856729</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>(0, 1, 5, 6, 7, 9, 10, 11, 12)</td>
+      <td>0.856044</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>(0, 1, 6, 7, 9, 10, 11, 12, 13, 14)</td>
+      <td>0.855568</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>(0, 1, 2, 7, 8, 9, 10, 11, 12, 13, 14)</td>
+      <td>0.855489</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)</td>
+      <td>0.854482</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)</td>
+      <td>0.849140</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)</td>
+      <td>0.848783</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,...</td>
+      <td>0.846343</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">bss_mses_df</span><span class="p">[</span><span class="s">'num_pred'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">bss_mses_df</span><span class="p">[</span><span class="s">'best_mse_train'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a19c8cc88&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch06_exercise_10_11_1.png" alt="png" /></p>
+
+<h2 id="d-bss-test-error">d. BSS test error</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># helper function which creates a full length beta with zero entries for ommitted predictors</span>
+<span class="k">def</span> <span class="nf">full_beta</span><span class="p">(</span><span class="n">beta_len</span><span class="p">,</span> <span class="n">model_beta</span><span class="p">,</span> <span class="n">pred_idx</span><span class="p">):</span>
+    <span class="n">beta</span><span class="p">,</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">beta_len</span><span class="p">),</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pred_idx</span><span class="p">:</span>
+        <span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_beta</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">beta</span>
+
+<span class="c"># helper which predicts test data &gt;= features of train data</span>
+<span class="k">def</span> <span class="nf">diff_num_feat_pred</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">pred_idx</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred_idx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">model_beta</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="n">pred_idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">coef_</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">model_beta</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="n">pred_idx</span><span class="p">],</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">coef_</span>
+    <span class="n">beta_len</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">full_beta</span><span class="p">(</span><span class="n">beta_len</span><span class="p">,</span> <span class="n">model_beta</span><span class="p">,</span> <span class="n">pred_idx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="c"># track best model test error</span>
+<span class="n">bss_mses_df</span><span class="p">[</span><span class="s">'best_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bss_mses_df</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">bss_mses_df</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="n">pred_idx</span> <span class="o">=</span> <span class="n">bss_mses_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s">'best_pred_idx'</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">diff_num_feat_pred</span><span class="p">(</span><span class="n">LinearRegression</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">pred_idx</span><span class="p">)</span>
+    <span class="n">bss_mses_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="s">'best_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bss_mses_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>num_pred</th>
+      <th>best_pred_idx</th>
+      <th>best_mse_train</th>
+      <th>best_mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>(8,)</td>
+      <td>0.965216</td>
+      <td>1.330568</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>(7, 14)</td>
+      <td>0.960280</td>
+      <td>1.269383</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>(3, 4, 14)</td>
+      <td>0.955215</td>
+      <td>1.316338</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>(5, 6, 7, 8)</td>
+      <td>0.950193</td>
+      <td>1.337739</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>(2, 4, 5, 6, 7)</td>
+      <td>0.932734</td>
+      <td>1.159891</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>(0, 1, 2, 3, 4, 6)</td>
+      <td>0.868717</td>
+      <td>7.432659</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>(0, 2, 3, 4, 5, 6, 11)</td>
+      <td>0.856748</td>
+      <td>4.303755</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>(0, 2, 3, 4, 5, 6, 8, 14)</td>
+      <td>0.856729</td>
+      <td>4.327183</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>(0, 1, 5, 6, 7, 9, 10, 11, 12)</td>
+      <td>0.856044</td>
+      <td>4.543950</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>(0, 1, 6, 7, 9, 10, 11, 12, 13, 14)</td>
+      <td>0.855568</td>
+      <td>4.293005</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>(0, 1, 2, 7, 8, 9, 10, 11, 12, 13, 14)</td>
+      <td>0.855489</td>
+      <td>4.556714</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)</td>
+      <td>0.854482</td>
+      <td>3.741683</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)</td>
+      <td>0.849140</td>
+      <td>2.879799</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)</td>
+      <td>0.848783</td>
+      <td>2.322990</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,...</td>
+      <td>0.846343</td>
+      <td>31.446850</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">bss_mses_df</span><span class="p">[</span><span class="s">'num_pred'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">bss_mses_df</span><span class="p">[</span><span class="s">'best_mse_test'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a19c18160&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch06_exercise_10_16_1.png" alt="png" /></p>
+
+<h2 id="e-model-with-minimum-test-error">e. Model with minimum test error</h2>
+
+<p>Here is the best model by test mse:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bss_mses_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bss_mses_df</span><span class="p">[</span><span class="s">'best_mse_test'</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">(),</span> <span class="p">:]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>num_pred                        5
+best_pred_idx     (2, 4, 5, 6, 7)
+best_mse_train           0.932734
+best_mse_test             1.15989
+Name: 4, dtype: object
+</code></pre></div></div>
+
+<p>And by train mse:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bss_mses_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bss_mses_df</span><span class="p">[</span><span class="s">'best_mse_train'</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">(),</span> <span class="p">:]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>num_pred                                                         15
+best_pred_idx     (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,...
+best_mse_train                                             0.846343
+best_mse_test                                               31.4469
+Name: 14, dtype: object
+</code></pre></div></div>
+
+<p>The best model by test mse is not the best model by train mse</p>
+
+<h2 id="f-comparing-best-model-and-true-model">f. Comparing best model and true model</h2>
+
+<p>The best model by test mse has only one third of the predictors of the full model. This is perhaps not surprising if we inspect the distributions of the features</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="nb">set</span><span class="p">()</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">prod</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">prod</span><span class="p">:</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">prod</span><span class="o">.</span><span class="n">index</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch06_exercise_10_25_0.png" alt="png" /></p>
+
+<p>The higher the power of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span>, the more concentrated the values are around 9</p>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

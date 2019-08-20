@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      7. Moving Beyond Linearity &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">7. Moving Beyond Linearity</h1>
+  	
+<h1 id="exercise-10-predicting-outstate-in-college-dataset-with-fss-and-gam">Exercise 10: Predicting <code class="highlighter-rouge">Outstate</code> in <code class="highlighter-rouge">College</code> dataset with FSS and GAM</h1>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<p>A description of the dataset can be <a href="https://cran.r-project.org/web/packages/ISLR/ISLR.pdf">found here</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">'whitegrid'</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">college</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'../../datasets/College.csv'</span><span class="p">)</span>
+<span class="n">college</span> <span class="o">=</span> <span class="n">college</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s">'Unnamed: 0'</span><span class="p">:</span> <span class="s">'Name'</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">college</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Private</th>
+      <th>Apps</th>
+      <th>Accept</th>
+      <th>Enroll</th>
+      <th>Top10perc</th>
+      <th>Top25perc</th>
+      <th>F.Undergrad</th>
+      <th>P.Undergrad</th>
+      <th>Outstate</th>
+      <th>Room.Board</th>
+      <th>Books</th>
+      <th>Personal</th>
+      <th>PhD</th>
+      <th>Terminal</th>
+      <th>S.F.Ratio</th>
+      <th>perc.alumni</th>
+      <th>Expend</th>
+      <th>Grad.Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Abilene Christian University</td>
+      <td>Yes</td>
+      <td>1660</td>
+      <td>1232</td>
+      <td>721</td>
+      <td>23</td>
+      <td>52</td>
+      <td>2885</td>
+      <td>537</td>
+      <td>7440</td>
+      <td>3300</td>
+      <td>450</td>
+      <td>2200</td>
+      <td>70</td>
+      <td>78</td>
+      <td>18.1</td>
+      <td>12</td>
+      <td>7041</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Adelphi University</td>
+      <td>Yes</td>
+      <td>2186</td>
+      <td>1924</td>
+      <td>512</td>
+      <td>16</td>
+      <td>29</td>
+      <td>2683</td>
+      <td>1227</td>
+      <td>12280</td>
+      <td>6450</td>
+      <td>750</td>
+      <td>1500</td>
+      <td>29</td>
+      <td>30</td>
+      <td>12.2</td>
+      <td>16</td>
+      <td>10527</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Adrian College</td>
+      <td>Yes</td>
+      <td>1428</td>
+      <td>1097</td>
+      <td>336</td>
+      <td>22</td>
+      <td>50</td>
+      <td>1036</td>
+      <td>99</td>
+      <td>11250</td>
+      <td>3750</td>
+      <td>400</td>
+      <td>1165</td>
+      <td>53</td>
+      <td>66</td>
+      <td>12.9</td>
+      <td>30</td>
+      <td>8735</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Agnes Scott College</td>
+      <td>Yes</td>
+      <td>417</td>
+      <td>349</td>
+      <td>137</td>
+      <td>60</td>
+      <td>89</td>
+      <td>510</td>
+      <td>63</td>
+      <td>12960</td>
+      <td>5450</td>
+      <td>450</td>
+      <td>875</td>
+      <td>92</td>
+      <td>97</td>
+      <td>7.7</td>
+      <td>37</td>
+      <td>19016</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Alaska Pacific University</td>
+      <td>Yes</td>
+      <td>193</td>
+      <td>146</td>
+      <td>55</td>
+      <td>16</td>
+      <td>44</td>
+      <td>249</td>
+      <td>869</td>
+      <td>7560</td>
+      <td>4120</td>
+      <td>800</td>
+      <td>1500</td>
+      <td>76</td>
+      <td>72</td>
+      <td>11.9</td>
+      <td>2</td>
+      <td>10922</td>
+      <td>15</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">college</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 777 entries, 0 to 776
+Data columns (total 19 columns):
+Name           777 non-null object
+Private        777 non-null object
+Apps           777 non-null int64
+Accept         777 non-null int64
+Enroll         777 non-null int64
+Top10perc      777 non-null int64
+Top25perc      777 non-null int64
+F.Undergrad    777 non-null int64
+P.Undergrad    777 non-null int64
+Outstate       777 non-null int64
+Room.Board     777 non-null int64
+Books          777 non-null int64
+Personal       777 non-null int64
+PhD            777 non-null int64
+Terminal       777 non-null int64
+S.F.Ratio      777 non-null float64
+perc.alumni    777 non-null int64
+Expend         777 non-null int64
+Grad.Rate      777 non-null int64
+dtypes: float64(1), int64(16), object(2)
+memory usage: 115.4+ KB
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># dummy variables for categorical variables</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">college</span><span class="p">[</span><span class="s">'Name'</span><span class="p">],</span> 
+                     <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">college</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Name'</span><span class="p">]))],</span> 
+                    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c"># drop redundant variable</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Private_Yes'</span><span class="p">])</span>
+
+<span class="c"># standardize</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'Name'</span><span class="p">,</span> <span class="s">'Private_No'</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span>
+<span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="nb">list</span><span class="p">(</span><span class="n">cols</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">df</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Apps</th>
+      <th>Accept</th>
+      <th>Enroll</th>
+      <th>Top10perc</th>
+      <th>Top25perc</th>
+      <th>F.Undergrad</th>
+      <th>P.Undergrad</th>
+      <th>Outstate</th>
+      <th>Room.Board</th>
+      <th>Books</th>
+      <th>Personal</th>
+      <th>PhD</th>
+      <th>Terminal</th>
+      <th>S.F.Ratio</th>
+      <th>perc.alumni</th>
+      <th>Expend</th>
+      <th>Grad.Rate</th>
+      <th>Private_No</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Abilene Christian University</td>
+      <td>-0.346659</td>
+      <td>-0.320999</td>
+      <td>-0.063468</td>
+      <td>-0.258416</td>
+      <td>-0.191704</td>
+      <td>-0.168008</td>
+      <td>-0.209072</td>
+      <td>-0.745875</td>
+      <td>-0.964284</td>
+      <td>-0.601924</td>
+      <td>1.269228</td>
+      <td>-0.162923</td>
+      <td>-0.115654</td>
+      <td>1.013123</td>
+      <td>-0.867016</td>
+      <td>-0.501587</td>
+      <td>-0.318047</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Adelphi University</td>
+      <td>-0.210748</td>
+      <td>-0.038678</td>
+      <td>-0.288398</td>
+      <td>-0.655234</td>
+      <td>-1.353040</td>
+      <td>-0.209653</td>
+      <td>0.244150</td>
+      <td>0.457202</td>
+      <td>1.907979</td>
+      <td>1.215097</td>
+      <td>0.235363</td>
+      <td>-2.673923</td>
+      <td>-3.376001</td>
+      <td>-0.477397</td>
+      <td>-0.544222</td>
+      <td>0.166003</td>
+      <td>-0.550907</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Adrian College</td>
+      <td>-0.406604</td>
+      <td>-0.376076</td>
+      <td>-0.477814</td>
+      <td>-0.315105</td>
+      <td>-0.292690</td>
+      <td>-0.549212</td>
+      <td>-0.496770</td>
+      <td>0.201175</td>
+      <td>-0.553960</td>
+      <td>-0.904761</td>
+      <td>-0.259415</td>
+      <td>-1.204069</td>
+      <td>-0.930741</td>
+      <td>-0.300556</td>
+      <td>0.585558</td>
+      <td>-0.177176</td>
+      <td>-0.667337</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Agnes Scott College</td>
+      <td>-0.667830</td>
+      <td>-0.681243</td>
+      <td>-0.691982</td>
+      <td>1.839046</td>
+      <td>1.676532</td>
+      <td>-0.657656</td>
+      <td>-0.520416</td>
+      <td>0.626229</td>
+      <td>0.996150</td>
+      <td>-0.601924</td>
+      <td>-0.687730</td>
+      <td>1.184443</td>
+      <td>1.174900</td>
+      <td>-1.614235</td>
+      <td>1.150447</td>
+      <td>1.791697</td>
+      <td>-0.376262</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Alaska Pacific University</td>
+      <td>-0.725709</td>
+      <td>-0.764063</td>
+      <td>-0.780232</td>
+      <td>-0.655234</td>
+      <td>-0.595647</td>
+      <td>-0.711466</td>
+      <td>0.009000</td>
+      <td>-0.716047</td>
+      <td>-0.216584</td>
+      <td>1.517934</td>
+      <td>0.235363</td>
+      <td>0.204540</td>
+      <td>-0.523198</td>
+      <td>-0.553186</td>
+      <td>-1.674001</td>
+      <td>0.241648</td>
+      <td>-2.937721</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a3308bd30&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch07_exercise_10_6_1.png" alt="png" /></p>
+
+<h2 id="a-train-test-split-and-forward-stepwise-selection">a. Train-test split and Forward Stepwise Selection</h2>
+
+<p>After some experimentation, it was noted that the features selected were highly dependent on the train-test split
+so we decided to repeat the split many times and look at the most frequently occuring features</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">mlxtend.feature_selection</span> <span class="kn">import</span> <span class="n">SequentialFeatureSelector</span>
+
+<span class="k">def</span> <span class="nf">is_present_in_fss</span><span class="p">():</span>
+    <span class="c"># train test split default 0.25 test size</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Outstate'</span><span class="p">,</span> <span class="s">'Name'</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s">'Outstate'</span><span class="p">]</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c"># FSS for linear regression</span>
+    <span class="n">linreg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+    <span class="n">fss</span> <span class="o">=</span> <span class="n">SequentialFeatureSelector</span><span class="p">(</span><span class="n">linreg</span><span class="p">,</span> <span class="n">k_features</span><span class="o">=</span><span class="s">'best'</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">,</span>
+                                <span class="n">cv</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">fss</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    
+    <span class="c"># df with boolean features are present in fss best subset</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">col</span> <span class="ow">in</span> <span class="n">fss</span><span class="o">.</span><span class="n">k_feature_names_</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_fss_results</span><span class="p">(</span><span class="n">n_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">i</span><span class="p">:</span> <span class="n">is_present_in_fss</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_runs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)},</span>
+                        <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fss_results</span> <span class="o">=</span> <span class="n">get_fss_results</span><span class="p">(</span><span class="n">n_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">show</span><span class="p">,</span> <span class="n">output_notebook</span>
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span>
+<span class="kn">from</span> <span class="nn">bokeh.palettes</span> <span class="kn">import</span> <span class="n">Greys</span>
+<span class="n">output_notebook</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div class="bk-root"&gt;
+    &lt;a href="https://bokeh.pydata.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"&gt;&lt;/a&gt;
+    &lt;span id="1281"&gt;Loading BokehJS ...&lt;/span&gt;
+&lt;/div&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">fss_results</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">x_range</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_range</span><span class="o">=</span><span class="n">x_range</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">"Frequency of features selected by FSS"</span><span class="p">,</span>
+           <span class="n">tools</span><span class="o">=</span><span class="s">'hover'</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">vbar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_range</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="n">counts</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">fill_color</span><span class="o">=</span><span class="s">'grey'</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s">'black'</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">major_label_orientation</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="bk-root" id="618cb09c-ad48-43be-8434-965b709603e8" data-root-id="1536"></div>
+
+<p>We note that <code class="highlighter-rouge">Name</code> and <code class="highlighter-rouge">Outstate</code> were never selected (this is by design) while <code class="highlighter-rouge">Room.Board</code>, <code class="highlighter-rouge">perc.alumni</code>, <code class="highlighter-rouge">Expend</code>, <code class="highlighter-rouge">Grad.Rate</code> and <code class="highlighter-rouge">Private_No</code> were always selected.</p>
+
+<p>We reason that, in general, if a feature was selected approximately half the time, its selection by fss was statistically independent of the train-test split. These are the features for which the train test split provides no information.</p>
+
+<p>Thankfully, there are no such features in our case. Our features partition naturally into those selected less than 40% of the time, and those selected greater than 60% of the time. We’ll take the latter for our final set of features</p>
+
+<h2 id="b-gam-for-predicting-outstate-from-fss-features">b. GAM for predicting <code class="highlighter-rouge">Outstate</code> from FSS features</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pygam</span> <span class="kn">import</span> <span class="n">LinearGAM</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">f</span>
+
+<span class="c"># train test split on fss features</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">fss_results</span><span class="o">.</span><span class="nb">sum</span><span class="p">()[</span><span class="n">fss_results</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">'Outstate'</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c"># terms for GAM</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">X_fss</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">terms</span> <span class="o">+=</span> <span class="n">si</span><span class="o">.</span>
+<span class="n">terms</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c"># optimize number of knots and smoothing penalty</span>
+<span class="n">n_splines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span> 
+<span class="n">lams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">gam</span> <span class="o">=</span> <span class="n">LinearGAM</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+<span class="n">gam_search</span> <span class="o">=</span> <span class="n">gam</span><span class="o">.</span><span class="n">gridsearch</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span> <span class="n">n_splines</span><span class="o">=</span><span class="n">n_splines</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100% (1100 of 1100) |####################| Elapsed Time: 0:02:21 Time:  0:02:21
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gam_search</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LinearGAM                                                                                                 
+=============================================== ==========================================================
+Distribution:                        NormalDist Effective DoF:                                     51.7716
+Link Function:                     IdentityLink Log Likelihood:                                  -975.1374
+Number of Samples:                          582 AIC:                                             2055.8181
+                                                AICc:                                             2066.562
+                                                GCV:                                                0.2227
+                                                Scale:                                              0.1874
+                                                Pseudo R-Squared:                                   0.8302
+==========================================================================================================
+Feature Function                  Lambda               Rank         EDoF         P &gt; x        Sig. Code   
+================================= ==================== ============ ============ ============ ============
+s(0)                              [1.5147]             11           7.3          5.61e-02     .           
+s(1)                              [0.6188]             11           4.2          1.30e-02     *           
+s(2)                              [11.1]               11           3.9          2.85e-01                 
+s(3)                              [0.0681]             11           6.0          1.60e-05     ***         
+s(4)                              [11.2738]            11           3.6          6.56e-11     ***         
+s(5)                              [5.4782]             11           3.5          1.75e-01                 
+s(6)                              [0.1632]             11           6.7          4.05e-01                 
+s(7)                              [4.7017]             11           3.7          4.87e-01                 
+s(8)                              [1.3333]             11           4.0          2.39e-02     *           
+s(9)                              [18.3683]            11           2.7          1.25e-03     **          
+s(10)                             [13.242]             11           2.0          1.11e-16     ***         
+s(11)                             [3.5209]             11           3.3          1.87e-05     ***         
+f(12)                             [0.2243]             2            0.8          3.61e-14     ***         
+intercept                                              1            0.0          5.22e-01                 
+==========================================================================================================
+Significance codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+WARNING: Fitting splines and a linear function to a feature introduces a model identifiability problem
+         which can cause p-values to appear significant when they are not.
+
+WARNING: p-values calculated in this manner behave correctly for un-penalized models or models with
+         known smoothing parameters, but when smoothing parameters have been estimated, the p-values
+         are typically lower than they should be, meaning that the tests reject the null too readily.
+
+
+/anaconda3/envs/islr/lib/python3.7/site-packages/ipykernel_launcher.py:1: UserWarning: KNOWN BUG: p-values computed in this summary are likely much smaller than they should be. 
+ 
+Please do not make inferences based on these values! 
+
+Collaborate on a solution, and stay up to date at: 
+github.com/dswah/pyGAM/issues/163 
+
+  """Entry point for launching an IPython kernel.
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">gam_search</span><span class="o">.</span><span class="n">terms</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">term</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">terms</span><span class="p">):</span>
+    <span class="n">XX</span> <span class="o">=</span> <span class="n">gam_search</span><span class="o">.</span><span class="n">generate_X_grid</span><span class="p">(</span><span class="n">term</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">pdep</span><span class="p">,</span> <span class="n">confi</span> <span class="o">=</span> <span class="n">gam_search</span><span class="o">.</span><span class="n">partial_dependence</span><span class="p">(</span><span class="n">term</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">XX</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">XX</span><span class="p">[:,</span> <span class="n">term</span><span class="o">.</span><span class="n">feature</span><span class="p">],</span> <span class="n">pdep</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">'r'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">XX</span><span class="p">[:,</span> <span class="n">term</span><span class="o">.</span><span class="n">feature</span><span class="p">],</span> <span class="n">confi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">'grey'</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s">'--'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">term</span><span class="p">))</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch07_exercise_10_17_0.png" alt="png" /></p>
+
+<h2 id="c-evaluate-on-test-set">c. Evaluate on test set</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="c"># rmse on test data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">gam_search</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.5237308479472315
+</code></pre></div></div>
+
+<h2 id="d-significant-features">d. Significant features</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># gam for significant features</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c"># optimize number of knots and smoothing penalty</span>
+<span class="n">n_splines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span> 
+<span class="n">lams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">gam2</span> <span class="o">=</span> <span class="n">LinearGAM</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+<span class="n">gam2_search</span> <span class="o">=</span> <span class="n">gam</span><span class="o">.</span><span class="n">gridsearch</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span> <span class="n">n_splines</span><span class="o">=</span><span class="n">n_splines</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100% (1100 of 1100) |####################| Elapsed Time: 0:01:24 Time:  0:01:24
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gam2_search</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LinearGAM                                                                                                 
+=============================================== ==========================================================
+Distribution:                        NormalDist Effective DoF:                                     41.6337
+Link Function:                     IdentityLink Log Likelihood:                                 -1003.3785
+Number of Samples:                          582 AIC:                                             2092.0243
+                                                AICc:                                            2098.9351
+                                                GCV:                                                0.2145
+                                                Scale:                                              0.1871
+                                                Pseudo R-Squared:                                   0.8271
+==========================================================================================================
+Feature Function                  Lambda               Rank         EDoF         P &gt; x        Sig. Code   
+================================= ==================== ============ ============ ============ ============
+s(0)                              [2.1663]             12           8.2          4.57e-02     *           
+s(1)                              [0.1115]             12           5.3          8.11e-03     **          
+s(3)                              [0.0665]             12           6.7          5.58e-06     ***         
+s(4)                              [16.8656]            12           3.7          1.87e-11     ***         
+s(8)                              [9.4796]             12           3.6          9.01e-02     .           
+s(9)                              [12.1717]            12           3.6          5.82e-05     ***         
+s(10)                             [0.1146]             12           5.4          1.11e-16     ***         
+s(11)                             [3.2801]             12           4.3          1.05e-05     ***         
+f(12)                             [0.6573]             2            0.8          1.82e-13     ***         
+intercept                                              1            0.0          2.22e-02     *           
+==========================================================================================================
+Significance codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+WARNING: Fitting splines and a linear function to a feature introduces a model identifiability problem
+         which can cause p-values to appear significant when they are not.
+
+WARNING: p-values calculated in this manner behave correctly for un-penalized models or models with
+         known smoothing parameters, but when smoothing parameters have been estimated, the p-values
+         are typically lower than they should be, meaning that the tests reject the null too readily.
+
+
+/anaconda3/envs/islr/lib/python3.7/site-packages/ipykernel_launcher.py:1: UserWarning: KNOWN BUG: p-values computed in this summary are likely much smaller than they should be. 
+ 
+Please do not make inferences based on these values! 
+
+Collaborate on a solution, and stay up to date at: 
+github.com/dswah/pyGAM/issues/163 
+
+  """Entry point for launching an IPython kernel.
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">gam2_search</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.495656037843246
+</code></pre></div></div>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      9. Support Vector Machines &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">9. Support Vector Machines</h1>
+  	
+<h1 id="exercise-6-svcs-for-barely-linearly-separable-data">Exercise 6: SVCs for barely linearly separable data</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#a-generate-data-and-scatterplot" data-toc-modified-id="a.-Generate-data-and-scatterplot-1">a. Generate data and scatterplot</a></span></li><li><span><a href="#b-vross-validation-error-for-svc-as-a-function-of-cost-parameter" data-toc-modified-id="b.-Cross-validation-error-for-SVC-as-a-function-of-cost-parameter-2">b. Cross-validation error for SVC as a function of <code>cost</code> parameter</a></span></li><li><span><a href="#c-test-error-for-svc-as-a-function-of-cost-parameter" data-toc-modified-id="c.-Test-error-for-SVC-as-a-function-of-cost-parameter-3">c. Test error for SVC as a function of <code>cost</code> parameter</a></span></li></ul>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">'whitegrid'</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s">'ignore'</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="nb">FutureWarning</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="a-generate-data-and-scatterplot">a. Generate data and scatterplot</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'X_1'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">'X_2'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
+                     <span class="s">'Y'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1000</span><span class="p">)})</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="n">X_1</span><span class="p">,</span> <span class="n">X_2</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'X_1'</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'X_2'</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">X_1</span> <span class="o">+</span> <span class="n">X_2</span> <span class="o">&gt;</span> <span class="mf">1.05</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">X_1</span> <span class="o">+</span> <span class="n">X_2</span> <span class="o">&lt;</span> <span class="mf">0.95</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        
+<span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Y'</span><span class="p">],</span> <span class="n">downcast</span><span class="o">=</span><span class="s">'integer'</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>X_1</th>
+      <th>X_2</th>
+      <th>Y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.349514</td>
+      <td>0.564869</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.336660</td>
+      <td>0.669171</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.452217</td>
+      <td>0.179149</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.724898</td>
+      <td>0.141218</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.509156</td>
+      <td>0.747757</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s">'X_1'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s">'X_2'</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s">'Y'</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x105e2d208&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch09_exercise_06_4_1.png" alt="png" /></p>
+
+<h2 id="b-cross-validation-error-for-svc-as-a-function-of-cost-parameter">b. Cross-validation error for SVC as a function of <code class="highlighter-rouge">cost</code> parameter</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="c"># cost parameter</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'C'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)}</span>
+
+<span class="c"># fit model</span>
+<span class="n">svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'linear'</span><span class="p">)</span>
+<span class="n">svc_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">svc</span><span class="p">,</span> 
+                          <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                          <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                          <span class="n">scoring</span><span class="o">=</span><span class="s">'accuracy'</span><span class="p">)</span>
+<span class="n">svc_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s">'X_1'</span><span class="p">,</span> <span class="s">'X_2'</span><span class="p">]],</span> <span class="n">data</span><span class="p">[</span><span class="s">'Y'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GridSearchCV(cv=10, error_score='raise-deprecating',
+       estimator=SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto_deprecated',
+  kernel='linear', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False),
+       fit_params=None, iid='warn', n_jobs=None,
+       param_grid={'C': array([ 1.     ,  1.04905, ..., 49.95095, 50.     ])},
+       pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
+       scoring='accuracy', verbose=0)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">svc_search_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">svc_search</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">svc_search_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_C</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>...</th>
+      <th>split2_train_score</th>
+      <th>split3_train_score</th>
+      <th>split4_train_score</th>
+      <th>split5_train_score</th>
+      <th>split6_train_score</th>
+      <th>split7_train_score</th>
+      <th>split8_train_score</th>
+      <th>split9_train_score</th>
+      <th>mean_train_score</th>
+      <th>std_train_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.005417</td>
+      <td>0.001175</td>
+      <td>0.001424</td>
+      <td>0.000477</td>
+      <td>1</td>
+      <td>{'C': 1.0}</td>
+      <td>0.950495</td>
+      <td>0.950495</td>
+      <td>0.940594</td>
+      <td>0.93</td>
+      <td>...</td>
+      <td>0.952169</td>
+      <td>0.956667</td>
+      <td>0.951111</td>
+      <td>0.952222</td>
+      <td>0.953333</td>
+      <td>0.957825</td>
+      <td>0.952275</td>
+      <td>0.948946</td>
+      <td>0.953334</td>
+      <td>0.002893</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.004414</td>
+      <td>0.000236</td>
+      <td>0.001259</td>
+      <td>0.000308</td>
+      <td>1.04905</td>
+      <td>{'C': 1.049049049049049}</td>
+      <td>0.950495</td>
+      <td>0.950495</td>
+      <td>0.950495</td>
+      <td>0.93</td>
+      <td>...</td>
+      <td>0.952169</td>
+      <td>0.957778</td>
+      <td>0.951111</td>
+      <td>0.953333</td>
+      <td>0.953333</td>
+      <td>0.957825</td>
+      <td>0.952275</td>
+      <td>0.950055</td>
+      <td>0.953667</td>
+      <td>0.002855</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.004460</td>
+      <td>0.000329</td>
+      <td>0.001215</td>
+      <td>0.000190</td>
+      <td>1.0981</td>
+      <td>{'C': 1.098098098098098}</td>
+      <td>0.950495</td>
+      <td>0.950495</td>
+      <td>0.950495</td>
+      <td>0.93</td>
+      <td>...</td>
+      <td>0.951057</td>
+      <td>0.957778</td>
+      <td>0.951111</td>
+      <td>0.953333</td>
+      <td>0.953333</td>
+      <td>0.956715</td>
+      <td>0.953385</td>
+      <td>0.952275</td>
+      <td>0.953555</td>
+      <td>0.002108</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.004940</td>
+      <td>0.000989</td>
+      <td>0.001507</td>
+      <td>0.000670</td>
+      <td>1.14715</td>
+      <td>{'C': 1.147147147147147}</td>
+      <td>0.950495</td>
+      <td>0.950495</td>
+      <td>0.950495</td>
+      <td>0.93</td>
+      <td>...</td>
+      <td>0.952169</td>
+      <td>0.957778</td>
+      <td>0.951111</td>
+      <td>0.954444</td>
+      <td>0.953333</td>
+      <td>0.956715</td>
+      <td>0.952275</td>
+      <td>0.951165</td>
+      <td>0.954000</td>
+      <td>0.002438</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.005254</td>
+      <td>0.000438</td>
+      <td>0.001622</td>
+      <td>0.000398</td>
+      <td>1.1962</td>
+      <td>{'C': 1.1961961961961962}</td>
+      <td>0.950495</td>
+      <td>0.950495</td>
+      <td>0.960396</td>
+      <td>0.93</td>
+      <td>...</td>
+      <td>0.953281</td>
+      <td>0.957778</td>
+      <td>0.951111</td>
+      <td>0.954444</td>
+      <td>0.952222</td>
+      <td>0.956715</td>
+      <td>0.952275</td>
+      <td>0.952275</td>
+      <td>0.954111</td>
+      <td>0.002326</td>
+    </tr>
+  </tbody>
+</table>
+  <p>5 rows × 31 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">svc_search_df</span><span class="p">[</span><span class="s">'mean_test_score'</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'logc.'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0.5, 0, 'logc.')
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch09_exercise_06_8_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">svc_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'C': 3.305305305305305}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">svc_search</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.955
+</code></pre></div></div>
+
+<h2 id="c-test-error-for-svc-as-a-function-of-cost-parameter">c. Test error for SVC as a function of <code class="highlighter-rouge">cost</code> parameter</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># generate test data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'X_1'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="s">'X_2'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
+                     <span class="s">'Y'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1000</span><span class="p">)})</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">test_data</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="n">X_1</span><span class="p">,</span> <span class="n">X_2</span> <span class="o">=</span> <span class="n">test_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'X_1'</span><span class="p">],</span> <span class="n">test_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'X_2'</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">X_1</span> <span class="o">+</span> <span class="n">X_2</span> <span class="o">&gt;</span> <span class="mf">1.05</span><span class="p">:</span>
+        <span class="n">test_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">X_1</span> <span class="o">+</span> <span class="n">X_2</span> <span class="o">&lt;</span> <span class="mf">0.95</span><span class="p">:</span>
+        <span class="n">test_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">test_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        
+<span class="n">test_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s">'Y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">test_data</span><span class="p">[</span><span class="s">'Y'</span><span class="p">],</span> <span class="n">downcast</span><span class="o">=</span><span class="s">'integer'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c"># train and test data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s">'X_1'</span><span class="p">,</span> <span class="s">'X_2'</span><span class="p">]],</span> <span class="n">data</span><span class="p">[</span><span class="s">'Y'</span><span class="p">]</span>
+<span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[[</span><span class="s">'X_1'</span><span class="p">,</span> <span class="s">'X_2'</span><span class="p">]],</span> <span class="n">test_data</span><span class="p">[</span><span class="s">'Y'</span><span class="p">]</span>
+
+<span class="c"># trained models</span>
+<span class="n">svcs</span> <span class="o">=</span> <span class="p">{</span><span class="n">C</span><span class="p">:</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'linear'</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span> <span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)}</span>
+
+<span class="c"># errors df</span>
+<span class="n">svcs_train_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">svcs</span><span class="p">[</span><span class="n">C</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">Y_train</span><span class="p">)</span> <span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">svcs</span><span class="p">])</span>
+<span class="n">svcs_test_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">svcs</span><span class="p">[</span><span class="n">C</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">Y_test</span><span class="p">)</span> <span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">svcs</span><span class="p">])</span>
+<span class="n">svcs_errors_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'C'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> 
+                               <span class="s">'train_error'</span><span class="p">:</span> <span class="n">svcs_train_errors</span><span class="p">,</span>
+                               <span class="s">'cv_error'</span><span class="p">:</span> <span class="n">svc_search_df</span><span class="p">[</span><span class="s">'mean_test_score'</span><span class="p">],</span>
+                               <span class="s">'test_error'</span><span class="p">:</span> <span class="n">svcs_test_errors</span>
+                                <span class="p">})</span>
+<span class="n">svcs_errors_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>C</th>
+      <th>train_error</th>
+      <th>cv_error</th>
+      <th>test_error</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.000000</td>
+      <td>0.953</td>
+      <td>0.952</td>
+      <td>0.954</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.049049</td>
+      <td>0.954</td>
+      <td>0.954</td>
+      <td>0.954</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.098098</td>
+      <td>0.954</td>
+      <td>0.953</td>
+      <td>0.954</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.147147</td>
+      <td>0.954</td>
+      <td>0.953</td>
+      <td>0.953</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.196196</td>
+      <td>0.954</td>
+      <td>0.954</td>
+      <td>0.954</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'C'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'train_error'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">svcs_errors_df</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'train_error'</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'C'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'cv_error'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">svcs_errors_df</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'cv_error'</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'C'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'test_error'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">svcs_errors_df</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'test_error'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.legend.Legend at 0x1a1a1dc1d0&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch09_exercise_06_14_1.png" alt="png" /></p>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

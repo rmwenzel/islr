@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      9. Support Vector Machines &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">9. Support Vector Machines</h1>
+  	
+<h1 id="exercise-8-using-svms-to-classify-purchase-in-oj-dataset">Exercise 8: Using SVMs to classify <code class="highlighter-rouge">Purchase</code> in <code class="highlighter-rouge">OJ</code> dataset</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span></li><li><span><a href="#a-train-test-split" data-toc-modified-id="a.-Train-test-split-2">a. Train test split</a></span></li><li><span><a href="#b-linear-svc-with-c-001" data-toc-modified-id="b.-Linear-SVC-with-C=001-3">b. Linear SVC with C = 0.01 </a></span></li><li><span><a href="#c-training-and-test-error-rates-for-linear-svc" data-toc-modified-id="c.-Training-and-test-error-rates-for-linear-SVC-4">c. Training and test error rates for linear SVC</a></span></li><li><span><a href="#d-tuning-cost-parameter-for-linear-svc" data-toc-modified-id="d.-Tuning-cost-parameter-for-linear-SVC-5">d. Tuning cost parameter for linear SVC</a></span></li><li><span><a href="#e-training-and-test-error-rates-for-radial-svc-with-optimized-cost" data-toc-modified-id="e.-Training-and-test-error-rates-for-radial-SVC-with-optimized-cost-6">e. Training and test error rates for radial SVC with optimized cost</a></span></li><li><span><a href="#f-repeat-b-e-for-radial-svc" data-toc-modified-id="f.-Repeat-b.---e.-for-radial-SVC-7">f. Repeat b. - e. for radial SVC</a></span><ul class="toc-item"><li><span><a href="#radial-svc-with-with-c-001" data-toc-modified-id="Radial-SVC-with-with-C-001-7.1">Radial SVC with C = 0.01 </a></span></li><li><span><a href="#training-and-test-error-rates-for-radial-svc" data-toc-modified-id="Training-and-test-error-rates-for-radial-SVC-7.2">Training and test error rates for radial SVC</a></span></li><li><span><a href="#tuning-cost-parameter-for-radial-svc" data-toc-modified-id="Tuning-cost-parameter-for-radial-SVC-7.3">Tuning cost parameter for radial SVC</a></span></li><li><span><a href="#training-and-test-error-rates-for-svc-with-optimized-cost" data-toc-modified-id="Training-and-test-error-rates-for--SVC-with-optimized-cost-7.4">Training and test error rates for SVC with optimized cost</a></span></li></ul></li><li><span><a href="#g-repeat-b-e-for-quadratic-svc" data-toc-modified-id="g.-Repeat-b.---e.-for-quadratic-SVC-8">g. Repeat b. - e. for quadratic SVC</a></span><ul class="toc-item"><li><span><a href="#quadratic-svc-with-c-001" data-toc-modified-id="Quadratic-SVC-with-C-001-8.1">Quadratic SVC with C = 0.01 </a></span></li><li><span><a href="#training-and-test-error-rates-for-radial-svc" data-toc-modified-id="Training-and-test-error-rates-for-radial-SVC-8.2">Training and test error rates for radial SVC</a></span></li><li><span><a href="#tuning-cost-parameter-for-radial-svc" data-toc-modified-id="Tuning-cost-parameter-for-radial-SVC-8.3">Tuning cost parameter for radial SVC</a></span></li><li><span><a href="#training-and-test-error-rates-for-svc-with-optimized-cost" data-toc-modified-id="Training-and-test-error-rates-for--SVC-with-optimized-cost-8.4">Training and test error rates for  SVC with optimized cost</a></span></li></ul></li></ul>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">'whitegrid'</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s">'ignore'</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="nb">FutureWarning</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<p>Information on the dataset can be <a href="https://rdrr.io/cran/ISLR/man/OJ.html">found here</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">oj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'../../datasets/OJ.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">oj</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">oj</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Purchase</th>
+      <th>WeekofPurchase</th>
+      <th>StoreID</th>
+      <th>PriceCH</th>
+      <th>PriceMM</th>
+      <th>DiscCH</th>
+      <th>DiscMM</th>
+      <th>SpecialCH</th>
+      <th>SpecialMM</th>
+      <th>LoyalCH</th>
+      <th>SalePriceMM</th>
+      <th>SalePriceCH</th>
+      <th>PriceDiff</th>
+      <th>Store7</th>
+      <th>PctDiscMM</th>
+      <th>PctDiscCH</th>
+      <th>ListPriceDiff</th>
+      <th>STORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CH</td>
+      <td>237</td>
+      <td>1</td>
+      <td>1.75</td>
+      <td>1.99</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>1.99</td>
+      <td>1.75</td>
+      <td>0.24</td>
+      <td>No</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.24</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CH</td>
+      <td>239</td>
+      <td>1</td>
+      <td>1.75</td>
+      <td>1.99</td>
+      <td>0.00</td>
+      <td>0.3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.600000</td>
+      <td>1.69</td>
+      <td>1.75</td>
+      <td>-0.06</td>
+      <td>No</td>
+      <td>0.150754</td>
+      <td>0.000000</td>
+      <td>0.24</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CH</td>
+      <td>245</td>
+      <td>1</td>
+      <td>1.86</td>
+      <td>2.09</td>
+      <td>0.17</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.680000</td>
+      <td>2.09</td>
+      <td>1.69</td>
+      <td>0.40</td>
+      <td>No</td>
+      <td>0.000000</td>
+      <td>0.091398</td>
+      <td>0.23</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MM</td>
+      <td>227</td>
+      <td>1</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.400000</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>No</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CH</td>
+      <td>228</td>
+      <td>7</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.956535</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>Yes</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">oj</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1070 entries, 0 to 1069
+Data columns (total 18 columns):
+Purchase          1070 non-null object
+WeekofPurchase    1070 non-null int64
+StoreID           1070 non-null int64
+PriceCH           1070 non-null float64
+PriceMM           1070 non-null float64
+DiscCH            1070 non-null float64
+DiscMM            1070 non-null float64
+SpecialCH         1070 non-null int64
+SpecialMM         1070 non-null int64
+LoyalCH           1070 non-null float64
+SalePriceMM       1070 non-null float64
+SalePriceCH       1070 non-null float64
+PriceDiff         1070 non-null float64
+Store7            1070 non-null object
+PctDiscMM         1070 non-null float64
+PctDiscCH         1070 non-null float64
+ListPriceDiff     1070 non-null float64
+STORE             1070 non-null int64
+dtypes: float64(11), int64(5), object(2)
+memory usage: 150.5+ KB
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># drop superfluous variables</span>
+<span class="n">oj</span> <span class="o">=</span> <span class="n">oj</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'STORE'</span><span class="p">,</span> <span class="s">'Store7'</span><span class="p">])</span>
+<span class="n">oj</span><span class="o">.</span><span class="n">columns</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Index(['Purchase', 'WeekofPurchase', 'StoreID', 'PriceCH', 'PriceMM', 'DiscCH',
+       'DiscMM', 'SpecialCH', 'SpecialMM', 'LoyalCH', 'SalePriceMM',
+       'SalePriceCH', 'PriceDiff', 'PctDiscMM', 'PctDiscCH', 'ListPriceDiff'],
+      dtype='object')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+
+<span class="c"># label encode string variable</span>
+<span class="n">purchase_le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">purchase_le</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">oj</span><span class="p">[</span><span class="s">'Purchase'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">oj</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="s">'Purchase'</span><span class="p">]</span> <span class="o">=</span> <span class="n">purchase_le</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">oj</span><span class="p">[</span><span class="s">'Purchase'</span><span class="p">])</span>
+<span class="n">purchase_le</span><span class="o">.</span><span class="n">classes_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array(['CH', 'MM'], dtype=object)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+
+<span class="c"># scale all columns to interval [0, 1]</span>
+<span class="n">oj_std</span> <span class="o">=</span> <span class="p">(</span><span class="n">oj</span> <span class="o">-</span> <span class="n">oj</span><span class="o">.</span><span class="nb">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">oj</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">oj</span><span class="o">.</span><span class="nb">min</span><span class="p">())</span>
+<span class="n">oj_std</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Purchase</th>
+      <th>WeekofPurchase</th>
+      <th>StoreID</th>
+      <th>PriceCH</th>
+      <th>PriceMM</th>
+      <th>DiscCH</th>
+      <th>DiscMM</th>
+      <th>SpecialCH</th>
+      <th>SpecialMM</th>
+      <th>LoyalCH</th>
+      <th>SalePriceMM</th>
+      <th>SalePriceCH</th>
+      <th>PriceDiff</th>
+      <th>PctDiscMM</th>
+      <th>PctDiscCH</th>
+      <th>ListPriceDiff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+      <td>1070.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.389720</td>
+      <td>0.536888</td>
+      <td>0.493302</td>
+      <td>0.443551</td>
+      <td>0.659019</td>
+      <td>0.103720</td>
+      <td>0.154206</td>
+      <td>0.147664</td>
+      <td>0.161682</td>
+      <td>0.565808</td>
+      <td>0.701861</td>
+      <td>0.607944</td>
+      <td>0.623272</td>
+      <td>0.147505</td>
+      <td>0.108093</td>
+      <td>0.495433</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.487915</td>
+      <td>0.305064</td>
+      <td>0.384831</td>
+      <td>0.254924</td>
+      <td>0.223976</td>
+      <td>0.234948</td>
+      <td>0.267292</td>
+      <td>0.354932</td>
+      <td>0.368331</td>
+      <td>0.307862</td>
+      <td>0.229725</td>
+      <td>0.204834</td>
+      <td>0.207300</td>
+      <td>0.253128</td>
+      <td>0.246282</td>
+      <td>0.244399</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.000000</td>
+      <td>0.254902</td>
+      <td>0.166667</td>
+      <td>0.250000</td>
+      <td>0.500000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.325267</td>
+      <td>0.454545</td>
+      <td>0.514286</td>
+      <td>0.511450</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.318182</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000000</td>
+      <td>0.588235</td>
+      <td>0.333333</td>
+      <td>0.425000</td>
+      <td>0.666667</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.600027</td>
+      <td>0.818182</td>
+      <td>0.671429</td>
+      <td>0.687023</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.545455</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>1.000000</td>
+      <td>0.803922</td>
+      <td>1.000000</td>
+      <td>0.750000</td>
+      <td>0.816667</td>
+      <td>0.000000</td>
+      <td>0.287500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.850916</td>
+      <td>0.854545</td>
+      <td>0.714286</td>
+      <td>0.755725</td>
+      <td>0.280282</td>
+      <td>0.000000</td>
+      <td>0.681818</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="a-train-test-split">a. Train test split</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">oj</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Purchase'</span><span class="p">]),</span> <span class="n">oj</span><span class="p">[</span><span class="s">'Purchase'</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="b-linear-svc-with-c--001">b. Linear SVC with C = 0.01</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+
+<span class="n">linear_svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'linear'</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">linear_svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SVC(C=0.01, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto_deprecated',
+  kernel='linear', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+</code></pre></div></div>
+
+<h2 id="c-training-and-test-error-rates-for-linear-svc">c. Training and test error rates for linear SVC</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="n">linear_svc_train_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">linear_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="n">linear_svc_test_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">linear_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">Y_test</span><span class="p">)</span>
+
+<span class="n">f</span><span class="s">'The linear SVC train error is {linear_svc_train_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The linear SVC train error is 0.75125'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="s">'The linear SVC test error is {linear_svc_test_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The linear SVC test error is 0.7333333333333333'
+</code></pre></div></div>
+
+<h2 id="d-tuning-cost-parameter-for-linear-svc">d. Tuning cost parameter for linear SVC</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">param</span> <span class="o">=</span> <span class="p">{</span><span class="s">'C'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+<span class="n">linear_svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'linear'</span><span class="p">)</span>
+<span class="n">linear_svc_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">linear_svc</span><span class="p">,</span>
+                                 <span class="n">param_grid</span><span class="o">=</span><span class="n">param</span><span class="p">,</span>
+                                 <span class="n">cv</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                                 <span class="n">scoring</span><span class="o">=</span><span class="s">'accuracy'</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">linear_svc_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.33 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+
+/anaconda3/envs/islr/lib/python3.7/site-packages/sklearn/model_selection/_search.py:841: DeprecationWarning: The default of the `iid` parameter will change from True to False in version 0.22 and will be removed in 0.24. This will change numeric results when test-set sizes are unequal.
+  DeprecationWarning)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear_svc_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'C': 1}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear_svc_search</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.82625
+</code></pre></div></div>
+
+<h2 id="e-training-and-test-error-rates-for-radial-svc-with-optimized-cost">e. Training and test error rates for radial SVC with optimized cost</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear_svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'linear'</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">linear_svc_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s">'C'</span><span class="p">])</span>
+<span class="n">linear_svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto_deprecated',
+  kernel='linear', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="n">linear_svc_train_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">linear_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="n">linear_svc_test_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">linear_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">Y_test</span><span class="p">)</span>
+
+<span class="n">f</span><span class="s">'The linear SVC train error is {linear_svc_train_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The linear SVC train error is 0.83125'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="s">'The linear SVC test error is {linear_svc_test_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The linear SVC test error is 0.8555555555555555'
+</code></pre></div></div>
+
+<h2 id="f-repeat-b---e-for-radial-svc">f. Repeat b. - e. for radial SVC</h2>
+
+<h3 id="radial-svc-with-c--001">Radial SVC with C = 0.01</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+
+<span class="n">radial_svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'rbf'</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">radial_svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SVC(C=0.01, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto_deprecated',
+  kernel='rbf', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+</code></pre></div></div>
+
+<h3 id="training-and-test-error-rates-for-radial-svc">Training and test error rates for radial SVC</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="n">radial_svc_train_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">radial_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="n">radial_svc_test_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">radial_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">Y_test</span><span class="p">)</span>
+
+<span class="n">f</span><span class="s">'The radial SVC train error is {radial_svc_train_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The radial SVC train error is 0.6175'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="s">'The radial SVC test error is {radial_svc_test_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The radial SVC test error is 0.5888888888888889'
+</code></pre></div></div>
+
+<h3 id="tuning-cost-parameter-for-radial-svc">Tuning cost parameter for radial SVC</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">param</span> <span class="o">=</span> <span class="p">{</span><span class="s">'C'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+<span class="n">radial_svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'rbf'</span><span class="p">)</span>
+<span class="n">radial_svc_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">radial_svc</span><span class="p">,</span>
+                                 <span class="n">param_grid</span><span class="o">=</span><span class="n">param</span><span class="p">,</span>
+                                 <span class="n">cv</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                                 <span class="n">scoring</span><span class="o">=</span><span class="s">'accuracy'</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">radial_svc_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+
+/anaconda3/envs/islr/lib/python3.7/site-packages/sklearn/model_selection/_search.py:841: DeprecationWarning: The default of the `iid` parameter will change from True to False in version 0.22 and will be removed in 0.24. This will change numeric results when test-set sizes are unequal.
+  DeprecationWarning)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">radial_svc_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'C': 10}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">radial_svc_search</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.795
+</code></pre></div></div>
+
+<h3 id="training-and-test-error-rates-for--svc-with-optimized-cost">Training and test error rates for  SVC with optimized cost</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">radial_svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'rbf'</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">radial_svc_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s">'C'</span><span class="p">])</span>
+<span class="n">radial_svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SVC(C=10, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto_deprecated',
+  kernel='rbf', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">radial_svc_train_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">radial_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="n">radial_svc_test_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">radial_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">Y_test</span><span class="p">)</span>
+
+<span class="n">f</span><span class="s">'The radial SVC train error is {radial_svc_train_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The radial SVC train error is 0.85375'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="s">'The radial SVC test error is {radial_svc_test_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The radial SVC test error is 0.8074074074074075'
+</code></pre></div></div>
+
+<h2 id="g-repeat-b---e-for-quadratic-svc">g. Repeat b. - e. for quadratic SVC</h2>
+
+<h3 id="quadratic-svc-with-c--001">Quadratic SVC with C = 0.01</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+
+<span class="n">quad_svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'poly'</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">quad_svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SVC(C=0.01, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=2, gamma='auto_deprecated',
+  kernel='poly', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+</code></pre></div></div>
+
+<h3 id="training-and-test-error-rates-for-radial-svc-1">Training and test error rates for radial SVC</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="n">quad_svc_train_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">quad_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="n">quad_svc_test_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">quad_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">Y_test</span><span class="p">)</span>
+
+<span class="n">f</span><span class="s">'The quadratic SVC train error is {quad_svc_train_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The quadratic SVC train error is 0.83625'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="s">'The quadratic SVC test error is {quad_svc_test_error}'</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'The quadratic SVC test error is 0.8555555555555555'
+</code></pre></div></div>
+
+<h3 id="tuning-cost-parameter-for-radial-svc-1">Tuning cost parameter for radial SVC</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">param</span> <span class="o">=</span> <span class="p">{</span><span class="s">'C'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+<span class="n">quad_svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'poly'</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">quad_svc_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">quad_svc</span><span class="p">,</span>
+                                 <span class="n">param_grid</span><span class="o">=</span><span class="n">param</span><span class="p">,</span>
+                                 <span class="n">cv</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                                 <span class="n">scoring</span><span class="o">=</span><span class="s">'accuracy'</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">quad_svc_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">quad_svc_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">quad_svc_search</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div></div>
+
+<h3 id="training-and-test-error-rates-for--svc-with-optimized-cost-1">Training and test error rates for  SVC with optimized cost</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">quad_svc</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">''</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">quad_svc_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s">'C'</span><span class="p">])</span>
+<span class="n">quad_svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">quad_svc_train_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">quad_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="n">quad_svc_test_error</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">quad_svc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">Y_test</span><span class="p">)</span>
+
+<span class="n">f</span><span class="s">'The quadratic SVC train error is {quad_svc_train_error}'</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="s">'The quadratic SVC test error is {quad_svc_test_error}'</span>
+</code></pre></div></div>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

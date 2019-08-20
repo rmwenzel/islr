@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      8. Tree-based Methods &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">8. Tree-based Methods</h1>
+  	
+<h1 id="exercise-10-boosting-to-predict-salary-in-hitters-dataset">Exercise 10: Boosting to predict <code class="highlighter-rouge">Salary</code> in <code class="highlighter-rouge">Hitters</code> dataset</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span></li><li><span><a href="#a-remove-observations-with-missing-Salary-and-log-transform-salary" data-toc-modified-id="a.-Remove-observations-with-missing-Salary-and-log-transform-Salary-2">a. Remove observations with missing <code>Salary</code> and log-transform <code>Salary</code></a></span></li><li><span><a href="#b-train-test-split" data-toc-modified-id="b.-Train-test-split-3">b. Train test split</a></span></li><li><span><a href="#c-boosting-on-training-set" data-toc-modified-id="c.-Boosting-on-training-set-4">c. Boosting on training set</a></span></li><li><span><a href="#d-plotting-train-error-cv-test-error-estimate-and-test-error" data-toc-modified-id="d.-Plotting-train-error,-cv-test-error-estimate,-and-test-error-5">d. Plotting train error, cv test error estimate, and test error</a></span></li><li><span><a href="#e-comparing-errors-with-ols-lasso,-and-Ridge-Regression-models" data-toc-modified-id="e.--Comparing-errors-with-OLS,-Lasso,-and-Ridge-Regression-models-6">e.  Comparing errors with OLS, Lasso, and Ridge Regression models</a></span></li><li><span><a href="#f.-Which-variables-are-the-most-important-in-the-boosted-tree-model?" data-toc-modified-id="f.-Which-variables-are-the-most-important-in-the-boosted-tree-model?-7">f. Which variables are the most important in the boosted tree model?</a></span></li><li><span><a href="#Bagged-tree" data-toc-modified-id="Bagged-tree-8">Bagged tree</a></span></li></ul>
+</div>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">notebook</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">'whitegrid'</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s">'ignore'</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="nb">FutureWarning</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hitters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'../../datasets/Hitters.csv'</span><span class="p">)</span>
+<span class="n">hitters</span> <span class="o">=</span> <span class="n">hitters</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'Unnamed: 0'</span><span class="p">:</span> <span class="s">'Name'</span><span class="p">})</span>
+<span class="n">hitters</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <div style="overflow-x:auto;">
+    <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th></th>
+        <th>Name</th>
+        <th>AtBat</th>
+        <th>Hits</th>
+        <th>HmRun</th>
+        <th>Runs</th>
+        <th>RBI</th>
+        <th>Walks</th>
+        <th>Years</th>
+        <th>CAtBat</th>
+        <th>CHits</th>
+        <th>...</th>
+        <th>CRuns</th>
+        <th>CRBI</th>
+        <th>CWalks</th>
+        <th>League</th>
+        <th>Division</th>
+        <th>PutOuts</th>
+        <th>Assists</th>
+        <th>Errors</th>
+        <th>Salary</th>
+        <th>NewLeague</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>0</th>
+        <td>-Andy Allanson</td>
+        <td>293</td>
+        <td>66</td>
+        <td>1</td>
+        <td>30</td>
+        <td>29</td>
+        <td>14</td>
+        <td>1</td>
+        <td>293</td>
+        <td>66</td>
+        <td>...</td>
+        <td>30</td>
+        <td>29</td>
+        <td>14</td>
+        <td>A</td>
+        <td>E</td>
+        <td>446</td>
+        <td>33</td>
+        <td>20</td>
+        <td>NaN</td>
+        <td>A</td>
+      </tr>
+      <tr>
+        <th>1</th>
+        <td>-Alan Ashby</td>
+        <td>315</td>
+        <td>81</td>
+        <td>7</td>
+        <td>24</td>
+        <td>38</td>
+        <td>39</td>
+        <td>14</td>
+        <td>3449</td>
+        <td>835</td>
+        <td>...</td>
+        <td>321</td>
+        <td>414</td>
+        <td>375</td>
+        <td>N</td>
+        <td>W</td>
+        <td>632</td>
+        <td>43</td>
+        <td>10</td>
+        <td>475.0</td>
+        <td>N</td>
+      </tr>
+      <tr>
+        <th>2</th>
+        <td>-Alvin Davis</td>
+        <td>479</td>
+        <td>130</td>
+        <td>18</td>
+        <td>66</td>
+        <td>72</td>
+        <td>76</td>
+        <td>3</td>
+        <td>1624</td>
+        <td>457</td>
+        <td>...</td>
+        <td>224</td>
+        <td>266</td>
+        <td>263</td>
+        <td>A</td>
+        <td>W</td>
+        <td>880</td>
+        <td>82</td>
+        <td>14</td>
+        <td>480.0</td>
+        <td>A</td>
+      </tr>
+      <tr>
+        <th>3</th>
+        <td>-Andre Dawson</td>
+        <td>496</td>
+        <td>141</td>
+        <td>20</td>
+        <td>65</td>
+        <td>78</td>
+        <td>37</td>
+        <td>11</td>
+        <td>5628</td>
+        <td>1575</td>
+        <td>...</td>
+        <td>828</td>
+        <td>838</td>
+        <td>354</td>
+        <td>N</td>
+        <td>E</td>
+        <td>200</td>
+        <td>11</td>
+        <td>3</td>
+        <td>500.0</td>
+        <td>N</td>
+      </tr>
+      <tr>
+        <th>4</th>
+        <td>-Andres Galarraga</td>
+        <td>321</td>
+        <td>87</td>
+        <td>10</td>
+        <td>39</td>
+        <td>42</td>
+        <td>30</td>
+        <td>2</td>
+        <td>396</td>
+        <td>101</td>
+        <td>...</td>
+        <td>48</td>
+        <td>46</td>
+        <td>33</td>
+        <td>N</td>
+        <td>E</td>
+        <td>805</td>
+        <td>40</td>
+        <td>4</td>
+        <td>91.5</td>
+        <td>N</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>5 rows × 21 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hitters</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 322 entries, 0 to 321
+Data columns (total 21 columns):
+Name         322 non-null object
+AtBat        322 non-null int64
+Hits         322 non-null int64
+HmRun        322 non-null int64
+Runs         322 non-null int64
+RBI          322 non-null int64
+Walks        322 non-null int64
+Years        322 non-null int64
+CAtBat       322 non-null int64
+CHits        322 non-null int64
+CHmRun       322 non-null int64
+CRuns        322 non-null int64
+CRBI         322 non-null int64
+CWalks       322 non-null int64
+League       322 non-null object
+Division     322 non-null object
+PutOuts      322 non-null int64
+Assists      322 non-null int64
+Errors       322 non-null int64
+Salary       263 non-null float64
+NewLeague    322 non-null object
+dtypes: float64(1), int64(16), object(4)
+memory usage: 52.9+ KB
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hitters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">hitters</span><span class="p">[</span><span class="s">'Name'</span><span class="p">],</span>
+                     <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">hitters</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Name'</span><span class="p">]),</span> <span class="n">drop_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">hitters</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>AtBat</th>
+      <th>Hits</th>
+      <th>HmRun</th>
+      <th>Runs</th>
+      <th>RBI</th>
+      <th>Walks</th>
+      <th>Years</th>
+      <th>CAtBat</th>
+      <th>CHits</th>
+      <th>...</th>
+      <th>CRuns</th>
+      <th>CRBI</th>
+      <th>CWalks</th>
+      <th>PutOuts</th>
+      <th>Assists</th>
+      <th>Errors</th>
+      <th>Salary</th>
+      <th>League_N</th>
+      <th>Division_W</th>
+      <th>NewLeague_N</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-Andy Allanson</td>
+      <td>293</td>
+      <td>66</td>
+      <td>1</td>
+      <td>30</td>
+      <td>29</td>
+      <td>14</td>
+      <td>1</td>
+      <td>293</td>
+      <td>66</td>
+      <td>...</td>
+      <td>30</td>
+      <td>29</td>
+      <td>14</td>
+      <td>446</td>
+      <td>33</td>
+      <td>20</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-Alan Ashby</td>
+      <td>315</td>
+      <td>81</td>
+      <td>7</td>
+      <td>24</td>
+      <td>38</td>
+      <td>39</td>
+      <td>14</td>
+      <td>3449</td>
+      <td>835</td>
+      <td>...</td>
+      <td>321</td>
+      <td>414</td>
+      <td>375</td>
+      <td>632</td>
+      <td>43</td>
+      <td>10</td>
+      <td>475.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-Alvin Davis</td>
+      <td>479</td>
+      <td>130</td>
+      <td>18</td>
+      <td>66</td>
+      <td>72</td>
+      <td>76</td>
+      <td>3</td>
+      <td>1624</td>
+      <td>457</td>
+      <td>...</td>
+      <td>224</td>
+      <td>266</td>
+      <td>263</td>
+      <td>880</td>
+      <td>82</td>
+      <td>14</td>
+      <td>480.0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-Andre Dawson</td>
+      <td>496</td>
+      <td>141</td>
+      <td>20</td>
+      <td>65</td>
+      <td>78</td>
+      <td>37</td>
+      <td>11</td>
+      <td>5628</td>
+      <td>1575</td>
+      <td>...</td>
+      <td>828</td>
+      <td>838</td>
+      <td>354</td>
+      <td>200</td>
+      <td>11</td>
+      <td>3</td>
+      <td>500.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-Andres Galarraga</td>
+      <td>321</td>
+      <td>87</td>
+      <td>10</td>
+      <td>39</td>
+      <td>42</td>
+      <td>30</td>
+      <td>2</td>
+      <td>396</td>
+      <td>101</td>
+      <td>...</td>
+      <td>48</td>
+      <td>46</td>
+      <td>33</td>
+      <td>805</td>
+      <td>40</td>
+      <td>4</td>
+      <td>91.5</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+  <p>5 rows × 21 columns</p>
+</div>
+
+<h2 id="a-remove-observations-with-missing-salary-and-log-transform-salary">a. Remove observations with missing <code class="highlighter-rouge">Salary</code> and log-transform <code class="highlighter-rouge">Salary</code></h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hitters</span> <span class="o">=</span> <span class="n">hitters</span><span class="p">[</span><span class="n">hitters</span><span class="p">[</span><span class="s">'Salary'</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+<span class="n">hitters</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Int64Index: 263 entries, 1 to 321
+Data columns (total 21 columns):
+Name           263 non-null object
+AtBat          263 non-null int64
+Hits           263 non-null int64
+HmRun          263 non-null int64
+Runs           263 non-null int64
+RBI            263 non-null int64
+Walks          263 non-null int64
+Years          263 non-null int64
+CAtBat         263 non-null int64
+CHits          263 non-null int64
+CHmRun         263 non-null int64
+CRuns          263 non-null int64
+CRBI           263 non-null int64
+CWalks         263 non-null int64
+PutOuts        263 non-null int64
+Assists        263 non-null int64
+Errors         263 non-null int64
+Salary         263 non-null float64
+League_N       263 non-null uint8
+Division_W     263 non-null uint8
+NewLeague_N    263 non-null uint8
+dtypes: float64(1), int64(16), object(1), uint8(3)
+memory usage: 39.8+ KB
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hitters</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s">'Salary'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">hitters</span><span class="p">[</span><span class="s">'Salary'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h2 id="b-train-test-split">b. Train test split</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">hitters</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Name'</span><span class="p">,</span> <span class="s">'Salary'</span><span class="p">]),</span> <span class="n">hitters</span><span class="p">[</span><span class="s">'Salary'</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="c-boosting-on-training-set">c. Boosting on training set</h2>
+
+<p>We used this <a href="https://machinelearningmastery.com/tune-learning-rate-for-gradient-boosting-with-xgboost-in-python/">article</a> to suggest customary values of the boosting parameter <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">λ</span></span></span></span> (the “learning rate”)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'learning_rate'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]}</span>
+<span class="n">boost_tree</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">boost_tree_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">boost_tree</span><span class="p">,</span>
+                                 <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                                 <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                 <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">boost_tree_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>19.3 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">boost_tree_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'learning_rate': 0.01}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="n">boost_tree_search</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.0066770413811597165
+</code></pre></div></div>
+
+<h2 id="d-plotting-train-error-cv-test-error-estimate-and-test-error">d. Plotting train error, cv test error estimate, and test error</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">boost_tree_search_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">boost_tree_search</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">boost_tree_search_df</span><span class="p">[</span><span class="s">'param_learning_rate'</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">boost_tree_search_df</span><span class="p">[</span><span class="s">'mean_train_score'</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'-b'</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">boost_tree_search_df</span><span class="p">[</span><span class="s">'mean_test_score'</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'--r'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'mean_cv_test_estimate'</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">rate</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s">'learning_rate'</span><span class="p">]:</span>
+    <span class="n">boost_tree</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="n">rate</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">+=</span> <span class="p">[</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">boost_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">':g'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'mean_test_error'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Learning Rate'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Error'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.legend.Legend at 0x1a180ac550&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch08_exercise_10_17_1.png" alt="png" /></p>
+
+<h2 id="e--comparing-errors-with-ols-lasso-and-ridge-regression-models">e.  Comparing errors with OLS, Lasso, and Ridge Regression models</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">Ridge</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+
+<span class="c"># df for comparison results</span>
+<span class="n">comp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'OLS'</span><span class="p">,</span> <span class="s">'Ridge'</span><span class="p">,</span> <span class="s">'Boosted Tree'</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'mse_train'</span><span class="p">,</span> <span class="s">'cv_mse_test'</span><span class="p">,</span> <span class="s">'mse_test'</span><span class="p">])</span>
+
+<span class="c"># OLS linear regression errors</span>
+<span class="n">linreg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">linreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'OLS'</span><span class="p">,</span> <span class="s">'mse_train'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">linreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'OLS'</span><span class="p">,</span> <span class="s">'cv_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">linreg</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                                                            <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">))</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'OLS'</span><span class="p">,</span> <span class="s">'mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">linreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="c"># Lasso Regression errors</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'alpha'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]}</span>
+<span class="n">lasso</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">lasso_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">lasso</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">lasso_best</span> <span class="o">=</span> <span class="n">lasso_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Lasso'</span><span class="p">,</span> <span class="s">'mse_train'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">lasso_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Lasso'</span><span class="p">,</span> <span class="s">'cv_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">lasso_best</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                                                            <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">))</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Lasso'</span><span class="p">,</span> <span class="s">'mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">lasso_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="c"># Ridge Regression errors</span>
+<span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">ridge_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">ridge</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">ridge_best</span> <span class="o">=</span> <span class="n">ridge_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Ridge'</span><span class="p">,</span> <span class="s">'mse_train'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">ridge_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Ridge'</span><span class="p">,</span> <span class="s">'cv_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">ridge_best</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                                                            <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">))</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Ridge'</span><span class="p">,</span> <span class="s">'mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">ridge_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="c"># Boosted Tree errors</span>
+<span class="n">boost_tree_best</span> <span class="o">=</span> <span class="n">boost_tree_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Boosted Tree'</span><span class="p">,</span> <span class="s">'mse_train'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">boost_tree_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Boosted Tree'</span><span class="p">,</span> <span class="s">'cv_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">boost_tree_best</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                                                            <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">))</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Boosted Tree'</span><span class="p">,</span> <span class="s">'mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">boost_tree_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Here’s the model comparison in order of increasing training error</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">comp_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'mse_train'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_train</th>
+      <th>cv_mse_test</th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Boosted Tree</th>
+      <td>0.00037481</td>
+      <td>0.00662225</td>
+      <td>0.00473355</td>
+    </tr>
+    <tr>
+      <th>OLS</th>
+      <td>0.0113734</td>
+      <td>0.0148324</td>
+      <td>0.0100858</td>
+    </tr>
+    <tr>
+      <th>Lasso</th>
+      <td>0.0114361</td>
+      <td>0.014843</td>
+      <td>0.00972244</td>
+    </tr>
+    <tr>
+      <th>Ridge</th>
+      <td>0.0114704</td>
+      <td>0.0146984</td>
+      <td>0.00965864</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>And cv test error estimate</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">comp_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'cv_mse_test'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_train</th>
+      <th>cv_mse_test</th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Boosted Tree</th>
+      <td>0.00037481</td>
+      <td>0.00662225</td>
+      <td>0.00473355</td>
+    </tr>
+    <tr>
+      <th>Ridge</th>
+      <td>0.0114704</td>
+      <td>0.0146984</td>
+      <td>0.00965864</td>
+    </tr>
+    <tr>
+      <th>OLS</th>
+      <td>0.0113734</td>
+      <td>0.0148324</td>
+      <td>0.0100858</td>
+    </tr>
+    <tr>
+      <th>Lasso</th>
+      <td>0.0114361</td>
+      <td>0.014843</td>
+      <td>0.00972244</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>And finally test error</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">comp_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'mse_test'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_train</th>
+      <th>cv_mse_test</th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Boosted Tree</th>
+      <td>0.00037481</td>
+      <td>0.00662225</td>
+      <td>0.00473355</td>
+    </tr>
+    <tr>
+      <th>Ridge</th>
+      <td>0.0114704</td>
+      <td>0.0146984</td>
+      <td>0.00965864</td>
+    </tr>
+    <tr>
+      <th>Lasso</th>
+      <td>0.0114361</td>
+      <td>0.014843</td>
+      <td>0.00972244</td>
+    </tr>
+    <tr>
+      <th>OLS</th>
+      <td>0.0113734</td>
+      <td>0.0148324</td>
+      <td>0.0100858</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>The boosted tree is a clear winner in all 3 cases</p>
+
+<h2 id="f-which-variables-are-the-most-important-in-the-boosted-tree-model">f. Which variables are the most important in the boosted tree model?</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">feat_imp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Feature Importance'</span><span class="p">:</span> <span class="n">boost_tree_best</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">},</span> 
+                        <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">feat_imp_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'Feature Importance'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Feature Importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CAtBat</th>
+      <td>0.441317</td>
+    </tr>
+    <tr>
+      <th>CHits</th>
+      <td>0.152543</td>
+    </tr>
+    <tr>
+      <th>CRuns</th>
+      <td>0.069480</td>
+    </tr>
+    <tr>
+      <th>Hits</th>
+      <td>0.049296</td>
+    </tr>
+    <tr>
+      <th>CWalks</th>
+      <td>0.048265</td>
+    </tr>
+    <tr>
+      <th>CRBI</th>
+      <td>0.035715</td>
+    </tr>
+    <tr>
+      <th>CHmRun</th>
+      <td>0.025762</td>
+    </tr>
+    <tr>
+      <th>AtBat</th>
+      <td>0.025063</td>
+    </tr>
+    <tr>
+      <th>Walks</th>
+      <td>0.024959</td>
+    </tr>
+    <tr>
+      <th>Years</th>
+      <td>0.024882</td>
+    </tr>
+    <tr>
+      <th>RBI</th>
+      <td>0.024426</td>
+    </tr>
+    <tr>
+      <th>Runs</th>
+      <td>0.022669</td>
+    </tr>
+    <tr>
+      <th>Errors</th>
+      <td>0.018002</td>
+    </tr>
+    <tr>
+      <th>HmRun</th>
+      <td>0.015309</td>
+    </tr>
+    <tr>
+      <th>PutOuts</th>
+      <td>0.014301</td>
+    </tr>
+    <tr>
+      <th>Assists</th>
+      <td>0.005260</td>
+    </tr>
+    <tr>
+      <th>League_N</th>
+      <td>0.001742</td>
+    </tr>
+    <tr>
+      <th>NewLeague_N</th>
+      <td>0.000780</td>
+    </tr>
+    <tr>
+      <th>Division_W</th>
+      <td>0.000229</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="bagged-tree">Bagged tree</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">BaggingRegressor</span>
+
+<span class="c"># Bagged Tree randomized CV search for rough hyperparameter tuning</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'n_estimators'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)}</span>
+<span class="n">bag_tree</span> <span class="o">=</span> <span class="n">BaggingRegressor</span><span class="p">()</span>
+<span class="n">bag_tree_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">bag_tree</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                               <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+<span class="n">bag_tree_best</span> <span class="o">=</span> <span class="n">bag_tree_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">bag_tree_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7.55 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bag_tree_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'n_estimators': 21}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bag_tree_best</span> <span class="o">=</span> <span class="n">bag_tree_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="c"># Bagged Tree errors</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Bagged Tree'</span><span class="p">,</span> <span class="s">'mse_train'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">bag_tree_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Bagged Tree'</span><span class="p">,</span> <span class="s">'cv_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">bag_tree_best</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                                                            <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">))</span>
+<span class="n">comp_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'Bagged Tree'</span><span class="p">,</span> <span class="s">'mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">bag_tree_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="n">comp_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'mse_test'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_train</th>
+      <th>cv_mse_test</th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Bagged Tree</th>
+      <td>0.00100862</td>
+      <td>0.0064751</td>
+      <td>0.0045024</td>
+    </tr>
+    <tr>
+      <th>Boosted Tree</th>
+      <td>0.00037481</td>
+      <td>0.00662225</td>
+      <td>0.00473355</td>
+    </tr>
+    <tr>
+      <th>Ridge</th>
+      <td>0.0114704</td>
+      <td>0.0146984</td>
+      <td>0.00965864</td>
+    </tr>
+    <tr>
+      <th>Lasso</th>
+      <td>0.0114361</td>
+      <td>0.014843</td>
+      <td>0.00972244</td>
+    </tr>
+    <tr>
+      <th>OLS</th>
+      <td>0.0113734</td>
+      <td>0.0148324</td>
+      <td>0.0100858</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

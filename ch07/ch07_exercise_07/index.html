@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      7. Moving Beyond Linearity &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">7. Moving Beyond Linearity</h1>
+  	
+<h1 id="exercise-7-using-non-linear-multiple-regression-to-predict-wage-in-wage-dataset">Exercise 7: Using non-linear multiple regression to predict <code class="highlighter-rouge">wage</code> in <code class="highlighter-rouge">Wage</code> dataset</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span><ul class="toc-item"><li><span><a href="#loading" data-toc-modified-id="Loading-1.1">Loading</a></span></li><li><span><a href="#cleaning" data-toc-modified-id="Cleaning-1.2">Cleaning</a></span><ul class="toc-item"><li><span><a href="#drop-columns" data-toc-modified-id="Drop-columns-1.2.1">Drop columns</a></span></li><li><span><a href="#convert-to-numerical-dtypes" data-toc-modified-id="Convert-to-numerical-dtypes-1.2.2">Convert to numerical dtypes</a></span></li></ul></li><li><span><a href="#preprocessing" data-toc-modified-id="Preprocessing-1.3">Preprocessing</a></span><ul class="toc-item"><li><span><a href="#scaling-the-numerical-variables" data-toc-modified-id="Scaling-the-numerical-variables-1.3.1">Scaling the numerical variables</a></span></li></ul></li></ul></li><li><span><a href="#fitting-some-nonlinear-models" data-toc-modified-id="Fitting-some-nonlinear-models-2">Fitting some nonlinear models</a></span><ul class="toc-item"><li><span><a href="#polynomial-ridge-regression" data-toc-modified-id="Polynomial-Ridge-Regression-2.1">Polynomial Ridge Regression</a></span></li><li><span><a href="#local-regression" data-toc-modified-id="Local-Regression-2.2">Local Regression</a></span></li><li><span><a href="#gams" data-toc-modified-id="GAMs-2.3">GAMs</a></span><ul class="toc-item"><li><span><a href="#gams-with-pygam" data-toc-modified-id="GAMs-with-pyGAM-2.3.1">GAMs with <code>pyGAM</code></a></span></li></ul></li></ul></li><li><span><a href="#model-selection" data-toc-modified-id="Model-Selection-3">Model Selection</a></span></li><li><span><a href="#improvements" data-toc-modified-id="Improvements-4">Improvements</a></span></li></ul>
+</div>
+
+<p>We’re modifying the exercise a bit to consider multiple regression (as opposed to considering different predictors individually). It’s not hard to see how the techniques of this chapter generalize to the multiple regression setting.</p>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<h3 id="loading">Loading</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="nb">set</span><span class="p">()</span>
+
+<span class="n">wage</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"../../datasets/Wage.csv"</span><span class="p">)</span>
+<span class="n">wage</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>year</th>
+      <th>age</th>
+      <th>maritl</th>
+      <th>race</th>
+      <th>education</th>
+      <th>region</th>
+      <th>jobclass</th>
+      <th>health</th>
+      <th>health_ins</th>
+      <th>logwage</th>
+      <th>wage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>231655</td>
+      <td>2006</td>
+      <td>18</td>
+      <td>1. Never Married</td>
+      <td>1. White</td>
+      <td>1. &lt; HS Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>1. &lt;=Good</td>
+      <td>2. No</td>
+      <td>4.318063</td>
+      <td>75.043154</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>86582</td>
+      <td>2004</td>
+      <td>24</td>
+      <td>1. Never Married</td>
+      <td>1. White</td>
+      <td>4. College Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>2. Information</td>
+      <td>2. &gt;=Very Good</td>
+      <td>2. No</td>
+      <td>4.255273</td>
+      <td>70.476020</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>161300</td>
+      <td>2003</td>
+      <td>45</td>
+      <td>2. Married</td>
+      <td>1. White</td>
+      <td>3. Some College</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>1. &lt;=Good</td>
+      <td>1. Yes</td>
+      <td>4.875061</td>
+      <td>130.982177</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>155159</td>
+      <td>2003</td>
+      <td>43</td>
+      <td>2. Married</td>
+      <td>3. Asian</td>
+      <td>4. College Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>2. Information</td>
+      <td>2. &gt;=Very Good</td>
+      <td>1. Yes</td>
+      <td>5.041393</td>
+      <td>154.685293</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11443</td>
+      <td>2005</td>
+      <td>50</td>
+      <td>4. Divorced</td>
+      <td>1. White</td>
+      <td>2. HS Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>2. Information</td>
+      <td>1. &lt;=Good</td>
+      <td>1. Yes</td>
+      <td>4.318063</td>
+      <td>75.043154</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wage</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 3000 entries, 0 to 2999
+Data columns (total 12 columns):
+Unnamed: 0    3000 non-null int64
+year          3000 non-null int64
+age           3000 non-null int64
+maritl        3000 non-null object
+race          3000 non-null object
+education     3000 non-null object
+region        3000 non-null object
+jobclass      3000 non-null object
+health        3000 non-null object
+health_ins    3000 non-null object
+logwage       3000 non-null float64
+wage          3000 non-null float64
+dtypes: float64(2), int64(3), object(7)
+memory usage: 281.3+ KB
+</code></pre></div></div>
+
+<h3 id="cleaning">Cleaning</h3>
+
+<h4 id="drop-columns">Drop columns</h4>
+
+<p>The unnamed column appears to be some sort of id number, which is useless for our purposes. We can also drop <code class="highlighter-rouge">logwage</code> since it’s redundant</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wage</span> <span class="o">=</span> <span class="n">wage</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Unnamed: 0'</span><span class="p">,</span> <span class="s">'logwage'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h4 id="convert-to-numerical-dtypes">Convert to numerical dtypes</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wage_num</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">wage</span><span class="p">)</span>
+<span class="n">wage_num</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>age</th>
+      <th>wage</th>
+      <th>maritl_1. Never Married</th>
+      <th>maritl_2. Married</th>
+      <th>maritl_3. Widowed</th>
+      <th>maritl_4. Divorced</th>
+      <th>maritl_5. Separated</th>
+      <th>race_1. White</th>
+      <th>race_2. Black</th>
+      <th>...</th>
+      <th>education_3. Some College</th>
+      <th>education_4. College Grad</th>
+      <th>education_5. Advanced Degree</th>
+      <th>region_2. Middle Atlantic</th>
+      <th>jobclass_1. Industrial</th>
+      <th>jobclass_2. Information</th>
+      <th>health_1. &lt;=Good</th>
+      <th>health_2. &gt;=Very Good</th>
+      <th>health_ins_1. Yes</th>
+      <th>health_ins_2. No</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2006</td>
+      <td>18</td>
+      <td>75.043154</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2004</td>
+      <td>24</td>
+      <td>70.476020</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2003</td>
+      <td>45</td>
+      <td>130.982177</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2003</td>
+      <td>43</td>
+      <td>154.685293</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2005</td>
+      <td>50</td>
+      <td>75.043154</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+  <p>5 rows × 24 columns</p>
+</div>
+
+<h3 id="preprocessing">Preprocessing</h3>
+
+<h4 id="scaling-the-numerical-variables">Scaling the numerical variables</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">wage_num</span><span class="p">[[</span><span class="s">'year'</span><span class="p">,</span> <span class="s">'age'</span><span class="p">,</span> <span class="s">'wage'</span><span class="p">]]</span>
+<span class="n">wage_num_std</span> <span class="o">=</span> <span class="n">wage_num</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">wage_num_std</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'year'</span><span class="p">,</span> <span class="s">'age'</span><span class="p">,</span> <span class="s">'wage'</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">df</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">wage_num_std</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>age</th>
+      <th>wage</th>
+      <th>maritl_1. Never Married</th>
+      <th>maritl_2. Married</th>
+      <th>maritl_3. Widowed</th>
+      <th>maritl_4. Divorced</th>
+      <th>maritl_5. Separated</th>
+      <th>race_1. White</th>
+      <th>race_2. Black</th>
+      <th>...</th>
+      <th>education_3. Some College</th>
+      <th>education_4. College Grad</th>
+      <th>education_5. Advanced Degree</th>
+      <th>region_2. Middle Atlantic</th>
+      <th>jobclass_1. Industrial</th>
+      <th>jobclass_2. Information</th>
+      <th>health_1. &lt;=Good</th>
+      <th>health_2. &gt;=Very Good</th>
+      <th>health_ins_1. Yes</th>
+      <th>health_ins_2. No</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.103150</td>
+      <td>-2.115215</td>
+      <td>-0.878545</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.883935</td>
+      <td>-1.595392</td>
+      <td>-0.987994</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.377478</td>
+      <td>0.223986</td>
+      <td>0.461999</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.377478</td>
+      <td>0.050712</td>
+      <td>1.030030</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.390392</td>
+      <td>0.657171</td>
+      <td>-0.878545</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+  <p>5 rows × 24 columns</p>
+</div>
+
+<h2 id="fitting-some-nonlinear-models">Fitting some nonlinear models</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_sc</span><span class="p">,</span> <span class="n">y_sc</span> <span class="o">=</span> <span class="n">wage_num_std</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'wage'</span><span class="p">])</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">wage_num_std</span><span class="p">[</span><span class="s">'wage'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_sc</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_sc</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>((3000, 23), (3000,))
+</code></pre></div></div>
+
+<h3 id="polynomial-ridge-regression">Polynomial Ridge Regression</h3>
+
+<p>We don’t need a special module for this model - we can use a <code class="highlighter-rouge">scikit-learn</code> pipeline.</p>
+
+<p>We’ll use 10-fold cross validation to pick the polynomial degree and L2 penalty.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+
+<span class="n">pr_pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s">'poly'</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">()),</span> <span class="p">(</span><span class="s">'ridge'</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">())])</span>
+<span class="n">pr_param_grid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">poly__degree</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ridge__alpha</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">pr_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pr_pipe</span><span class="p">,</span> <span class="n">pr_param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+<span class="n">pr_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_sc</span><span class="p">,</span> <span class="n">y_sc</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GridSearchCV(cv=5, error_score='raise-deprecating',
+       estimator=Pipeline(memory=None,
+     steps=[('poly', PolynomialFeatures(degree=2, include_bias=True, interaction_only=False)), ('ridge', Ridge(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=None,
+   normalize=False, random_state=None, solver='auto', tol=0.001))]),
+       fit_params=None, iid='warn', n_jobs=None,
+       param_grid={'poly__degree': array([1, 2, 3, 4]), 'ridge__alpha': array([1.e-04, 1.e-02, 1.e+00, 1.e+02, 1.e+04])},
+       pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
+       scoring='neg_mean_squared_error', verbose=0)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pr_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'poly__degree': 2, 'ridge__alpha': 100.0}
+</code></pre></div></div>
+
+<h3 id="local-regression">Local Regression</h3>
+
+<p><code class="highlighter-rouge">scikit-learn</code> has <a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html">support for local regression</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">lr_param_grid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="s">'uniform'</span><span class="p">,</span> <span class="s">'distance'</span><span class="p">],</span> 
+                     <span class="n">p</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">lr_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">KNeighborsRegressor</span><span class="p">(),</span> <span class="n">lr_param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                         <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+<span class="n">lr_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_sc</span><span class="p">,</span> <span class="n">y_sc</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GridSearchCV(cv=10, error_score='raise-deprecating',
+       estimator=KNeighborsRegressor(algorithm='auto', leaf_size=30, metric='minkowski',
+          metric_params=None, n_jobs=None, n_neighbors=5, p=2,
+          weights='uniform'),
+       fit_params=None, iid='warn', n_jobs=None,
+       param_grid={'n_neighbors': array([1, 2, 3, 4, 5, 6]), 'weights': ['uniform', 'distance'], 'p': array([1, 2, 3, 4, 5, 6])},
+       pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
+       scoring='neg_mean_squared_error', verbose=0)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lr_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'n_neighbors': 6, 'p': 1, 'weights': 'uniform'}
+</code></pre></div></div>
+
+<h3 id="gams">GAMs</h3>
+
+<p>GAMs are quite general. There exists python modules that implement specific choices for the nonlinear component functions <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>f</mi><mi>i</mi></msub><mo stretchy="false">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_i(X_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>. Here we’ll explore two modules that seem relatively mature/well-maintained.</p>
+
+<h4 id="gams-with-pygam">GAMs with <code class="highlighter-rouge">pyGAM</code></h4>
+
+<p>The module <a href="https://pygam.readthedocs.io/en/latest/?badge=latest"><code class="highlighter-rouge">pyGAM</code></a> implements <a href="https://en.wikipedia.org/wiki/B-spline#P-spline">P-splines</a>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pygam</span> <span class="kn">import</span> <span class="n">GAM</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">f</span>
+
+<span class="c"># generate string for terms</span>
+<span class="n">spline_terms</span> <span class="o">=</span> <span class="s">' + '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">'s('</span> <span class="o">+</span> <span class="n">stri</span><span class="o">.</span> <span class="o">+</span> <span class="s">')'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)])</span>
+<span class="n">factor_terms</span> <span class="o">=</span> <span class="s">' + '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">'f('</span> <span class="o">+</span> <span class="n">stri</span><span class="o">.</span> <span class="o">+</span> <span class="s">')'</span> 
+                           <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">X_sc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">spline_terms</span> <span class="o">+</span> <span class="s">' + '</span> <span class="o">+</span> <span class="n">factor_terms</span>
+<span class="n">terms</span>
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'s(0) + s(1) + s(2) + f(3) + f(4) + f(5) + f(6) + f(7) + f(8) + f(9) + f(10) + f(11) + f(12) + f(13) + f(14) + f(15) + f(16) + f(17) + f(18) + f(19) + f(20) + f(21) + f(22)'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pygam_gam</span> <span class="o">=</span> <span class="n">GAM</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> 
+                <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span> 
+                <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> 
+                <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="mi">22</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ps_search</span> <span class="o">=</span> <span class="n">pygam_gam</span><span class="o">.</span><span class="n">gridsearch</span><span class="p">(</span><span class="n">X_sc</span><span class="p">,</span> <span class="n">y_sc</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+                     <span class="n">lam</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100% (100 of 100) |######################| Elapsed Time: 0:00:13 Time:  0:00:13
+</code></pre></div></div>
+
+<h2 id="model-selection">Model Selection</h2>
+
+<p>As in exercise 6, we’ll select a model on the basis of mean squared test error.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mse_test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'mse_test'</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'poly_ridge'</span><span class="p">,</span> <span class="s">'local_reg'</span><span class="p">,</span> <span class="s">'p_spline'</span><span class="p">])</span>
+
+<span class="c"># polynomial ridge and local regression models already have CV estimates of test mse</span>
+<span class="n">mse_test_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'poly_ridge'</span><span class="p">,</span> <span class="s">'mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">pr_search</span><span class="o">.</span><span class="n">best_score_</span>
+<span class="n">mse_test_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'local_reg'</span><span class="p">,</span> <span class="s">'mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">lr_search</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+
+<span class="c"># get p-spline CV estimate of test mse</span>
+<span class="n">mse_test_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'p_spline'</span><span class="p">,</span> <span class="s">'mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">ps_search</span><span class="p">,</span>
+                                                                  <span class="n">X_sc</span><span class="p">,</span> <span class="n">y_sc</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">,</span>
+                                                                  <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mse_test_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>poly_ridge</th>
+      <td>0.653614</td>
+    </tr>
+    <tr>
+      <th>local_reg</th>
+      <td>0.741645</td>
+    </tr>
+    <tr>
+      <th>p_spline</th>
+      <td>1.000513</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Polynomial ridge regression has won out. Since this CV mse estimate was calculated on scaled data, let’s get the estimate for the original data</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">capture</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">wage_num</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'wage'</span><span class="p">])</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">wage_num</span><span class="p">[</span><span class="s">'wage'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">cv_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">pr_search</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mse</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cv_score</span><span class="p">)</span>
+<span class="n">mse</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1137.2123862552992
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">me</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+<span class="n">me</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>33.722579768684646
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">wage</span><span class="p">[</span><span class="s">'wage'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a20d1e668&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch07_exercise_07_42_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wage</span><span class="p">[</span><span class="s">'wage'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>count    3000.000000
+mean      111.703608
+std        41.728595
+min        20.085537
+25%        85.383940
+50%       104.921507
+75%       128.680488
+max       318.342430
+Name: wage, dtype: float64
+</code></pre></div></div>
+
+<p>This model predicts a mean (absolute) error of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext> </mtext><mo>≈</mo><mn>33.7</mn></mrow><annotation encoding="application/x-tex">~\approx 33.7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.48312em;vertical-align:0em;"></span><span class="mspace nobreak"> </span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">3</span><span class="mord">.</span><span class="mord">7</span></span></span></span></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">me</span><span class="o">/</span><span class="n">wage</span><span class="p">[</span><span class="s">'wage'</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.81
+</code></pre></div></div>
+
+<p>which is 0.81 standard deviations.</p>
+
+<h2 id="improvements">Improvements</h2>
+
+<p>After inspecting the distribution of <code class="highlighter-rouge">wage</code>, it’s fairly clear there is a group of outliers that are no doubt affecting the prediction accuracy of the model. Let’s try to separate that group.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">wage</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">wage</span><span class="p">[</span><span class="s">'wage'</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'grey'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a2469d8d0&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch07_exercise_07_49_1.png" alt="png" /></p>
+
+<p>There appears to be a break point around 250. Let’s take all rows with wage less than this</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wage_num_low</span> <span class="o">=</span> <span class="n">wage_num</span><span class="p">[</span><span class="n">wage_num</span><span class="p">[</span><span class="s">'wage'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">250</span><span class="p">]</span>
+<span class="n">wage_num_low_sc</span> <span class="o">=</span> <span class="n">wage_num_low</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">wage_num_low_sc</span><span class="p">[[</span><span class="s">'year'</span><span class="p">,</span> <span class="s">'age'</span><span class="p">,</span> <span class="s">'wage'</span><span class="p">]]</span>
+<span class="n">wage_num_low_sc</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'year'</span><span class="p">,</span> <span class="s">'age'</span><span class="p">,</span> <span class="s">'wage'</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">df</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Let train the same models again</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_low_sc</span><span class="p">,</span> <span class="n">y_low_sc</span> <span class="o">=</span> <span class="n">wage_num_low_sc</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'wage'</span><span class="p">])</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">wage_num_low_sc</span><span class="p">[</span><span class="s">'wage'</span><span class="p">]</span>
+
+<span class="c"># polynomial ridge model</span>
+<span class="n">pr_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_low_sc</span><span class="p">,</span> <span class="n">y_low_sc</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/home/anaconda3/lib/python3.6/site-packages/sklearn/model_selection/_search.py:841: DeprecationWarning: The default of the `iid` parameter will change from True to False in version 0.22 and will be removed in 0.24. This will change numeric results when test-set sizes are unequal.
+  DeprecationWarning)
+
+
+
+
+
+GridSearchCV(cv=5, error_score='raise-deprecating',
+       estimator=Pipeline(memory=None,
+     steps=[('poly', PolynomialFeatures(degree=2, include_bias=True, interaction_only=False)), ('ridge', Ridge(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=None,
+   normalize=False, random_state=None, solver='auto', tol=0.001))]),
+       fit_params=None, iid='warn', n_jobs=None,
+       param_grid={'poly__degree': array([1, 2, 3, 4]), 'ridge__alpha': array([1.e-04, 1.e-02, 1.e+00, 1.e+02, 1.e+04])},
+       pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
+       scoring='neg_mean_squared_error', verbose=0)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pr_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'poly__degree': 2, 'ridge__alpha': 100.0}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># local regression</span>
+<span class="n">lr_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_low_sc</span><span class="p">,</span> <span class="n">y_low_sc</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GridSearchCV(cv=10, error_score='raise-deprecating',
+       estimator=KNeighborsRegressor(algorithm='auto', leaf_size=30, metric='minkowski',
+          metric_params=None, n_jobs=None, n_neighbors=5, p=2,
+          weights='uniform'),
+       fit_params=None, iid='warn', n_jobs=None,
+       param_grid={'n_neighbors': array([1, 2, 3, 4, 5, 6]), 'weights': ['uniform', 'distance'], 'p': array([1, 2, 3, 4, 5, 6])},
+       pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
+       scoring='neg_mean_squared_error', verbose=0)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lr_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'n_neighbors': 6, 'p': 5, 'weights': 'uniform'}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># p spline </span>
+<span class="n">ps_search</span> <span class="o">=</span> <span class="n">pygam_gam</span><span class="o">.</span><span class="n">gridsearch</span><span class="p">(</span><span class="n">X_low_sc</span><span class="p">,</span> <span class="n">y_low_sc</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+                     <span class="n">lam</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100% (100 of 100) |######################| Elapsed Time: 0:00:25 Time:  0:00:25
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ps_search</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GAM                                                                                                       
+=============================================== ==========================================================
+Distribution:                        NormalDist Effective DoF:                                     28.9895
+Link Function:                     IdentityLink Log Likelihood:                                 -3606.1899
+Number of Samples:                         2921 AIC:                                             7272.3587
+                                                AICc:                                            7273.0018
+                                                GCV:                                                0.6157
+                                                Scale:                                              0.6047
+                                                Pseudo R-Squared:                                   0.4011
+==========================================================================================================
+Feature Function                  Lambda               Rank         EDoF         P &gt; x        Sig. Code   
+================================= ==================== ============ ============ ============ ============
+s(0)                              [13.8473]            20           7.0          1.38e-05     ***         
+s(1)                              [17.046]             20           8.3          3.52e-13     ***         
+s(2)                              [0.1439]             20           1.1          5.30e-04     ***         
+f(3)                              [11.8899]            2            1.0          3.09e-02     *           
+f(4)                              [3.5507]             2            0.9          2.96e-01                 
+f(5)                              [0.1322]             2            0.9          1.79e-02     *           
+f(6)                              [14.0907]            2            0.0          3.22e-01                 
+f(7)                              [8.8878]             2            1.0          2.87e-01                 
+f(8)                              [0.2954]             2            1.0          3.01e-01                 
+f(9)                              [2.0563]             2            0.9          6.03e-01                 
+f(10)                             [8.6475]             2            0.0          3.51e-01                 
+f(11)                             [8.7695]             2            1.0          1.11e-16     ***         
+f(12)                             [0.1363]             2            1.0          2.69e-02     *           
+f(13)                             [0.9965]             2            1.0          1.11e-16     ***         
+f(14)                             [0.1233]             2            1.0          1.11e-16     ***         
+f(15)                             [0.3011]             2            0.0          1.11e-16     ***         
+f(16)                             [2.094]              1            0.0          1.00e+00                 
+f(17)                             [0.6317]             2            1.0          2.06e-01                 
+f(18)                             [16.422]             2            0.0          2.07e-01                 
+f(19)                             [0.3865]             2            1.0          1.33e-05     ***         
+f(20)                             [4.8438]             2            0.0          1.38e-05     ***         
+f(21)                             [0.1626]             2            1.0          1.11e-16     ***         
+f(22)                             [0.3707]             2            0.0          1.11e-16     ***         
+intercept                                              1            0.0          2.88e-01                 
+==========================================================================================================
+Significance codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+WARNING: Fitting splines and a linear function to a feature introduces a model identifiability problem
+         which can cause p-values to appear significant when they are not.
+
+WARNING: p-values calculated in this manner behave correctly for un-penalized models or models with
+         known smoothing parameters, but when smoothing parameters have been estimated, the p-values
+         are typically lower than they should be, meaning that the tests reject the null too readily.
+
+
+/Users/home/anaconda3/lib/python3.6/site-packages/ipykernel_launcher.py:1: UserWarning: KNOWN BUG: p-values computed in this summary are likely much smaller than they should be. 
+ 
+Please do not make inferences based on these values! 
+
+Collaborate on a solution, and stay up to date at: 
+github.com/dswah/pyGAM/issues/163 
+
+  """Entry point for launching an IPython kernel.
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">low_mse_test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'low_mse_test'</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'poly_ridge'</span><span class="p">,</span> <span class="s">'local_reg'</span><span class="p">,</span> <span class="s">'p_spline'</span><span class="p">])</span>
+<span class="n">low_mse_test_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'poly_ridge'</span><span class="p">,</span> <span class="s">'low_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">pr_search</span><span class="o">.</span><span class="n">best_score_</span>
+<span class="n">low_mse_test_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'local_reg'</span><span class="p">,</span> <span class="s">'low_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">lr_search</span><span class="o">.</span><span class="n">best_score_</span>
+<span class="n">low_mse_test_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="s">'p_spline'</span><span class="p">,</span> <span class="s">'low_mse_test'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">ps_search</span><span class="p">,</span>
+                                                                 <span class="n">X_low_sc</span><span class="p">,</span> <span class="n">y_low_sc</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">,</span>
+                                                                 <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">mse_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">mse_test_df</span><span class="p">,</span> <span class="n">low_mse_test_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mse_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse_test</th>
+      <th>low_mse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>poly_ridge</th>
+      <td>0.653614</td>
+      <td>0.613098</td>
+    </tr>
+    <tr>
+      <th>local_reg</th>
+      <td>0.741645</td>
+      <td>0.701615</td>
+    </tr>
+    <tr>
+      <th>p_spline</th>
+      <td>1.000513</td>
+      <td>1.000513</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>There was a considerable improvement for the polynomial ridge and local regression models.</p>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

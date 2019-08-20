@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      7. Moving Beyond Linearity &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">7. Moving Beyond Linearity</h1>
+  	
+<h1 id="exercise-6-using-polynomial-and-step-function-regression-to-predict-wage-using-age-in-wage-dataset">Exercise 6: Using polynomial and step function regression to predict <code class="highlighter-rouge">wage</code> using <code class="highlighter-rouge">age</code> in <code class="highlighter-rouge">Wage</code> dataset</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span></li><li><span><a href="#a-predict-wage-with-age-using-polynomial-regression-with-L2-penalty." data-toc-modified-id="a.-Predict-wage-with-age-using-polynomial-regression-with-L2-penalty.-2">a. Predict <code>wage</code> with <code>age</code> using polynomial regression with L2 penalty.</a></span></li><li><span><a href="#b-predict-wage-with-age-using-step-function-regression" data-toc-modified-id="b.-Predict-wage-with-age-using-step-function-regression-3">b. Predict <code>wage</code> with <code>age</code> using step function regression</a></span></li></ul>
+</div>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="nb">set</span><span class="p">()</span>
+
+<span class="n">wage</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"../../datasets/Wage.csv"</span><span class="p">)</span>
+<span class="n">wage</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>year</th>
+      <th>age</th>
+      <th>maritl</th>
+      <th>race</th>
+      <th>education</th>
+      <th>region</th>
+      <th>jobclass</th>
+      <th>health</th>
+      <th>health_ins</th>
+      <th>logwage</th>
+      <th>wage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>231655</td>
+      <td>2006</td>
+      <td>18</td>
+      <td>1. Never Married</td>
+      <td>1. White</td>
+      <td>1. &lt; HS Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>1. &lt;=Good</td>
+      <td>2. No</td>
+      <td>4.318063</td>
+      <td>75.043154</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>86582</td>
+      <td>2004</td>
+      <td>24</td>
+      <td>1. Never Married</td>
+      <td>1. White</td>
+      <td>4. College Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>2. Information</td>
+      <td>2. &gt;=Very Good</td>
+      <td>2. No</td>
+      <td>4.255273</td>
+      <td>70.476020</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>161300</td>
+      <td>2003</td>
+      <td>45</td>
+      <td>2. Married</td>
+      <td>1. White</td>
+      <td>3. Some College</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>1. &lt;=Good</td>
+      <td>1. Yes</td>
+      <td>4.875061</td>
+      <td>130.982177</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>155159</td>
+      <td>2003</td>
+      <td>43</td>
+      <td>2. Married</td>
+      <td>3. Asian</td>
+      <td>4. College Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>2. Information</td>
+      <td>2. &gt;=Very Good</td>
+      <td>1. Yes</td>
+      <td>5.041393</td>
+      <td>154.685293</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11443</td>
+      <td>2005</td>
+      <td>50</td>
+      <td>4. Divorced</td>
+      <td>1. White</td>
+      <td>2. HS Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>2. Information</td>
+      <td>1. &lt;=Good</td>
+      <td>1. Yes</td>
+      <td>4.318063</td>
+      <td>75.043154</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wage</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 3000 entries, 0 to 2999
+Data columns (total 12 columns):
+Unnamed: 0    3000 non-null int64
+year          3000 non-null int64
+age           3000 non-null int64
+maritl        3000 non-null object
+race          3000 non-null object
+education     3000 non-null object
+region        3000 non-null object
+jobclass      3000 non-null object
+health        3000 non-null object
+health_ins    3000 non-null object
+logwage       3000 non-null float64
+wage          3000 non-null float64
+dtypes: float64(2), int64(3), object(7)
+memory usage: 281.3+ KB
+</code></pre></div></div>
+
+<h2 id="a-predict-wage-with-age-using-polynomial-regression-with-l2-penalty">a. Predict <code class="highlighter-rouge">wage</code> with <code class="highlighter-rouge">age</code> using polynomial regression with L2 penalty.</h2>
+
+<p>See <a href="https://scikit-learn.org/stable/modules/linear_model.html#polynomial-regression-extending-linear-models-with-basis-functions">sklearn docs on polynomial regression</a>. We’re going to add an L2 penalty for fun (and performance improvement)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span><span class="p">,</span> <span class="n">scale</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[(</span><span class="s">'poly'</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">()),</span> <span class="p">(</span><span class="s">'ridge'</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">())]</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">poly__degree</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ridge__alpha</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">capture</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">wage</span><span class="p">[</span><span class="s">'age'</span><span class="p">],</span> <span class="n">wage</span><span class="p">[</span><span class="s">'wage'</span><span class="p">]</span>
+<span class="n">X_sc</span><span class="p">,</span> <span class="n">y_sc</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">wage</span><span class="p">[</span><span class="s">'age'</span><span class="p">]),</span> <span class="n">scale</span><span class="p">(</span><span class="n">wage</span><span class="p">[</span><span class="s">'wage'</span><span class="p">])</span>
+<span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_sc</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_sc</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The best 10-fold CV model has parameters</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'poly__degree': 4, 'ridge__alpha': 1.0}
+</code></pre></div></div>
+
+<p>This model has a CV mse test error estimate of</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="n">search</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.9156879981745668
+</code></pre></div></div>
+
+<p>This represents an absolute error of</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.9569158783166715
+</code></pre></div></div>
+
+<p>Not terribly good - this is about one standard deviation (since the data were normalized)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">X_sc</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a1effe6a0&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch07_exercise_06_15_1.png" alt="png" /></p>
+
+<p>Now to use these parameters on the original data to get a real mse test reading</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">X_poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_poly</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/home/anaconda3/lib/python3.6/site-packages/sklearn/linear_model/ridge.py:125: LinAlgWarning: Ill-conditioned matrix (rcond=2.01369e-17): result may not be accurate.
+  overwrite_a=True).T
+
+
+
+
+
+39.239871740545624
+</code></pre></div></div>
+
+<p>We’ll plot the model fitted curve against the original data</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="nb">min</span><span class="p">(),</span> <span class="n">X</span><span class="o">.</span><span class="nb">max</span><span class="p">(),</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'grey'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a1ebe6e48&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch07_exercise_06_19_1.png" alt="png" /></p>
+
+<h2 id="b-predict-wage-with-age-using-step-function-regression">b. Predict <code class="highlighter-rouge">wage</code> with <code class="highlighter-rouge">age</code> using step function regression</h2>
+
+<p>Sklearn doesn’t have a builtin for step functions, so we’ll use <a href="http://www.science.smith.edu/~jcrouser/SDS293/labs/lab12-py.html"><code class="highlighter-rouge">basis-expansions</code></a>, a Python module by <a href="https://github.com/madrury">Matthew Drury</a> (cf his <a href="http://madrury.github.io/jekyll/update/statistics/2017/08/04/basis-expansions.html">blog post</a> for an accessible discussion of basis expansions).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">basis_expansions</span> <span class="kn">import</span> <span class="n">Binner</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">bin_reg</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">n_cuts</span><span class="o">=</span><span class="p">[],</span> <span class="n">mse_test</span><span class="o">=</span><span class="p">[])</span>
+
+<span class="n">X_sc_train</span><span class="p">,</span> <span class="n">X_sc_test</span><span class="p">,</span> <span class="n">y_sc_train</span><span class="p">,</span> <span class="n">y_sc_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_sc</span><span class="p">,</span> <span class="n">y_sc</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n_cuts</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">26</span><span class="p">):</span>
+    <span class="n">bin_reg</span><span class="p">[</span><span class="s">'n_cuts'</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">n_cuts</span><span class="p">]</span>
+    
+    <span class="n">steps</span> <span class="o">=</span> <span class="p">[(</span><span class="s">'bin'</span><span class="p">,</span> <span class="n">Binner</span><span class="p">(</span><span class="n">X_sc</span><span class="o">.</span><span class="nb">min</span><span class="p">(),</span> <span class="n">X_sc</span><span class="o">.</span><span class="nb">max</span><span class="p">(),</span> <span class="n">n_cuts</span><span class="o">=</span><span class="n">n_cuts</span><span class="p">)),</span> <span class="p">(</span><span class="s">'linreg'</span><span class="p">,</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">))]</span>
+    <span class="n">pipe_fit</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_sc_train</span><span class="p">,</span> <span class="n">y_sc_train</span><span class="p">)</span>
+    <span class="n">bin_reg</span><span class="p">[</span><span class="s">'mse_test'</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_sc_test</span><span class="p">,</span> <span class="n">pipe_fit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_sc_test</span><span class="p">))]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bin_reg_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bin_reg</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">bin_reg_df</span><span class="p">[</span><span class="s">'n_cuts'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">bin_reg_df</span><span class="p">[</span><span class="s">'mse_test'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a1eef7588&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch07_exercise_06_23_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bin_reg_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bin_reg_df</span><span class="p">[</span><span class="s">'mse_test'</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">(),</span> <span class="p">:]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n_cuts      7.000000
+mse_test    0.875825
+Name: 6, dtype: float64
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">binner</span> <span class="o">=</span> <span class="n">Binner</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="nb">min</span><span class="p">(),</span> <span class="n">X</span><span class="o">.</span><span class="nb">max</span><span class="p">(),</span> <span class="n">n_cuts</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">linreg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">binner</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">linreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">binner</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>39.24772730694755
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="nb">min</span><span class="p">(),</span> <span class="n">X</span><span class="o">.</span><span class="nb">max</span><span class="p">(),</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">linreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">binner</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'grey'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a1ef712e8&gt;
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch07_exercise_06_26_1.png" alt="png" /></p>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

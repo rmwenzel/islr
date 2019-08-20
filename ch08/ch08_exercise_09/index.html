@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      8. Tree-based Methods &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">8. Tree-based Methods</h1>
+  	
+<h1 id="exercise-9-using-tree-based-methods-on-the-oj-dataset">Exercise 9: Using tree based methods on the <code class="highlighter-rouge">OJ</code> dataset</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span></li><li><span><a href="#a-train-test-split" data-toc-modified-id="a.-Train-test-split-2">a. Train-test split</a></span></li><li><span><a href="#b-classification-Tree-for-predicting-Purchase" data-toc-modified-id="b.-Classification-Tree-for-predicting-Purchase-3">b. Classification Tree for predicting <code>Purchase</code></a></span></li><li><span><a href="#c-classification-tree-feature-importances" data-toc-modified-id="c.-Classification-tree-feature-importances-4">c. Classification tree feature importances</a></span></li><li><span><a href="#d-classification-tree-plot" data-toc-modified-id="d.-Classification-tree-plot-5">d. Classification tree plot</a></span></li><li><span><a href="#e-confusion-matrix-for-test-data" data-toc-modified-id="e.-Confusion-matrix-for-test-data-6">e. Confusion matrix for test data</a></span></li><li><span><a href="#f-cross-validation-for-optimal-tree-size" data-toc-modified-id="f.-Cross-validation-for-optimal-tree-size-7">f. Cross-validation for optimal tree size</a></span></li><li><span><a href="#g-plot-of-cv-error-vs-tree-size" data-toc-modified-id="g.-Plot-of-CV-error-vs.-tree-size-8">g. Plot of CV error vs. tree size</a></span></li><li><span><a href="#j-comparing-training-error-rates" data-toc-modified-id="j.-Comparing-training-error-rates-9">j. Comparing training error rates</a></span></li></ul>
+</div>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<p>Information on the dataset can be <a href="https://rdrr.io/cran/ISLR/man/OJ.html">found here</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">'whitegrid'</span><span class="p">)</span>
+<span class="n">oj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'../../datasets/OJ.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">oj</span> <span class="o">=</span> <span class="n">oj</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">oj</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Purchase</th>
+      <th>WeekofPurchase</th>
+      <th>StoreID</th>
+      <th>PriceCH</th>
+      <th>PriceMM</th>
+      <th>DiscCH</th>
+      <th>DiscMM</th>
+      <th>SpecialCH</th>
+      <th>SpecialMM</th>
+      <th>LoyalCH</th>
+      <th>SalePriceMM</th>
+      <th>SalePriceCH</th>
+      <th>PriceDiff</th>
+      <th>Store7</th>
+      <th>PctDiscMM</th>
+      <th>PctDiscCH</th>
+      <th>ListPriceDiff</th>
+      <th>STORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CH</td>
+      <td>237</td>
+      <td>1</td>
+      <td>1.75</td>
+      <td>1.99</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>1.99</td>
+      <td>1.75</td>
+      <td>0.24</td>
+      <td>No</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.24</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CH</td>
+      <td>239</td>
+      <td>1</td>
+      <td>1.75</td>
+      <td>1.99</td>
+      <td>0.00</td>
+      <td>0.3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.600000</td>
+      <td>1.69</td>
+      <td>1.75</td>
+      <td>-0.06</td>
+      <td>No</td>
+      <td>0.150754</td>
+      <td>0.000000</td>
+      <td>0.24</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CH</td>
+      <td>245</td>
+      <td>1</td>
+      <td>1.86</td>
+      <td>2.09</td>
+      <td>0.17</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.680000</td>
+      <td>2.09</td>
+      <td>1.69</td>
+      <td>0.40</td>
+      <td>No</td>
+      <td>0.000000</td>
+      <td>0.091398</td>
+      <td>0.23</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MM</td>
+      <td>227</td>
+      <td>1</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.400000</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>No</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CH</td>
+      <td>228</td>
+      <td>7</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.956535</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>Yes</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">oj</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1070 entries, 0 to 1069
+Data columns (total 18 columns):
+Purchase          1070 non-null object
+WeekofPurchase    1070 non-null int64
+StoreID           1070 non-null int64
+PriceCH           1070 non-null float64
+PriceMM           1070 non-null float64
+DiscCH            1070 non-null float64
+DiscMM            1070 non-null float64
+SpecialCH         1070 non-null int64
+SpecialMM         1070 non-null int64
+LoyalCH           1070 non-null float64
+SalePriceMM       1070 non-null float64
+SalePriceCH       1070 non-null float64
+PriceDiff         1070 non-null float64
+Store7            1070 non-null object
+PctDiscMM         1070 non-null float64
+PctDiscCH         1070 non-null float64
+ListPriceDiff     1070 non-null float64
+STORE             1070 non-null int64
+dtypes: float64(11), int64(5), object(2)
+memory usage: 150.5+ KB
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># drop superfluous variables</span>
+<span class="n">oj</span> <span class="o">=</span> <span class="n">oj</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'STORE'</span><span class="p">,</span> <span class="s">'Store7'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">oj</span><span class="o">.</span><span class="n">columns</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Index(['Purchase', 'WeekofPurchase', 'StoreID', 'PriceCH', 'PriceMM', 'DiscCH',
+       'DiscMM', 'SpecialCH', 'SpecialMM', 'LoyalCH', 'SalePriceMM',
+       'SalePriceCH', 'PriceDiff', 'PctDiscMM', 'PctDiscCH', 'ListPriceDiff'],
+      dtype='object')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># one hot encode categoricals</span>
+<span class="n">cat_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s">'StoreID'</span><span class="p">,</span> <span class="s">'Purchase'</span><span class="p">]</span>
+
+<span class="n">oj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">oj</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cat_vars</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">oj</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WeekofPurchase</th>
+      <th>PriceCH</th>
+      <th>PriceMM</th>
+      <th>DiscCH</th>
+      <th>DiscMM</th>
+      <th>SpecialCH</th>
+      <th>SpecialMM</th>
+      <th>LoyalCH</th>
+      <th>SalePriceMM</th>
+      <th>SalePriceCH</th>
+      <th>PriceDiff</th>
+      <th>PctDiscMM</th>
+      <th>PctDiscCH</th>
+      <th>ListPriceDiff</th>
+      <th>StoreID_2</th>
+      <th>StoreID_3</th>
+      <th>StoreID_4</th>
+      <th>StoreID_7</th>
+      <th>Purchase_MM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>237</td>
+      <td>1.75</td>
+      <td>1.99</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>1.99</td>
+      <td>1.75</td>
+      <td>0.24</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.24</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>239</td>
+      <td>1.75</td>
+      <td>1.99</td>
+      <td>0.00</td>
+      <td>0.3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.600000</td>
+      <td>1.69</td>
+      <td>1.75</td>
+      <td>-0.06</td>
+      <td>0.150754</td>
+      <td>0.000000</td>
+      <td>0.24</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>245</td>
+      <td>1.86</td>
+      <td>2.09</td>
+      <td>0.17</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.680000</td>
+      <td>2.09</td>
+      <td>1.69</td>
+      <td>0.40</td>
+      <td>0.000000</td>
+      <td>0.091398</td>
+      <td>0.23</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>227</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.400000</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>228</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.956535</td>
+      <td>1.69</td>
+      <td>1.69</td>
+      <td>0.00</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">oj</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1070 entries, 0 to 1069
+Data columns (total 18 columns):
+Purchase          1070 non-null object
+WeekofPurchase    1070 non-null int64
+StoreID           1070 non-null int64
+PriceCH           1070 non-null float64
+PriceMM           1070 non-null float64
+DiscCH            1070 non-null float64
+DiscMM            1070 non-null float64
+SpecialCH         1070 non-null int64
+SpecialMM         1070 non-null int64
+LoyalCH           1070 non-null float64
+SalePriceMM       1070 non-null float64
+SalePriceCH       1070 non-null float64
+PriceDiff         1070 non-null float64
+Store7            1070 non-null object
+PctDiscMM         1070 non-null float64
+PctDiscCH         1070 non-null float64
+ListPriceDiff     1070 non-null float64
+STORE             1070 non-null int64
+dtypes: float64(11), int64(5), object(2)
+memory usage: 150.5+ KB
+</code></pre></div></div>
+
+<h2 id="a-train-test-split">a. Train-test split</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">oj</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Purchase_MM'</span><span class="p">]),</span> <span class="n">oj</span><span class="p">[</span><span class="s">'Purchase_MM'</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
+<span class="n">X_train</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(800, 18)
+</code></pre></div></div>
+
+<h2 id="b-classification-tree-for-predicting-purchase">b. Classification Tree for predicting <code class="highlighter-rouge">Purchase</code></h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+
+<span class="n">clf_tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
+<span class="n">clf_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=27,
+            splitter='best')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># training error rate</span>
+<span class="n">clf_tree</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.98875
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># test error rate</span>
+<span class="n">clf_tree</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.7777777777777778
+</code></pre></div></div>
+
+<p>The following is lifted straight from the <a href="https://scikit-learn.org/stable/auto_examples/tree/plot_unveil_tree_structure.html#sphx-glr-auto-examples-tree-plot-unveil-tree-structure-py"><code class="highlighter-rouge">sklearn</code> docs</a>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">estimator</span> <span class="o">=</span> <span class="n">clf_tree</span>
+<span class="n">n_nodes</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">tree_</span><span class="o">.</span><span class="n">node_count</span>
+<span class="n">children_left</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">tree_</span><span class="o">.</span><span class="n">children_left</span>
+<span class="n">children_right</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">tree_</span><span class="o">.</span><span class="n">children_right</span>
+<span class="n">feature</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">tree_</span><span class="o">.</span><span class="n">feature</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">tree_</span><span class="o">.</span><span class="n">threshold</span>
+
+
+<span class="c"># The tree structure can be traversed to compute various properties such</span>
+<span class="c"># as the depth of each node and whether or not it is a leaf.</span>
+<span class="n">node_depth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">n_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="n">is_leaves</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">n_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">stack</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>  <span class="c"># seed is the root node id and its parent depth</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">node_id</span><span class="p">,</span> <span class="n">parent_depth</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="n">node_depth</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_depth</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="c"># If we have a test node</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">children_left</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span> <span class="o">!=</span> <span class="n">children_right</span><span class="p">[</span><span class="n">node_id</span><span class="p">]):</span>
+        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">children_left</span><span class="p">[</span><span class="n">node_id</span><span class="p">],</span> <span class="n">parent_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">children_right</span><span class="p">[</span><span class="n">node_id</span><span class="p">],</span> <span class="n">parent_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">is_leaves</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c"># number of leaves = number of terminal nodes</span>
+<span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">is_leaves</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>165
+</code></pre></div></div>
+
+<h2 id="c-classification-tree-feature-importances">c. Classification tree feature importances</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># feature importances</span>
+<span class="n">clf_tree_feat_imp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'feature'</span><span class="p">:</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> 
+                            <span class="s">'importance'</span><span class="p">:</span> <span class="n">clf_tree</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">})</span>
+<span class="n">clf_tree_feat_imp</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'importance'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature</th>
+      <th>importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>LoyalCH</td>
+      <td>0.659534</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>WeekofPurchase</td>
+      <td>0.098166</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>PriceDiff</td>
+      <td>0.085502</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>ListPriceDiff</td>
+      <td>0.026363</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>SalePriceMM</td>
+      <td>0.024777</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PriceCH</td>
+      <td>0.016979</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>StoreID_2</td>
+      <td>0.013228</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>SpecialCH</td>
+      <td>0.010388</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>SalePriceCH</td>
+      <td>0.010037</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>StoreID_3</td>
+      <td>0.009939</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>StoreID_7</td>
+      <td>0.009578</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PriceMM</td>
+      <td>0.007906</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>PctDiscCH</td>
+      <td>0.007804</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>StoreID_4</td>
+      <td>0.006839</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>SpecialMM</td>
+      <td>0.004914</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>PctDiscMM</td>
+      <td>0.004139</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DiscMM</td>
+      <td>0.003906</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>DiscCH</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="d-classification-tree-plot">d. Classification tree plot</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Source</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf_tree</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filled</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+                                    <span class="n">feature_names</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">SVG</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s">'svg'</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p><a href="/islr/assets/images/ch08_exercise_09_21_0.svg"><img src="/islr/assets/images/ch08_exercise_09_21_0.svg" alt="svg" /></a></p>
+
+<h2 id="e-confusion-matrix-for-test-data">e. Confusion matrix for test data</h2>
+
+<p>This <a href="https://stackoverflow.com/questions/2148543/how-to-write-a-confusion-matrix-in-python">Stack Overflow post</a> was helpful</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="n">y_act</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s">'Purchase_CH'</span> <span class="k">if</span> <span class="n">entry</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">"Purchase_MM"</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">y_test</span><span class="p">],</span>
+                  <span class="n">name</span><span class="o">=</span><span class="s">'Actual'</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s">'Purchase_CH'</span> <span class="k">if</span> <span class="n">entry</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">"Purchase_MM"</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">clf_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)],</span>
+                  <span class="n">name</span><span class="o">=</span><span class="s">'Predicted'</span><span class="p">)</span>
+<span class="n">clf_tree_test_conf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">y_act</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">margins</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">clf_tree_test_conf</span>
+
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Predicted</th>
+      <th>Purchase_CH</th>
+      <th>Purchase_MM</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>Actual</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Purchase_CH</th>
+      <td>136</td>
+      <td>34</td>
+      <td>170</td>
+    </tr>
+    <tr>
+      <th>Purchase_MM</th>
+      <td>26</td>
+      <td>74</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>162</td>
+      <td>108</td>
+      <td>270</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="f-cross-validation-for-optimal-tree-size">f. Cross-validation for optimal tree size</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'max_depth'</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">800</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="bp">None</span><span class="p">]}</span>
+<span class="n">clf_tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
+<span class="n">clf_tree_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">clf_tree</span><span class="p">,</span> 
+                               <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                               <span class="n">cv</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                               <span class="n">scoring</span><span class="o">=</span><span class="s">'accuracy'</span><span class="p">)</span>
+
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">clf_tree_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>44.9 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clf_tree_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'max_depth': 2}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clf_tree_search</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.8075
+</code></pre></div></div>
+
+<h2 id="g-plot-of-cv-error-vs-tree-size">g. Plot of CV error vs. tree size</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clf_tree_search_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">clf_tree_search</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">clf_tree_search_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_max_depth</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>...</th>
+      <th>split0_train_score</th>
+      <th>split1_train_score</th>
+      <th>split2_train_score</th>
+      <th>split3_train_score</th>
+      <th>split4_train_score</th>
+      <th>split5_train_score</th>
+      <th>split6_train_score</th>
+      <th>split7_train_score</th>
+      <th>mean_train_score</th>
+      <th>std_train_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.003523</td>
+      <td>0.000421</td>
+      <td>0.001491</td>
+      <td>0.000361</td>
+      <td>1</td>
+      <td>{'max_depth': 1}</td>
+      <td>0.801980</td>
+      <td>0.841584</td>
+      <td>0.811881</td>
+      <td>0.76</td>
+      <td>...</td>
+      <td>0.816881</td>
+      <td>0.811159</td>
+      <td>0.809728</td>
+      <td>0.817143</td>
+      <td>0.817143</td>
+      <td>0.814551</td>
+      <td>0.810271</td>
+      <td>0.803138</td>
+      <td>0.812502</td>
+      <td>0.004591</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.002702</td>
+      <td>0.000291</td>
+      <td>0.001097</td>
+      <td>0.000200</td>
+      <td>2</td>
+      <td>{'max_depth': 2}</td>
+      <td>0.801980</td>
+      <td>0.841584</td>
+      <td>0.811881</td>
+      <td>0.78</td>
+      <td>...</td>
+      <td>0.816881</td>
+      <td>0.811159</td>
+      <td>0.816881</td>
+      <td>0.827143</td>
+      <td>0.821429</td>
+      <td>0.818830</td>
+      <td>0.817404</td>
+      <td>0.810271</td>
+      <td>0.817500</td>
+      <td>0.005043</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.003065</td>
+      <td>0.000534</td>
+      <td>0.001211</td>
+      <td>0.000264</td>
+      <td>3</td>
+      <td>{'max_depth': 3}</td>
+      <td>0.811881</td>
+      <td>0.801980</td>
+      <td>0.831683</td>
+      <td>0.73</td>
+      <td>...</td>
+      <td>0.826896</td>
+      <td>0.831187</td>
+      <td>0.836910</td>
+      <td>0.851429</td>
+      <td>0.844286</td>
+      <td>0.841655</td>
+      <td>0.841655</td>
+      <td>0.830243</td>
+      <td>0.838032</td>
+      <td>0.007727</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.002972</td>
+      <td>0.000107</td>
+      <td>0.000967</td>
+      <td>0.000055</td>
+      <td>4</td>
+      <td>{'max_depth': 4}</td>
+      <td>0.801980</td>
+      <td>0.811881</td>
+      <td>0.831683</td>
+      <td>0.73</td>
+      <td>...</td>
+      <td>0.856938</td>
+      <td>0.841202</td>
+      <td>0.841202</td>
+      <td>0.868571</td>
+      <td>0.847143</td>
+      <td>0.861626</td>
+      <td>0.858773</td>
+      <td>0.844508</td>
+      <td>0.852495</td>
+      <td>0.009673</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.003204</td>
+      <td>0.000121</td>
+      <td>0.000971</td>
+      <td>0.000060</td>
+      <td>5</td>
+      <td>{'max_depth': 5}</td>
+      <td>0.782178</td>
+      <td>0.821782</td>
+      <td>0.801980</td>
+      <td>0.75</td>
+      <td>...</td>
+      <td>0.868383</td>
+      <td>0.852647</td>
+      <td>0.856938</td>
+      <td>0.880000</td>
+      <td>0.865714</td>
+      <td>0.873039</td>
+      <td>0.881598</td>
+      <td>0.864479</td>
+      <td>0.867850</td>
+      <td>0.009552</td>
+    </tr>
+  </tbody>
+</table>
+  <p>5 rows × 27 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">clv_tree_search_df</span><span class="p">[</span><span class="s">'param_max_depth'</span><span class="p">],</span> <span class="n">clv_tree_search_df</span><span class="p">[</span><span class="s">'mean_test_score'</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[&lt;matplotlib.lines.Line2D at 0x1a19ea4908&gt;]
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch08_exercise_09_31_1.png" alt="png" /></p>
+
+<p>We chose an upper limit of 799 for the maximum tree depth (in a worst case scenario, the decision tree partitions into unique regions for each observation). This is clearly overkill</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">30</span><span class="p">,</span> <span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">30</span><span class="p">,</span> <span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[&lt;matplotlib.lines.Line2D at 0x1a1a67e6d8&gt;]
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch08_exercise_09_33_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>A maximum tree depth of 2 leads to the best cv test error!</p>
+
+<h1 id="i-pruning-a-tree-with-depth-2">i. Pruning a tree with depth 2</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'max_features'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
+          <span class="s">'max_leaf_nodes'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="bp">None</span><span class="p">),</span>
+          <span class="s">'min_impurity_decrease'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+          <span class="s">'min_samples_leaf'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+          <span class="p">}</span>
+<span class="n">clf_tree2</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c"># Randomized search to cover a large region of parameter space</span>
+<span class="n">clf_tree2_rvsearch</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">clf_tree2</span><span class="p">,</span>
+                                        <span class="n">param_distributions</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                                        <span class="n">cv</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                                        <span class="n">scoring</span><span class="o">=</span><span class="s">'accuracy'</span><span class="p">,</span>
+                                        <span class="n">n_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                                        <span class="n">random_state</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">clf_tree2_rvsearch</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>39.7 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+
+/anaconda3/envs/islr/lib/python3.7/site-packages/sklearn/model_selection/_search.py:841: DeprecationWarning: The default of the `iid` parameter will change from True to False in version 0.22 and will be removed in 0.24. This will change numeric results when test-set sizes are unequal.
+  DeprecationWarning)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clf_tree2_rvsearch</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'min_samples_leaf': 6,
+ 'min_impurity_decrease': 0.0,
+ 'max_leaf_nodes': None,
+ 'max_features': 16}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Grid search nearby randomized search results</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'min_samples_leaf'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+          <span class="s">'max_features'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+         <span class="p">}</span>
+<span class="n">clf_tree3</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> 
+                                   <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                   <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">clf_tree2_gridsearch</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">clf_tree3</span><span class="p">,</span>
+                                    <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                                    <span class="n">cv</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                                    <span class="n">scoring</span><span class="o">=</span><span class="s">'accuracy'</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">clf_tree2_gridsearch</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+
+/anaconda3/envs/islr/lib/python3.7/site-packages/sklearn/model_selection/_search.py:841: DeprecationWarning: The default of the `iid` parameter will change from True to False in version 0.22 and will be removed in 0.24. This will change numeric results when test-set sizes are unequal.
+  DeprecationWarning)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clf_tree2_gridsearch</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'max_features': 15, 'min_samples_leaf': 4}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clf_tree2_gridsearch</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.8075
+</code></pre></div></div>
+
+<h2 id="j-comparing-training-error-rates">j. Comparing training error rates</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c"># trees for comparison</span>
+<span class="n">clf_tree</span> <span class="o">=</span> <span class="n">clf_tree_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">pruned_clf_tree</span> <span class="o">=</span> <span class="n">clf_tree2_gridsearch</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="c"># train and test errors</span>
+<span class="n">train</span> <span class="o">=</span> <span class="p">[</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">clf_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">),</span> 
+         <span class="n">accuracy_score</span><span class="p">(</span><span class="n">pruned_clf_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">)]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="p">[</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">clf_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">),</span> 
+         <span class="n">accuracy_score</span><span class="p">(</span><span class="n">pruned_clf_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)]</span>
+
+<span class="c"># df for results</span>
+<span class="n">comp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'train_error'</span><span class="p">:</span> <span class="n">train</span><span class="p">,</span> <span class="s">'test_error'</span><span class="p">:</span> <span class="n">test</span><span class="p">},</span> 
+                       <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'clf_tree'</span><span class="p">,</span> <span class="s">'pruned_clf_tree'</span><span class="p">])</span>
+<span class="n">comp_df</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train_error</th>
+      <th>test_error</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>clf_tree</th>
+      <td>0.81625</td>
+      <td>0.785185</td>
+    </tr>
+    <tr>
+      <th>pruned_clf_tree</th>
+      <td>0.81625</td>
+      <td>0.785185</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

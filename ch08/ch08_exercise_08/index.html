@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      8. Tree-based Methods &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">8. Tree-based Methods</h1>
+  	
+<h1 id="exercise-8-predicting-sales-in-carseats-dataset">Exercise 8: Predicting <code class="highlighter-rouge">Sales</code> in <code class="highlighter-rouge">Carseats</code> dataset</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-0.1">Preparing the data</a></span></li></ul></li><li><span><a href="#a-train-test-split" data-toc-modified-id="a.-Train-test-split-1">a. Train test split</a></span></li><li><span><a href="#b-regression-tree" data-toc-modified-id="b.-Regression-tree-2">b. Regression tree</a></span></li><li><span><a href="#c-cv-grid-search-for-optimal-regression-tree" data-toc-modified-id="c.-CV-Grid-search-for-optimal-regression-tree-3">c. CV Grid search for optimal regression tree</a></span></li><li><span><a href="#d-bagged-regression-tree" data-toc-modified-id="d.-Bagged-Regression-Tree-4">d. Bagged Regression Tree</a></span></li><li><span><a href="#e-random-forest" data-toc-modified-id="e.-Random-Forest-5">e. Random Forest</a></span></li></ul>
+</div>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<p>Information on the dataset can be <a href="https://cran.r-project.org/web/packages/ISLR/ISLR.pdf">found here</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">'whitegrid'</span><span class="p">)</span>
+
+<span class="n">carseats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'../../datasets/Carseats.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">carseats</span> <span class="o">=</span> <span class="n">carseats</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">carseats</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sales</th>
+      <th>CompPrice</th>
+      <th>Income</th>
+      <th>Advertising</th>
+      <th>Population</th>
+      <th>Price</th>
+      <th>ShelveLoc</th>
+      <th>Age</th>
+      <th>Education</th>
+      <th>Urban</th>
+      <th>US</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9.50</td>
+      <td>138</td>
+      <td>73</td>
+      <td>11</td>
+      <td>276</td>
+      <td>120</td>
+      <td>Bad</td>
+      <td>42</td>
+      <td>17</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11.22</td>
+      <td>111</td>
+      <td>48</td>
+      <td>16</td>
+      <td>260</td>
+      <td>83</td>
+      <td>Good</td>
+      <td>65</td>
+      <td>10</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10.06</td>
+      <td>113</td>
+      <td>35</td>
+      <td>10</td>
+      <td>269</td>
+      <td>80</td>
+      <td>Medium</td>
+      <td>59</td>
+      <td>12</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7.40</td>
+      <td>117</td>
+      <td>100</td>
+      <td>4</td>
+      <td>466</td>
+      <td>97</td>
+      <td>Medium</td>
+      <td>55</td>
+      <td>14</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.15</td>
+      <td>141</td>
+      <td>64</td>
+      <td>3</td>
+      <td>340</td>
+      <td>128</td>
+      <td>Bad</td>
+      <td>38</td>
+      <td>13</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">carseats</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 400 entries, 0 to 399
+Data columns (total 11 columns):
+Sales          400 non-null float64
+CompPrice      400 non-null int64
+Income         400 non-null int64
+Advertising    400 non-null int64
+Population     400 non-null int64
+Price          400 non-null int64
+ShelveLoc      400 non-null object
+Age            400 non-null int64
+Education      400 non-null int64
+Urban          400 non-null object
+US             400 non-null object
+dtypes: float64(1), int64(7), object(3)
+memory usage: 34.5+ KB
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">carseats</span><span class="p">[</span><span class="s">'ShelveLoc'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array(['Bad', 'Good', 'Medium'], dtype=object)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># convert categorical to numeric values</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+
+<span class="c"># label encoders</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">'ShelveLoc'</span><span class="p">,</span> <span class="s">'Urban'</span><span class="p">,</span> <span class="s">'US'</span><span class="p">]</span>
+<span class="n">encs</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span><span class="bp">None</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">encs</span><span class="p">:</span>
+    <span class="n">encs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">carseats</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="n">carseats</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">encs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">carseats</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
+<span class="n">carseats</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sales</th>
+      <th>CompPrice</th>
+      <th>Income</th>
+      <th>Advertising</th>
+      <th>Population</th>
+      <th>Price</th>
+      <th>ShelveLoc</th>
+      <th>Age</th>
+      <th>Education</th>
+      <th>Urban</th>
+      <th>US</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9.50</td>
+      <td>138</td>
+      <td>73</td>
+      <td>11</td>
+      <td>276</td>
+      <td>120</td>
+      <td>0</td>
+      <td>42</td>
+      <td>17</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11.22</td>
+      <td>111</td>
+      <td>48</td>
+      <td>16</td>
+      <td>260</td>
+      <td>83</td>
+      <td>1</td>
+      <td>65</td>
+      <td>10</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10.06</td>
+      <td>113</td>
+      <td>35</td>
+      <td>10</td>
+      <td>269</td>
+      <td>80</td>
+      <td>2</td>
+      <td>59</td>
+      <td>12</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7.40</td>
+      <td>117</td>
+      <td>100</td>
+      <td>4</td>
+      <td>466</td>
+      <td>97</td>
+      <td>2</td>
+      <td>55</td>
+      <td>14</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.15</td>
+      <td>141</td>
+      <td>64</td>
+      <td>3</td>
+      <td>340</td>
+      <td>128</td>
+      <td>0</td>
+      <td>38</td>
+      <td>13</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="a-train-test-split">a. Train test split</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">carseats</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Sales'</span><span class="p">]),</span> <span class="n">carseats</span><span class="p">[</span><span class="s">'Sales'</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="b-regression-tree">b. Regression tree</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span><span class="p">,</span> <span class="n">export_graphviz</span>
+
+<span class="n">reg_tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">min_samples_split</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">reg_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DecisionTreeRegressor(criterion='mse', max_depth=None, max_features=None,
+           max_leaf_nodes=None, min_impurity_decrease=0.0,
+           min_impurity_split=None, min_samples_leaf=1,
+           min_samples_split=5, min_weight_fraction_leaf=0.0,
+           presort=False, random_state=None, splitter='best')
+</code></pre></div></div>
+
+<p>For visualizing the tree, we found this <a href="https://towardsdatascience.com/interactive-visualization-of-decision-trees-with-jupyter-widgets-ca15dd312084">Medium article</a> helpful</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Source</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">reg_tree</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filled</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+                                    <span class="n">feature_names</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">SVG</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s">'svg'</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p><a href="/islr/assets/images/ch08_exercise_08_12_0.svg"><img src="/islr/assets/images/ch08_exercise_08_12_0.svg" alt="svg" /></a></p>
+
+<h2 id="c-cv-grid-search-for-optimal-regression-tree">c. CV Grid search for optimal regression tree</h2>
+
+<p>Currently <code class="highlighter-rouge">sklearn</code> doesn’t implement cost complexity pruning (at the time of writing it is an <a href="https://github.com/scikit-learn/scikit-learn/issues/6557">open issue on Github</a> and a <a href="https://github.com/scikit-learn/scikit-learn/pull/12887">pending  pull request</a> may fix the issue.</p>
+
+<p>In the meantime, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html">DecisionTreeRegressor</a> has many parameters one can vary for optimization.</p>
+<ul>
+  <li><code class="highlighter-rouge">max_depth</code> – the maximum depth of the tree.</li>
+  <li><code class="highlighter-rouge">min_samples_split</code> - The minimum number of samples required to split an internal node (this is a stopping criterion)</li>
+  <li><code class="highlighter-rouge">min_samples_leaf</code> - The minimum number of samples required to be at a leaf node.</li>
+  <li><code class="highlighter-rouge">max_leaf_nodes</code> - Grow a tree with max_leaf_nodes in best-first fashion.</li>
+  <li><code class="highlighter-rouge">min_impurity_decrease</code> - A node will be split if this split induces a decrease of the impurity greater than or equal to this value.</li>
+</ul>
+
+<p>This is a lot of parameters, and there is bound to be some coflict and redundancy in a grid search. We’ll make the parameter search a little faster with the following:</p>
+<ul>
+  <li>Booth <code class="highlighter-rouge">min_samples_leaf</code> and <code class="highlighter-rouge">min_samples_split</code> are stopping criterion, but we’ll go with <code class="highlighter-rouge">min_samples_split</code>, since it’s a less restrictive criterion.</li>
+  <li>Both <code class="highlighter-rouge">max_depth</code> and <code class="highlighter-rouge">max_leaf_nodes</code> both control tree depth, we’ll choose <code class="highlighter-rouge">max_depth</code>, again since it’s a less restrictive criterion.</li>
+</ul>
+
+<p>We would use a randomized search if the dataset were larger, but it’s small enough we can do an exhaustive (grid) search.</p>
+
+<p>We don’t optimize <code class="highlighter-rouge">max_features</code> even though this would likely improve performance, since that is effectively a random forest with one tree and we’ll be training a random forest model later in the exercise.</p>
+
+<p>This <a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_randomized_search.html"><code class="highlighter-rouge">sklearn</code> doc</a> was helpful</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span><span class="p">,</span> <span class="n">GridSearchCV</span>
+
+<span class="c"># parameter grid of size 1e3</span>
+
+<span class="n">depths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span>
+<span class="n">sample_splits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">impurity_decreases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">reg_tree_params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'max_depth'</span><span class="p">:</span> <span class="n">depths</span><span class="p">,</span> 
+              <span class="s">'min_samples_split'</span><span class="p">:</span> <span class="n">sample_splits</span><span class="p">,</span>
+              <span class="s">'min_impurity_decrease'</span><span class="p">:</span> <span class="n">impurity_decreases</span><span class="p">}</span>
+
+<span class="c"># search best case 1/10 of parameter grid</span>
+<span class="n">reg_tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="c"># use 6 fold CV because train size is 300</span>
+<span class="n">reg_tree_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">reg_tree</span><span class="p">,</span>
+                                <span class="n">param_grid</span><span class="o">=</span><span class="n">reg_tree_params</span><span class="p">,</span>
+                                <span class="n">cv</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                                <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">reg_tree_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>28 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reg_tree_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'max_depth': 8, 'min_impurity_decrease': 0.0, 'min_samples_split': 11}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 6-fold cv estimate of test rmse</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">reg_tree_search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.0189730868235154
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="c"># test set mse</span>
+<span class="n">final_reg_tree</span> <span class="o">=</span> <span class="n">reg_tree_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">reg_tree_test_mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">final_reg_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">reg_tree_test_mse</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.3843108670794915
+</code></pre></div></div>
+
+<h2 id="d-bagged-regression-tree">d. Bagged Regression Tree</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">BaggingRegressor</span>
+
+
+<span class="n">bag_reg_params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'n_estimators'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)}</span>
+<span class="n">bag_reg_tree</span> <span class="o">=</span> <span class="n">BaggingRegressor</span><span class="p">()</span>
+
+<span class="n">bag_reg_tree_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">bag_reg_tree</span><span class="p">,</span>
+                                   <span class="n">param_grid</span><span class="o">=</span><span class="n">bag_reg_params</span><span class="p">,</span>
+                                   <span class="n">cv</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                                   <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">bag_reg_tree_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>44.9 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bag_reg_tree_search</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'n_estimators': 51}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 6-fold cv estimate of test rmse</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">bag_reg_tree_search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.6309302986679604
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># test set mse</span>
+<span class="n">final_bag_reg_tree</span> <span class="o">=</span> <span class="n">bag_reg_tree_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">bag_reg_tree_test_mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">final_bag_reg_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">bag_reg_tree_test_mse</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.7220755952142313
+</code></pre></div></div>
+
+<h2 id="e-random-forest">e. Random Forest</h2>
+
+<p><code class="highlighter-rouge">sklearn</code>’s  <code class="highlighter-rouge">RandomForestRegressor</code> has a lot of parameters. We’ll use a tactic borrowed from <a href="https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74">this Medium article</a> - randomized search to narrow down the range for the parameters, then grid search to fine-tune.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span>
+
+<span class="n">random_forest_params</span> <span class="o">=</span> <span class="n">reg_tree_params</span>
+<span class="n">random_forest_params</span><span class="p">[</span><span class="s">'max_features'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">random_forest_params</span><span class="p">[</span><span class="s">'n_estimators'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">random_forest</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span>
+
+<span class="c"># random search to narrow the parameter space</span>
+<span class="n">random_forest_rsearch</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">random_forest</span><span class="p">,</span>
+                                   <span class="n">param_distributions</span><span class="o">=</span><span class="n">random_forest_params</span><span class="p">,</span>
+                                   <span class="n">n_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                                   <span class="n">cv</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                                   <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">,</span>
+                                   <span class="n">random_state</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
+
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">random_forest_rsearch</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2min 13s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random_forest_rsearch</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'n_estimators': 60,
+ 'min_samples_split': 5,
+ 'min_impurity_decrease': 0.0,
+ 'max_features': 6,
+ 'max_depth': 9}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># grid search to fine tune</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'n_estimators'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+          <span class="s">'min_samples_split'</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+          <span class="s">'min_impurity_decrease'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">],</span>
+          <span class="s">'max_features'</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> 
+           <span class="p">}</span>
+<span class="n">random_forest_cvsearch</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">random_forest</span><span class="p">,</span>
+                                      <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                                      <span class="n">cv</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                                      <span class="n">scoring</span><span class="o">=</span><span class="s">'neg_mean_squared_error'</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n1</span> <span class="o">-</span><span class="n">r1</span> <span class="n">random_forest_cvsearch</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4min 19s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random_forest_cvsearch</span><span class="o">.</span><span class="n">best_params_</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'max_features': 8,
+ 'min_impurity_decrease': 0.01,
+ 'min_samples_split': 2,
+ 'n_estimators': 43}
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 6-fold cv estimate of test rmse</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">random_forest_cvsearch</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.6234289198882141
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># test set mse</span>
+<span class="n">final_random_forest</span> <span class="o">=</span> <span class="n">random_forest_cvsearch</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">random_forest_test_mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">final_random_forest</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">random_forest_test_mse</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.712239660011634
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># feature importances</span>
+<span class="n">rf_feat_imp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'feature'</span><span class="p">:</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> 
+                            <span class="s">'importance'</span><span class="p">:</span> <span class="n">final_random_forest</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">})</span>
+<span class="n">rf_feat_imp</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'importance'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature</th>
+      <th>importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>Price</td>
+      <td>0.337647</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ShelveLoc</td>
+      <td>0.202521</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>CompPrice</td>
+      <td>0.132621</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Advertising</td>
+      <td>0.097423</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Age</td>
+      <td>0.088481</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Income</td>
+      <td>0.054456</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Population</td>
+      <td>0.037483</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Education</td>
+      <td>0.028029</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>US</td>
+      <td>0.015726</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Urban</td>
+      <td>0.005614</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

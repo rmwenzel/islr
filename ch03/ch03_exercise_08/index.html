@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      3. Linear Regression &middot; islr
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/islr/public/css/poole.css">
+  <link rel="stylesheet" href="/islr/public/css/syntax.css">
+  <link rel="stylesheet" href="/islr/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/islr/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/islr/public/favicon.ico">
+  --->
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!--- KaTeX --->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/islr/">Home</a>
+
+    
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch02/">2. Statistical Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch03/">3. Linear Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch04/">4. Logistic Regression</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch05/">5. Resampling Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch06/">6. Linear Model Selection and Regularization</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch07/">7. Moving Beyond Linearity</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch08/">8. Tree-Based Methods</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch09/">9. Support Vector Machines</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          <a class="sidebar-nav-item" href="/islr/ch10/">10. Unsupervised Learning</a>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2019.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/islr/" title="Home">islr</a>
+            <small>notes and exercises from An Introduction to Statistical Learning</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">3. Linear Regression</h1>
+  	<h1 id="exercise-8-simple-regression-of-mpg-on-horsepower-in-auto-dataset">Exercise 8: Simple regression of <code class="highlighter-rouge">mpg</code> on <code class="highlighter-rouge">horsepower</code> in <code class="highlighter-rouge">auto</code> dataset</h1>
+
+<div class="toc">
+  <ul class="toc-item"><li><span><a href="#preparing-the-dataset" data-toc-modified-id="Preparing-the-dataset-1">Preparing the dataset</a></span></li><li><span><a href="#a-fitting-the-model" data-toc-modified-id="a.-Fitting-the-model-2">a. Fitting the model</a></span><ul class="toc-item"><li><span><a href="#i-is-there-a-relationship-between-horsepower-and-mpg" data-toc-modified-id="i.-Is-there-a-relationship-between-horsepower-and-mpg?-2.1">i. Is there a relationship between <code>horsepower</code> and <code>mpg</code>?</a></span></li><li><span><a href="#ii-how-strong-is-the-relationship" data-toc-modified-id="ii.-How-strong-is-the-relationship?-2.2">ii. How strong is the relationship?</a></span></li><li><span><a href="#iii-is-the-relationship-positive-or-negative" data-toc-modified-id="iii.-Is-the-relationship-positive-or-negative?-2.3">iii. Is the relationship positive or negative?</a></span></li><li><span><a href="#iv-what-is-the-predicted-mpg-associated-with-a-horsepower-of-98-what-are-the-associated-95-confidence-and-prediction-intervals" data-toc-modified-id="iv.-What-is-the-predicted-mpg-associated-with-a-horsepower-of-98?-What-are-the-associated-95-%-confidence-and-prediction-intervals?-2.4">iv. What is the predicted <code>mpg</code> associated with a <code>horsepower</code> of 98? What are the associated 95 % confidence and prediction intervals?</a></span></li></ul></li><li><span><a href="#b-scatterplot-and-least-squares-line-plot" data-toc-modified-id="b.-Scatterplot-and-least-squares-line-plot-3">b. Scatterplot and least squares line plot</a></span></li><li><span><a href="#c-diagnostic-plots" data-toc-modified-id="c-diagnostic-plots-4">c. Diagnostic plots</a></span><ul class="toc-item"><li><span><a href="#studentized-residuals-vs-fitted-plot" data-toc-modified-id="Studentized-Residuals-vs.-Fitted-plot-4.1">Studentized Residuals vs. Fitted plot</a></span></li><li><span><a href="#qq-plot-of-residuals" data-toc-modified-id="QQ-plot-of-Residuals-4.2">QQ-plot of Residuals</a></span></li><li><span><a href="#scale-location-plot" data-toc-modified-id="Scale-location-plot-4.3">Scale-location plot</a></span></li><li><span><a href="#influence-plot" data-toc-modified-id="Influence-Plot-4.4">Influence Plot</a></span></li></ul></li><li><span><a href="#footnotes" data-toc-modified-id="Footnotes-5">Footnotes</a></span></li></ul>
+</div>
+
+<h2 id="preparing-the-dataset">Preparing the dataset</h2>
+
+<p>Import pandas, load the <code class="highlighter-rouge">Auto</code> dataset, and inspect</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">auto</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'http://www-bcf.usc.edu/~gareth/ISL/Auto.csv'</span><span class="p">)</span>
+<span class="n">auto</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-aligned: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-aligned: top;
+    }
+
+    .dataframe thead th {
+        text-aligned: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-aligned: right;">
+      <th></th>
+      <th>mpg</th>
+      <th>cylinders</th>
+      <th>displacement</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>year</th>
+      <th>origin</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>307.0</td>
+      <td>130</td>
+      <td>3504</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>chevrolet chevelle malibu</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15.0</td>
+      <td>8</td>
+      <td>350.0</td>
+      <td>165</td>
+      <td>3693</td>
+      <td>11.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>buick skylark 320</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>318.0</td>
+      <td>150</td>
+      <td>3436</td>
+      <td>11.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>plymouth satellite</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>16.0</td>
+      <td>8</td>
+      <td>304.0</td>
+      <td>150</td>
+      <td>3433</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>amc rebel sst</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17.0</td>
+      <td>8</td>
+      <td>302.0</td>
+      <td>140</td>
+      <td>3449</td>
+      <td>10.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>ford torino</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">auto</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 397 entries, 0 to 396
+Data columns (total 9 columns):
+mpg             397 non-null float64
+cylinders       397 non-null int64
+displacement    397 non-null float64
+horsepower      397 non-null object
+weight          397 non-null int64
+acceleration    397 non-null float64
+year            397 non-null int64
+origin          397 non-null int64
+name            397 non-null object
+dtypes: float64(3), int64(4), object(2)
+memory usage: 28.0+ KB
+</code></pre></div></div>
+
+<p>All the dtypes look good except <code class="highlighter-rouge">horsepower</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">auto</span><span class="o">.</span><span class="n">horsepower</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">auto</span><span class="o">.</span><span class="n">horsepower</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s">'coerce'</span><span class="p">)</span>
+<span class="n">auto</span><span class="o">.</span><span class="n">horsepower</span><span class="o">.</span><span class="n">dtype</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtype('float64')
+</code></pre></div></div>
+
+<h2 id="a-fitting-the-model">a. Fitting the model</h2>
+
+<p>There are lots of way to <a href="https://medium.freecodecamp.org/data-science-with-python-8-ways-to-do-linear-regression-and-measure-their-speed-b5577d75f8b">do simple linear regression with Python</a>. For statistical analysis, <code class="highlighter-rouge">statsmodel</code> is useful.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="n">sm</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># filter out null entries</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">auto</span><span class="o">.</span><span class="n">horsepower</span><span class="p">[</span><span class="n">auto</span><span class="o">.</span><span class="n">mpg</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">auto</span><span class="o">.</span><span class="n">horsepower</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">auto</span><span class="o">.</span><span class="n">mpg</span><span class="p">[</span><span class="n">auto</span><span class="o">.</span><span class="n">mpg</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">auto</span><span class="o">.</span><span class="n">horsepower</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+<span class="n">X</span>
+
+<span class="c"># add constant</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c"># create and fit model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c"># show results summary</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div></div>
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.606</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.605</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   599.7</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sat, 27 Oct 2018</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>08:23:54</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2361.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   390</td>      <th>  BIC:               </th> <td>   2369.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>      <td>   39.9359</td> <td>    0.717</td> <td>   55.660</td> <td> 0.000</td> <td>   38.525</td> <td>   41.347</td>
+</tr>
+<tr>
+  <th>horsepower</th> <td>   -0.1578</td> <td>    0.006</td> <td>  -24.489</td> <td> 0.000</td> <td>   -0.171</td> <td>   -0.145</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>16.432</td> <th>  Durbin-Watson:     </th> <td>   0.920</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  17.305</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.492</td> <th>  Prob(JB):          </th> <td>0.000175</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.299</td> <th>  Cond. No.          </th> <td>    322.</td>
+</tr>
+</table>
+<p><br /><br />Warnings:<br />[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</p>
+
+<p>Now to answer the questions</p>
+
+<h3 id="i-is-there-a-relationship-between-horsepower-and-mpg">i. Is there a relationship between <code class="highlighter-rouge">horsepower</code> and <code class="highlighter-rouge">mpg</code>?</h3>
+
+<p>This question is answered by testing the hypothesis</p>
+
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><msub><mi>β</mi><mn>1</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">H_0: \beta_1 = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></span>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>H</mi><mi>a</mi></msub><mo>:</mo><msub><mi>β</mi><mn>1</mn></msub><mi mathvariant="normal">≠</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">H_a: \beta_1 \neq 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></span></p>
+
+<p>In the results summary table above, the value <code class="highlighter-rouge">P&gt;|t|</code> in the row <code class="highlighter-rouge">horsepower</code> is the p-value for our hypothesis test. Since it’s <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>&lt;</mo><mn>0.5</mn><mi>e</mi><mo>−</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">&lt; 0.5e-3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">5</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span>, we reject <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">H_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and conclude there is a relationship between <code class="highlighter-rouge">mpg</code> and <code class="highlighter-rouge">hp</code></p>
+
+<h3 id="ii-how-strong-is-the-relationship">ii. How strong is the relationship?</h3>
+
+<p>This question is answered by checking the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">R^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> value.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="o">.</span><span class="n">rsquared</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.6059482578894348
+</code></pre></div></div>
+
+<p>It’s hard to interpret this based on the current state of my knowledge about the data. Interpretation is discussed on page 70 of the book, but it’s not clear where this problem fits into that discussion.</p>
+
+<p>Given <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>min</mi><mo>⁡</mo><mo stretchy="false">(</mo><msup><mi>R</mi><mn>2</mn></msup><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\min(R^2) = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mop">min</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> indicates no relationship and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><msup><mi>R</mi><mn>2</mn></msup><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\max(R^2) = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> indicates a perfect (linear) relationship, I’ll say this is a somewhat strong relationship.</p>
+
+<h3 id="iii-is-the-relationship-positive-or-negative">iii. Is the relationship positive or negative?</h3>
+
+<p>This is given by the sign of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>β</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\beta_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="o">.</span><span class="n">params</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const         39.935861
+horsepower    -0.157845
+dtype: float64
+</code></pre></div></div>
+
+<p>Since <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>β</mi><mn>1</mn></msub><mo>=</mo><mo>−</mo><mn>0.157845</mn></mrow><annotation encoding="application/x-tex">\beta_1 = -0.157845</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">0</span><span class="mord">.</span><span class="mord">1</span><span class="mord">5</span><span class="mord">7</span><span class="mord">8</span><span class="mord">4</span><span class="mord">5</span></span></span></span>, the relationship is negative</p>
+
+<h3 id="iv-what-is-the-predicted-mpg-associated-with-a-horsepower-of-98-what-are-the-associated-95-confidence-and-prediction-intervals">iv. What is the predicted <code class="highlighter-rouge">mpg</code> associated with a <code class="highlighter-rouge">horsepower</code> of 98? What are the associated 95/ confidence and prediction intervals?</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">98</span><span class="p">])</span>
+<span class="n">pred_df</span> <span class="o">=</span> <span class="n">prediction</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">()</span>
+<span class="n">pred_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-aligned: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-aligned: top;
+    }
+
+    .dataframe thead th {
+        text-aligned: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-aligned: right;">
+      <th></th>
+      <th>mean</th>
+      <th>mean_se</th>
+      <th>mean_ci_lower</th>
+      <th>mean_ci_upper</th>
+      <th>obs_ci_lower</th>
+      <th>obs_ci_upper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>24.467077</td>
+      <td>0.251262</td>
+      <td>23.973079</td>
+      <td>24.961075</td>
+      <td>14.809396</td>
+      <td>34.124758</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>The predicted value for <code class="highlighter-rouge">mpg</code>=98 is</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pred_df</span><span class="p">[</span><span class="s">'mean'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    24.467077
+Name: mean, dtype: float64
+</code></pre></div></div>
+
+<p>The confidence interval is</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">pred_df</span><span class="p">[</span><span class="s">'mean_ci_lower'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pred_df</span><span class="p">[</span><span class="s">'mean_ci_upper'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(23.97307896070394, 24.961075344320907)
+</code></pre></div></div>
+
+<p>While the prediction interval is</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">pred_df</span><span class="p">[</span><span class="s">'obs_ci_lower'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pred_df</span><span class="p">[</span><span class="s">'obs_ci_upper'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(14.809396070967116, 34.12475823405773)
+</code></pre></div></div>
+
+<h2 id="b-scatterplot-and-least-squares-line-plot">b. Scatterplot and least squares line plot</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># setup</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">'seaborn-white'</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">'white'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>For convenience, assemble the results in a new dataframe</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># get full prediction results</span>
+<span class="n">pred_df</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">()</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">()</span>
+
+<span class="c"># rename columns to avoid `mean` name conflicts and other confusions</span>
+<span class="n">new_names</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">pred_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">'mean'</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">new_names</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'mean'</span><span class="p">,</span> <span class="s">'mpg_pred'</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s">'obs_ci'</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">new_names</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'obs_ci'</span><span class="p">,</span> <span class="s">'mpg_pred_pi'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_names</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+<span class="n">pred_df</span> <span class="o">=</span> <span class="n">pred_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">new_names</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s">'columns'</span><span class="p">)</span>
+
+<span class="c"># concat mpg, horsepower and prediction results in dataframe</span>
+<span class="n">model_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">pred_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+  <style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-aligned: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-aligned: top;
+    }
+
+    .dataframe thead th {
+        text-aligned: right;
+    }
+</style>
+
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-aligned: right;">
+      <th></th>
+      <th>const</th>
+      <th>horsepower</th>
+      <th>mpg</th>
+      <th>mpg_pred</th>
+      <th>mpg_pred_se</th>
+      <th>mpg_pred_ci_lower</th>
+      <th>mpg_pred_ci_upper</th>
+      <th>mpg_pred_pi_lower</th>
+      <th>mpg_pred_pi_upper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>130.0</td>
+      <td>18.0</td>
+      <td>19.416046</td>
+      <td>0.297444</td>
+      <td>18.831250</td>
+      <td>20.000841</td>
+      <td>9.753295</td>
+      <td>29.078797</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>165.0</td>
+      <td>15.0</td>
+      <td>13.891480</td>
+      <td>0.462181</td>
+      <td>12.982802</td>
+      <td>14.800158</td>
+      <td>4.203732</td>
+      <td>23.579228</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>150.0</td>
+      <td>18.0</td>
+      <td>16.259151</td>
+      <td>0.384080</td>
+      <td>15.504025</td>
+      <td>17.014277</td>
+      <td>6.584598</td>
+      <td>25.933704</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>150.0</td>
+      <td>16.0</td>
+      <td>16.259151</td>
+      <td>0.384080</td>
+      <td>15.504025</td>
+      <td>17.014277</td>
+      <td>6.584598</td>
+      <td>25.933704</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>140.0</td>
+      <td>17.0</td>
+      <td>17.837598</td>
+      <td>0.337403</td>
+      <td>17.174242</td>
+      <td>18.500955</td>
+      <td>8.169775</td>
+      <td>27.505422</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">model_df</span><span class="o">.</span><span class="n">horsepower</span><span class="p">,</span> <span class="n">model_df</span><span class="o">.</span><span class="n">mpg</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s">'grey'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">model_df</span><span class="o">.</span><span class="n">horsepower</span><span class="p">,</span> <span class="n">model_df</span><span class="o">.</span><span class="n">mpg_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'r'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch03_exercise_08_27_1.png" alt="png" /></p>
+
+<h2 id="c-diagnostic-plots">c. Diagnostic plots</h2>
+
+<p>This exercise uses R’s <a href="https://www.rdocumentation.org/packages/graphics/versions/3.5.1/topics/plot"><code class="highlighter-rouge">plot()</code> function</a>, which by default returns <a href="https://data.library.virginia.edu/diagnostic-plots/">four diagnostic plots</a>. We’ll recreate those plots in python <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<h3 id="studentized-residuals-vs-fitted-plot">Studentized Residuals vs. Fitted plot</h3>
+
+<p>This helps identify non-linearity</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># add studentized residuals to the dataframe</span>
+<span class="n">model_df</span><span class="p">[</span><span class="s">'resid'</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">resid</span>
+
+<span class="c"># studentized residuals vs. predicted values plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">model_df</span><span class="o">.</span><span class="n">mpg_pred</span><span class="p">,</span> <span class="n">model_df</span><span class="o">.</span><span class="n">resid</span><span class="o">/</span><span class="n">model_df</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">lowess</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+            <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s">'color'</span><span class="p">:</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'lw'</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s">'facecolors'</span><span class="p">:</span><span class="s">'grey'</span><span class="p">,</span> <span class="s">'edgecolors'</span><span class="p">:</span><span class="s">'grey'</span><span class="p">,</span> <span class="s">'alpha'</span><span class="p">:</span><span class="mf">0.4</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'studentized resid'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0,0.5,'studentized resid')
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch03_exercise_08_30_1.png" alt="png" /></p>
+
+<p>This is a pretty clear indication of non-linearity (see p93) of text). We can also see some outliers</p>
+
+<h3 id="qq-plot-of-residuals">QQ-plot of Residuals</h3>
+
+<p>This tests the assumption that the errors are normally distributed</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># plot standardized residuals against a standard normal distribution</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">model_df</span><span class="o">.</span><span class="n">resid</span><span class="o">/</span><span class="n">model_df</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s">'grey'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'studentized resid quantiles'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'standard normal quantiles'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch03_exercise_08_33_1.png" alt="png" /></p>
+
+<p>In this case there’s good agreement with the normality assumption</p>
+
+<h3 id="scale-location-plot">Scale-location plot</h3>
+
+<p>This tests the assumption of homoscedasticity (equal variance) of the errors</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">model_df</span><span class="o">.</span><span class="n">mpg_pred</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">model_df</span><span class="o">.</span><span class="n">resid</span><span class="o">/</span><span class="n">model_df</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">std</span><span class="p">())),</span> <span class="n">lowess</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+            <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s">'color'</span><span class="p">:</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'lw'</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s">'facecolors'</span><span class="p">:</span><span class="s">'grey'</span><span class="p">,</span> <span class="s">'edgecolors'</span><span class="p">:</span><span class="s">'grey'</span><span class="p">,</span> <span class="s">'alpha'</span><span class="p">:</span><span class="mf">0.4</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'√|studentized resid|'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch03_exercise_08_36_1.png" alt="png" /></p>
+
+<p>In this case, the assumptions seems unjustified.</p>
+
+<h3 id="influence-plot">Influence Plot</h3>
+
+<p>This helps identify influence points, i.e. points with an “outsize” effect on the model <sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># scatterplot of leverage vs studentized residuals</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span><span class="o">.</span><span class="n">hat_matrix_diag</span><span class="p">,</span> <span class="n">model_df</span><span class="o">.</span><span class="n">resid</span><span class="o">/</span><span class="n">model_df</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> 
+            <span class="n">lowess</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+            <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s">'color'</span><span class="p">:</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'lw'</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s">'facecolors'</span><span class="p">:</span><span class="s">'grey'</span><span class="p">,</span> <span class="s">'edgecolors'</span><span class="p">:</span><span class="s">'grey'</span><span class="p">,</span> <span class="s">'alpha'</span><span class="p">:</span><span class="mf">0.4</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'leverage'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'studentized resid'</span><span class="p">)</span>
+
+<span class="c"># plot Cook's distance contours for D = 0.5, D = 1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axes</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">'dashed'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">'dashed'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/islr/assets/images/ch03_exercise_08_39_1.png" alt="png" /></p>
+
+<p>No point in this plot has both high leverage and high residual, and all the points in this plot are within the Cook’s distance contours, so we conclude that there are no high influence points</p>
+
+<h2 id="footnotes">Footnotes</h2>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="https://medium.com/@emredjan/emulating-r-regression-plots-in-python-43741952c034">This Medium article</a> addresses the same issue. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="https://stats.stackexchange.com/questions/266597/plotting-cooks-distance-lines">This Cross-Validated question</a> was helpful in figuring out how to plot the Cook’s distance. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', functione. {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>
