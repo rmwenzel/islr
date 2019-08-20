@@ -1,5 +1,12 @@
+---
+layout: page
+title: 7. Moving Beyond Linearity
+---
 
-# Predicting `Outstate` in `College` dataset with FSS and GAM
+
+{% katexmm %}
+
+# Exercise 10: Predicting `Outstate` in `College` dataset with FSS and GAM
 
 ## Preparing the data
 
@@ -399,7 +406,7 @@ sns.boxplot(data=data)
 
 
 
-![png](ch07_exercise_10_files/ch07_exercise_10_6_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_10_6_1.png)
 
 
 ## a. Train-test split and Forward Stepwise Selection
@@ -584,7 +591,7 @@ plt.show()
 ```
 
 
-![png](ch07_exercise_10_files/ch07_exercise_10_17_0.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_10_17_0.png)
 
 
 ## c. Evaluate on test set
@@ -679,4 +686,4 @@ np.sqrt(mean_squared_error(gam2_search.predict(X_test), y_test))
 
     0.495656037843246
 
-
+{% endkatexmm %}

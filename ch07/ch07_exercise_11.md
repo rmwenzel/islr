@@ -1,5 +1,13 @@
+---
+layout: page
+title: 7. Moving Beyond Linearity
+---
 
-# Exploring backfitting for multiple linear regression
+{% katexmm %}
+
+# Exercise 11: Exploring backfitting for multiple linear regression
+
+<div class="toc"><ul class="toc-item"><li><span><a href="#a-generating-some-data" data-toc-modified-id="a.-Generating-some-data-1">a. Generating some data</a></span></li><li><span><a href="#b-Setting-initial-value-for-hat-beta-1." data-toc-modified-id="#b-Setting-initial-value-for-hat-beta-1.-2">b. Setting initial value for $\hat{\beta}_1$.</a></span></li><li><span><a href="#c-fitting-y-hat-beta-1X-1" data-toc-modified-id="c.-Fitting-y-hat-beta-1X-1-3">c. Fitting $Y - \hat{\beta}_1X_1$</a></span></li><li><span><a href="#d-fitting-y-hat-beta-2-X-2" data-toc-modified-id="d.-Fitting-y-hat-beta-2-X-2-4">d. Fitting $Y - \hat{\beta}_2 X_2$</a></span></li><li><span><a href="#e-f-backfitting-to-estimate-ols-multiple-regression-coefficients" data-toc-modified-id="e.,-f.-Backfitting-to-estimate-OLS-multiple-regression-coefficients-5">e., f. Backfitting to estimate OLS multiple regression coefficients</a></span></li><li><span><a href="#g-how-may-iterations-needed-for-a-good-approximation" data-toc-modified-id="g.-How-may-iterations-needed-for-a-good-approximation?-6">g. How may iterations needed for a good approximation?</a></span></li></ul></div>
 
 ## a. Generating some data
 
@@ -33,7 +41,7 @@ ax.scatter3D(X_1, X_2, Y, c=Y)
 
 
 
-![png](ch07_exercise_11_files/ch07_exercise_11_3_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_11_3_1.png)
 
 
 ## b. Setting initial value for $\hat{\beta}_1$.
@@ -261,7 +269,7 @@ plt.legend()
 
 
 
-![png](ch07_exercise_11_files/ch07_exercise_11_17_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_11_17_1.png)
 
 
 ## g. How may iterations needed for a good approximation?
@@ -424,5 +432,6 @@ backfit_coefs - mreg_coefs
 </div>
 
 
-
 The differences are all exceedingly small after only a few iterations
+
+{% endkatexmm %}

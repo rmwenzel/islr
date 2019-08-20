@@ -1,5 +1,14 @@
+---
+layout: page
+title: 7. Moving Beyond Linearity
+---
 
-# Using non-linear multiple regression to predict `wage` in `Wage` dataset
+
+{% katexmm %}
+
+# Exercise 7: Using non-linear multiple regression to predict `wage` in `Wage` dataset
+
+<div class="toc"><ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span><ul class="toc-item"><li><span><a href="#loading" data-toc-modified-id="Loading-1.1">Loading</a></span></li><li><span><a href="#cleaning" data-toc-modified-id="Cleaning-1.2">Cleaning</a></span><ul class="toc-item"><li><span><a href="#drop-columns" data-toc-modified-id="Drop-columns-1.2.1">Drop columns</a></span></li><li><span><a href="#convert-to-numerical-dtypes" data-toc-modified-id="Convert-to-numerical-dtypes-1.2.2">Convert to numerical dtypes</a></span></li></ul></li><li><span><a href="#preprocessing" data-toc-modified-id="Preprocessing-1.3">Preprocessing</a></span><ul class="toc-item"><li><span><a href="#scaling-the-numerical-variables" data-toc-modified-id="Scaling-the-numerical-variables-1.3.1">Scaling the numerical variables</a></span></li></ul></li></ul></li><li><span><a href="#fitting-some-nonlinear-models" data-toc-modified-id="Fitting-some-nonlinear-models-2">Fitting some nonlinear models</a></span><ul class="toc-item"><li><span><a href="#polynomial-ridge-regression" data-toc-modified-id="Polynomial-Ridge-Regression-2.1">Polynomial Ridge Regression</a></span></li><li><span><a href="#local-regression" data-toc-modified-id="Local-Regression-2.2">Local Regression</a></span></li><li><span><a href="#gams" data-toc-modified-id="GAMs-2.3">GAMs</a></span><ul class="toc-item"><li><span><a href="#gams-with-pygam" data-toc-modified-id="GAMs-with-pyGAM-2.3.1">GAMs with <code>pyGAM</code></a></span></li></ul></li></ul></li><li><span><a href="#model-selection" data-toc-modified-id="Model-Selection-3">Model Selection</a></span></li><li><span><a href="#improvements" data-toc-modified-id="Improvements-4">Improvements</a></span></li></ul></div>
 
 We're modifying the exercise a bit to consider multiple regression (as opposed to considering different predictors individually). It's not hard to see how the techniques of this chapter generalize to the multiple regression setting.
 
@@ -804,7 +813,7 @@ sns.distplot(wage['wage'])
 
 
 
-![png](ch07_exercise_07_files/ch07_exercise_07_42_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_07_42_1.png)
 
 
 
@@ -856,7 +865,7 @@ sns.scatterplot(x=wage.index, y=wage['wage'].sort_values(), alpha=0.4, color='gr
 
 
 
-![png](ch07_exercise_07_files/ch07_exercise_07_49_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_07_49_1.png)
 
 
 There appears to be a break point around 250. Let's take all rows with wage less than this
@@ -1074,3 +1083,5 @@ mse_df
 
 
 There was a considerable improvement for the polynomial ridge and local regression models.
+
+{% endkatexmm %}

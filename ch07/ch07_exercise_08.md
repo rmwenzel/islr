@@ -1,5 +1,14 @@
+---
+layout: page
+title: 7. Moving Beyond Linearity
+---
 
-# Investigating non-linear relationships in `Auto` dataset
+
+{% katexmm %}
+
+# Exercise 8: Investigating non-linear relationships in `Auto` dataset
+
+<div class="toc"><ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span><ul class="toc-item"><li><span><a href="#import" data-toc-modified-id="Import-1.1">Import</a></span></li><li><span><a href="#encode-categorical-variables" data-toc-modified-id="Encode-categorical-variables-1.2">Encode categorical variables</a></span></li></ul></li><li><span><a href="#inspecting-the-data" data-toc-modified-id="Inspecting-the-Data-2">Inspecting the Data</a></span></li><li><span><a href="#modeling-some-non-linear-relationships-with-mpg" data-toc-modified-id="Modeling-some-non-linear-relationships-with-mpg-3">Modeling some non-linear relationships with <code>mpg</code></a></span><ul class="toc-item"><li><span><a href="#local-regression" data-toc-modified-id="Local-Regression-3.1">Local Regression</a></span></li><li><span><a href="#Polynomial-Regression" data-toc-modified-id="Polynomial-Regression-3.2">Polynomial Regression</a></span></li><li><span><a href="#cubic-p-spline-regression" data-toc-modified-id="Cubic-P-Spline-Regression-3.3">Cubic P-Spline Regression</a></span></li><li><span><a href="#model-comparison" data-toc-modified-id="Model-Comparison-3.4">Model Comparison</a></span></li><li><span><a href="#optimal-models-and-their-test-errors" data-toc-modified-id="Optimal-models-and-their-test-errors-3.5">Optimal models and their test errors</a></span></li><li><span><a href="#analysis-of-optimal-models" data-toc-modified-id="Analysis-of-optimal-models-3.6">Analysis of optimal models</a></span></li><li><span><a href="#mpg-vs-accleration" data-toc-modified-id="mpg-vs-accleration-3.7"><code>mpg</code> vs <code>accleration</code></a></span></li><li><span><a href="#mpg-vs-weight" data-toc-modified-id="mpg-vs.-weight-3.8"><code>mpg</code> vs. <code>weight</code></a></span></li><li><span><a href="#mpg-vs-horsepower" data-toc-modified-id="mpg-vs.-horsepower-3.9"><code>mpg</code> vs. <code>horsepower</code></a></span></li><li><span><a href="#mpg-vs-displacement" data-toc-modified-id="mpg-vs.-displacement-3.10"><code>mpg</code> vs. <code>displacement</code></a></span></li></ul></li><li><span><a href="#gam-for-predicting-mpg" data-toc-modified-id="GAM-for-predicting-mpg-4">GAM for predicting <code>mpg</code></a></span><ul class="toc-item"><li><span><a href="#find-variables-with-linear-relationships-to-mpg" data-toc-modified-id="Find-variables-with-linear-relationships-to-mpg-4.1">Find variables with linear relationships to <code>mpg</code></a></span></li><li><span><a href="#train-gam" data-toc-modified-id="Train-GAM-4.2">Train GAM</a></span></li><li><span><a href="#compare-to-alternative-regression-models" data-toc-modified-id="Compare-to-alternative-regression-models-4.3">Compare to alternative regression models</a></span></li></ul></li></ul></div>
 
 ## Preparing the data
 
@@ -281,7 +290,7 @@ sns.pairplot(data=auto, diag_kind='kde', plot_kws={'alpha':0.5},
 
 
 
-![png](ch07_exercise_08_files/ch07_exercise_08_10_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_08_10_1.png)
 
 
 Observations:
@@ -693,7 +702,7 @@ plot_results('acc', acc)
 ```
 
 
-![png](ch07_exercise_08_files/ch07_exercise_08_35_0.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_08_35_0.png)
 
 
 Observations:
@@ -772,7 +781,7 @@ plot_results('wt', wt)
 ```
 
 
-![png](ch07_exercise_08_files/ch07_exercise_08_39_0.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_08_39_0.png)
 
 
 Observations:
@@ -876,7 +885,7 @@ plot_results('hp', hp)
 ```
 
 
-![png](ch07_exercise_08_files/ch07_exercise_08_46_0.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_08_46_0.png)
 
 
 Observations:
@@ -980,7 +989,7 @@ plot_results('dp', dp)
 ```
 
 
-![png](ch07_exercise_08_files/ch07_exercise_08_53_0.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_08_53_0.png)
 
 
 Observations:
@@ -1403,3 +1412,4 @@ ridge.best_params_
     {'poly__degree': 3, 'ridge__alpha': 1.0}
 
 
+{% endkatexmm %}

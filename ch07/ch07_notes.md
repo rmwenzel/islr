@@ -1,14 +1,19 @@
+---
+layout: page
+title: 7. Moving Beyond Linearity
+---
 
-<h1>Table of Contents<span class="tocSkip"></span></h1>
-<div class="toc"><ul class="toc-item"><li><span><a href="#Moving-Beyond-Linearity" data-toc-modified-id="Moving-Beyond-Linearity-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>Moving Beyond Linearity</a></span><ul class="toc-item"><li><span><a href="#Polynomial-Regression" data-toc-modified-id="Polynomial-Regression-7.1"><span class="toc-item-num">7.1&nbsp;&nbsp;</span>Polynomial Regression</a></span></li><li><span><a href="#Step-Functions" data-toc-modified-id="Step-Functions-7.2"><span class="toc-item-num">7.2&nbsp;&nbsp;</span>Step Functions</a></span></li><li><span><a href="#Basis-Functions" data-toc-modified-id="Basis-Functions-7.3"><span class="toc-item-num">7.3&nbsp;&nbsp;</span>Basis Functions</a></span></li><li><span><a href="#Regression-Splines" data-toc-modified-id="Regression-Splines-7.4"><span class="toc-item-num">7.4&nbsp;&nbsp;</span>Regression Splines</a></span><ul class="toc-item"><li><span><a href="#Piecewise-Polynomials" data-toc-modified-id="Piecewise-Polynomials-7.4.1"><span class="toc-item-num">7.4.1&nbsp;&nbsp;</span>Piecewise Polynomials</a></span></li><li><span><a href="#Constraints-and-Splines" data-toc-modified-id="Constraints-and-Splines-7.4.2"><span class="toc-item-num">7.4.2&nbsp;&nbsp;</span>Constraints and Splines</a></span></li><li><span><a href="#The-Spline-Basis-Representation" data-toc-modified-id="The-Spline-Basis-Representation-7.4.3"><span class="toc-item-num">7.4.3&nbsp;&nbsp;</span>The Spline Basis Representation</a></span></li><li><span><a href="#Choosing-the-Number-and-the-Locations-of-the-Knots" data-toc-modified-id="Choosing-the-Number-and-the-Locations-of-the-Knots-7.4.4"><span class="toc-item-num">7.4.4&nbsp;&nbsp;</span>Choosing the Number and the Locations of the Knots</a></span></li><li><span><a href="#Comparison-to-Polynomial-Regression" data-toc-modified-id="Comparison-to-Polynomial-Regression-7.4.5"><span class="toc-item-num">7.4.5&nbsp;&nbsp;</span>Comparison to Polynomial Regression</a></span></li></ul></li><li><span><a href="#Smoothing-Splines" data-toc-modified-id="Smoothing-Splines-7.5"><span class="toc-item-num">7.5&nbsp;&nbsp;</span>Smoothing Splines</a></span><ul class="toc-item"><li><span><a href="#An-Overview-of-Smoothing-Splines" data-toc-modified-id="An-Overview-of-Smoothing-Splines-7.5.1"><span class="toc-item-num">7.5.1&nbsp;&nbsp;</span>An Overview of Smoothing Splines</a></span></li><li><span><a href="#Choosing-the-Smoothing-Parameter-$\lambda$" data-toc-modified-id="Choosing-the-Smoothing-Parameter-$\lambda$-7.5.2"><span class="toc-item-num">7.5.2&nbsp;&nbsp;</span>Choosing the Smoothing Parameter $\lambda$</a></span></li></ul></li><li><span><a href="#Local-Regression" data-toc-modified-id="Local-Regression-7.6"><span class="toc-item-num">7.6&nbsp;&nbsp;</span>Local Regression</a></span></li><li><span><a href="#Generalized-Additive-Models" data-toc-modified-id="Generalized-Additive-Models-7.7"><span class="toc-item-num">7.7&nbsp;&nbsp;</span>Generalized Additive Models</a></span><ul class="toc-item"><li><span><a href="#GAMs-for-Regression-Problems" data-toc-modified-id="GAMs-for-Regression-Problems-7.7.1"><span class="toc-item-num">7.7.1&nbsp;&nbsp;</span>GAMs for Regression Problems</a></span></li><li><span><a href="#GAMs-for-Classification-Problems" data-toc-modified-id="GAMs-for-Classification-Problems-7.7.2"><span class="toc-item-num">7.7.2&nbsp;&nbsp;</span>GAMs for Classification Problems</a></span></li></ul></li><li><span><a href="#Footnotes" data-toc-modified-id="Footnotes-7.8"><span class="toc-item-num">7.8&nbsp;&nbsp;</span>Footnotes</a></span></li></ul></li></ul></div>
-
-___
 # Moving Beyond Linearity
-___
+
+{% katexmm %}
+
+<h2>Table of Contents<span class="tocSkip"></span></h2>
+<div class="toc"><ul class="toc-item"><li><span><a href="#moving-beyond-linearity" data-toc-modified-id="Moving-Beyond-Linearity-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>Moving Beyond Linearity</a></span><ul class="toc-item"><li><span><a href="#polynomial-regression" data-toc-modified-id="Polynomial-Regression-7.1"><span class="toc-item-num">7.1&nbsp;&nbsp;</span>Polynomial Regression</a></span></li><li><span><a href="#step-functions" data-toc-modified-id="Step-Functions-7.2"><span class="toc-item-num">7.2&nbsp;&nbsp;</span>Step Functions</a></span></li><li><span><a href="#basis-functions" data-toc-modified-id="Basis-Functions-7.3"><span class="toc-item-num">7.3&nbsp;&nbsp;</span>Basis Functions</a></span></li><li><span><a href="#regression-splines" data-toc-modified-id="Regression-Splines-7.4"><span class="toc-item-num">7.4&nbsp;&nbsp;</span>Regression Splines</a></span><ul class="toc-item"><li><span><a href="#piecewise-polynomials" data-toc-modified-id="Piecewise-Polynomials-7.4.1"><span class="toc-item-num">7.4.1&nbsp;&nbsp;</span>Piecewise Polynomials</a></span></li><li><span><a href="#constraints-and-splines" data-toc-modified-id="Constraints-and-Splines-7.4.2"><span class="toc-item-num">7.4.2&nbsp;&nbsp;</span>Constraints and Splines</a></span></li><li><span><a href="#the-spline-basis-representation" data-toc-modified-id="The-Spline-Basis-Representation-7.4.3"><span class="toc-item-num">7.4.3&nbsp;&nbsp;</span>The Spline Basis Representation</a></span></li><li><span><a href="#choosing-the-number-and-the-locations-of-the-knots" data-toc-modified-id="Choosing-the-Number-and-the-Locations-of-the-Knots-7.4.4"><span class="toc-item-num">7.4.4&nbsp;&nbsp;</span>Choosing the Number and the Locations of the Knots</a></span></li><li><span><a href="#comparison-to-polynomial-regression" data-toc-modified-id="Comparison-to-Polynomial-Regression-7.4.5"><span class="toc-item-num">7.4.5&nbsp;&nbsp;</span>Comparison to Polynomial Regression</a></span></li></ul></li><li><span><a href="#smoothing-splines" data-toc-modified-id="Smoothing-Splines-7.5"><span class="toc-item-num">7.5&nbsp;&nbsp;</span>Smoothing Splines</a></span><ul class="toc-item"><li><span><a href="#an-overview-of-smoothing-splines" data-toc-modified-id="An-Overview-of-Smoothing-Splines-7.5.1"><span class="toc-item-num">7.5.1&nbsp;&nbsp;</span>An Overview of Smoothing Splines</a></span></li><li><span><a href="#choosing-the-smoothing-parameter-lambda" data-toc-modified-id="Choosing-the-Smoothing-Parameter-lambda-7.5.2"><span class="toc-item-num">7.5.2&nbsp;&nbsp;</span>Choosing the Smoothing Parameter $\lambda$</a></span></li></ul></li><li><span><a href="#local-regression" data-toc-modified-id="Local-Regression-7.6"><span class="toc-item-num">7.6&nbsp;&nbsp;</span>Local Regression</a></span></li><li><span><a href="#generalized-additive-models" data-toc-modified-id="Generalized-Additive-Models-7.7"><span class="toc-item-num">7.7&nbsp;&nbsp;</span>Generalized Additive Models</a></span><ul class="toc-item"><li><span><a href="#gams-for-regression-problems" data-toc-modified-id="GAMs-for-Regression-Problems-7.7.1"><span class="toc-item-num">7.7.1&nbsp;&nbsp;</span>GAMs for Regression Problems</a></span></li><li><span><a href="#gams-for-classification-problems" data-toc-modified-id="GAMs-for-Classification-Problems-7.7.2"><span class="toc-item-num">7.7.2&nbsp;&nbsp;</span>GAMs for Classification Problems</a></span></li></ul></li><li><span><a href="#footnotes" data-toc-modified-id="Footnotes-7.8"><span class="toc-item-num">7.8&nbsp;&nbsp;</span>Footnotes</a></span></li></ul></li></ul></div>
+
 
 ## Polynomial Regression
 
-- ***Simple polynomial regression*** is a regression model which is polynomial<sup><a href='#foot54' id='ref54'>54</a></sup> in the feature variable X
+- ***Simple polynomial regression*** is a regression model which is polynomial [^1] in the feature variable X
 
 $$Y = \beta_0 + \sum_{i = 1}^d \beta_iX^d$$
 - The model can be fit as a simple linear regression model with predictors $X_1, \dots, X_d = X, \dots X^d$.
@@ -29,12 +34,14 @@ $$Y = \beta_0 + \sum_{i = 1}^d \beta_iX^d$$
 - Step functions model the target function as locally constant by converting the continuous variable $X$ into an ***ordered categorical variable***.as follows
     - Choose $K$ points $c_1, \dots, c_K \in [\min(X), \max(X)]$
     - Define $K + 1$ "dummy" variables
-    \begin{align}
+    $$
+    \begin{aligned}
     C_0(X) &= I(X < c_1)\\
     C_i(X) &= I(c_i \leqslant X < c_{i+1})\qquad 1 \leqslant i \leqslant K - 1\\
     C_K(X) &= I(c_K \leqslant X)
-    \end{align}
-    - Fit a linear regression model to the predictors $C_1, \dots, C_K$<sup><a href='#foot55' id='ref55'>55</a>
+    \end{aligned}
+    $$
+    - Fit a linear regression model to the predictors $C_1, \dots, C_K$ [^2]
 
 ##### Advantages
 
@@ -51,7 +58,7 @@ In general, we can fit a regression model
 
 $$Y = \beta_0 + \sum_{i=1}^Kb_i(X)$$
 
-where the $b_i(X)$ are called ***basis functions*** <sup><a href='#foot56' id='ref56'>56</a>
+where the $b_i(X)$ are called ***basis functions*** [^3]
     
 
 ##### Advantages
@@ -130,12 +137,12 @@ Often gives superior results to polynomial regression -- the latter must use hig
 
 ### An Overview of Smoothing Splines
 
-- A ***smoothing spline*** <sup><a href='#foot57' id='ref57'>57</a></sup> is a function
+- A ***smoothing spline*** [^4] is a function
 
 $$\hat{g}_\lambda = \underset{g}{\text{argmin}\,}\sum_{i=1}^n(y_i - g(x_i))^2 + \lambda \int g''(t)^2\,dt$$
-    where $\lambda = 0$ is a tuning parameter<sup><a href='#foot58' id='ref58'>58</a>
+    where $\lambda = 0$ is a tuning parameter [^5]
 - $\lambda$ controls the bias-variance tradeoff. $\lambda = 0$ corresponds to the ***interpolation spline*** which fits all the data points exactly and will be thus woefull overfit. In the limit $\lambda \rightarrow \infty$, $\hat{g}_\lambda$ approaches the least squares line
-- It can be show that the function $\hat{g}_\lambda$ is a piecewise cubic polynomial with knots at the unique $x_i$ and continuous first and second derivatives at the knots <sup><a href='#foot59' id='ref59'>59</a></sup>
+- It can be show that the function $\hat{g}_\lambda$ is a piecewise cubic polynomial with knots at the unique $x_i$ and continuous first and second derivatives at the knots [^6]
 
 
 ### Choosing the Smoothing Parameter $\lambda$
@@ -144,7 +151,7 @@ $$\hat{g}_\lambda = \underset{g}{\text{argmin}\,}\sum_{i=1}^n(y_i - g(x_i))^2 + 
 - The effective degress of freedom is defined to be
 $$df_\lambda = \text{trace}(S_\lambda)$$
 where $S_\lambda$ is the matrix such that $\mathbf{\hat{g}}_\lambda = S_\lambda \mathbf{y}$ where $\mathbf{\hat{g}}$ is the vector of fitted values.
-- $\lambda$ can be chosen by cross-validation. LOOCV is particularly efficient to compute <sup><a href='#foot60' id='ref60'>60</a></sup>
+- $\lambda$ can be chosen by cross-validation. LOOCV is particularly efficient to compute [^7]
 
 $$RSS_{cv}(\lambda) = \sum_{i=1}^n (y_i - \hat{g}_\lambda^{(-i)}(x_i))^2 = \sum_{i=1}^n\left(\frac{y_i - \hat{g}_\lambda(x_i)}{1-tr(S_{\lambda})}\right)^2 $$
 
@@ -165,7 +172,7 @@ $$RSS_{cv}(\lambda) = \sum_{i=1}^n (y_i - \hat{g}_\lambda^{(-i)}(x_i))^2 = \sum_
 
 ##### Algorithm: $K$-nearest neighbors regression
 
-Fix the parameter<sup><a href='#foot61' id='ref61'>61</a></sup> $1 \leqslant k \leqslant n$. For each $X_=x_0$:
+Fix the parameter [^8] $1 \leqslant k \leqslant n$. For each $X_=x_0$:
 1. Get the neighborhood $N_{i0}= \{k\ \text{closest}\ x_i\}$. 
 2. Assign a weight $K_{i0} = K(x_i, x_0)$ to each point $x_i$ such that such that 
     - each point outside $x_i\notin N_{i0}$ has $K_{i0}(x_i)=0$.
@@ -182,13 +189,13 @@ A ***Generalized additive model*** is a model which is a sum of nonlinear functi
 
 ### GAMs for Regression Problems
 
-- A GAM for regression  <sup><a href='#foot62' id='ref62'>62</a></sup> is a model
+- A GAM for regression [^9] is a model
 
 $$Y =\beta_0 + \sum_{j=1}^p f_j(X_j) + \epsilon$$
 
 where the functions $f_j$ are smooth non-linear functions.
 
-- GAMs can be used to combine methods from this chapter -- one can fit different nonlinear functions $f_j$ to the predictors $X_j$ <sup><a href='#foot63' id='ref63'>63</a></sup>
+- GAMs can be used to combine methods from this chapter -- one can fit different nonlinear functions $f_j$ to the predictors $X_j$ [^10]
 - Standard software can fit GAMs with smoothing splines via [***backfitting***](https://en.wikipedia.org/wiki/Backfitting_algorithm)
 
 ##### Advantages
@@ -216,73 +223,22 @@ where $p_k(X) =\text{Pr}(Y = k\ |\ X)$.
 ___
 ## Footnotes
 
-<p>
-</p>
+[^1]: In statistical literature, polynomial regression is sometimes referred to as linear regression. This is because the model is linear in the population parameters $\beta_i$. 
 
-<div id="foot54"> 54. In statistical literature, polynomial regression is sometimes referred to as linear regression. This is because the model is linear in the population parameters $\beta_i$. 
-<a href="#ref54">↩</a>
-</div>
+[^2]: The variable $C_0(X)$ accounts for an intercept. Alternatively fit a linear model to $C_0, \dots, C_K$ with no intercept.
 
-<p>
-</p>
+[^3]: Such a model amounts to the assumption that the target function lives in a finite-dimensional subspace of the vector space of all functions $f:X\rightarrow Y$.
 
-<div id="foot55"> 55. The variable $C_0(X)$ accounts for an intercept. Alternatively fit a linear model to $C_0, \dots, C_K$ with no intercept.
-<a href="#ref55">↩</a>
-</div>
+[^4]: The function $g$ is not guaranteed to be smooth in the sense of infinitely differentiable. The penalty on the second derivative (curvature) penalizes the "roughness" or "wiggliness" of $g$, hence "smoothes out" noise in the data. Other penalties <a href="https://en.wikipedia.org/wiki/Smoothing_spline">have been used</a>
 
-<p>
-</p>
+[^5]:  A tuning parameter is also called a <a href="https://en.wikipedia.org/wiki/Hyperparameter">hyperparameter</a>
 
-<div id="foot56"> 56. Such a model amounts to the assumption that the target function lives in a finite-dimensional subspace of the vector space of all functions $f:X\rightarrow Y$.
-<a href="#ref56">↩</a>
-</div>
+[^6]: Thus $\hat{g}$ is a natural cubic spline with knots at the $x_i$. However, it is not the spline one obtains in [§7.4.3](#The-Spline-Basis-Representation). It is a "shrunken" version, where $\lambda$ controls the shrinkage.
 
-<p>
-</p>
+[^7]: Compare to a similar formula in <a href="#Leave-One-Out-Cross-Validation"> §5.1.2 </a>
 
-<div id="foot57"> 57. The function $g$ is not guaranteed to be smooth in the sense of infinitely differentiable. The penalty on the second derivative (curvature) penalizes the "roughness" or "wiggliness" of $g$, hence "smoothes out" noise in the data. Other penalties <a href="https://en.wikipedia.org/wiki/Smoothing_spline">have been used</a>
-<a href="#ref57">↩</a>
-</div>
+[^8]: Our description of the algorithm deviates a bit from the book, but it's equivalent. 
 
-<p>
-</p>
+[^9]: "Additive" because we are summing the $f_i$. "Generalized" because it generalizes from the linear functions $\beta_jX_j$ in ordinary linear regression.
 
-<div id="foot58"> 58. A tuning parameter is also called a <a href="https://en.wikipedia.org/wiki/Hyperparameter">hyperparameter</a>
-<a href="#ref58">↩</a>
-</div>
-
-<p>
-</p>
-
-<div id="foot59"> 59. Thus $\hat{g}$ is a natural cubic spline with knots at the $x_i$. However, it is not the spline one obtains in [§7.4.3](#The-Spline-Basis-Representation). It is a "shrunken" version, where $\lambda$ controls the shrinkage.
-<a href="#ref59">↩</a>
-</div>
-
-<p>
-</p>
-
-<div id="foot60"> 60. Compare to a similar formula in <a href="#Leave-One-Out-Cross-Validation"> §5.1.2 </a>
-<a href="#ref60">↩</a>
-</div>
-
-<p>
-</p>
-
-<div id="foot61"> 61. Our description of the algorithm deviates a bit from the book, but it's equivalent. 
-<a href="#ref61">↩</a>
-</div>
-
-<p>
-</p>
-
-<div id="foot62"> 62. "Additive" because we are summing the $f_i$. "Generalized" because it generalizes from the linear functions $\beta_jX_j$ in ordinary linear regression.
-<a href="#ref62">↩</a>
-</div>
-
-<p>
-</p>
-
-<div id="foot63"> 63. It's not hard to see that (with the exception of local regression), all the models discussed in this chapter can be seen as special cases of GAM.
-    
-<a href="#ref63">↩</a>
-</div>
+{% endkatexmm %}

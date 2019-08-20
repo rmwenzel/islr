@@ -5,7 +5,7 @@ markdown:            kramdown
 
 # Setup
 title:               islr
-tagline:             ''
+tagline:             'notes and exercises from An Introduction to Statistical Learning'
 description:         'Notes and exercises from Introduction to Statistical Learning'
 url:                 127.0.0.1:4000
 baseurl:             /islr
@@ -16,6 +16,6 @@ author:
   url:               https://rmwenzel.com
   email:             rmwenzel@uw.edu
 
+kramdown:
+  parse_block_html: true
 
-plugins:
-  - jekyll-katex

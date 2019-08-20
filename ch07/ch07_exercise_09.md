@@ -1,5 +1,13 @@
+---
+layout: page
+title: 7. Moving Beyond Linearity
+---
 
-# Nonlinear models for predicting `nox` using `dis` in `Boston` dataset
+{% katexmm %}
+
+# Exercise 9: Nonlinear models for predicting `nox` using `dis` in `Boston` dataset
+
+<div class="toc"><ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span></li><li><span><a href="#a-cubic-regression" data-toc-modified-id="a.-Cubic-regression-2">a. Cubic regression</a></span></li><li><span><a href="#b-polynomial-regression-for-degree-d-1-10" data-toc-modified-id="b.-Polynomial-regression-for-degree-d-=-1,-...-,10-3">b. Polynomial regression for degree d = 1, ... ,10</a></span></li><li><span><a href="#c-optimizing-the-degree-of-the-polynomial-regression-model" data-toc-modified-id="c.-Optimizing-the-degree-of-the-polynomial-regression-model-4">c. Optimizing the degree of the polynomial regression model</a></span></li><li><span><a href="#d-cubic-spline-regression-with-4-degrees-of-freedom" data-toc-modified-id="d.--Cubic-spline-regression-with-4-degrees-of-freedom-5">d.  Cubic spline regression with 4 degrees of freedom</a></span></li><li><span><a href="#e-cubic-spline-regression-with-degrees-of-freedom-d-4-11" data-toc-modified-id="e.-Cubic-spline-regression-with-degrees-of-freedom-d-=-4,-...-,11-6">e. Cubic spline regression with degrees of freedom d = 4, ... ,11</a></span></li><li><span><a href="#f-optimizing-the-degrees-of-freedom-of-the-cubic-spline-model" data-toc-modified-id="f.-Optimizing-the-degrees-of-freedom-of-the-cubic-spline-model-7">f. Optimizing the degrees of freedom of the cubic spline model</a></span></li></ul></div>
 
 ## Preparing the data
 
@@ -220,7 +228,7 @@ sns.scatterplot(x=X, y=y, color='grey', alpha=0.5)
 
 
 
-![png](ch07_exercise_09_files/ch07_exercise_09_9_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_09_9_1.png)
 
 
 ## b. Polynomial regression for degree $d = 1,\dots, 10$
@@ -242,7 +250,7 @@ for (i, d) in enumerate(regs):
 ```
 
 
-![png](ch07_exercise_09_files/ch07_exercise_09_11_0.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_09_11_0.png)
 
 
 ## c. Optimizing the degree of the polynomial regression model
@@ -303,7 +311,7 @@ np.sqrt(-poly_reg_search.best_score_)
 
 
 
-## d.  Cubic spline regression with $4$ degrees of freedom
+## d.  Cubic spline regression with 4 degrees of freedom
 
 For this we'll use [`patsy`](https://patsy.readthedocs.io/en/latest/) Python module. This [blog post](https://www.analyticsvidhya.com/blog/2018/03/introduction-regression-splines-python-codes/) was helpful. 
 
@@ -341,7 +349,7 @@ sns.scatterplot(x=X, y=y, color='grey', alpha=0.5)
 
 
 
-![png](ch07_exercise_09_files/ch07_exercise_09_20_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_09_20_1.png)
 
 
 
@@ -380,7 +388,7 @@ for (i, d) in enumerate(range(4, 12)):
 ```
 
 
-![png](ch07_exercise_09_files/ch07_exercise_09_23_0.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_09_23_0.png)
 
 
 ## f. Optimizing the degrees of freedom of the cubic spline model
@@ -490,7 +498,9 @@ sns.lineplot(x=spline_cvs['dofs'], y = spline_cvs['cv_rmses'], color='red')
 
 
 
-![png](ch07_exercise_09_files/ch07_exercise_09_26_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_09_26_1.png)
 
 
 By cross-validation, (for this choice of knots), 5 is the best number of degrees of freedom
+
+{% endkatexmm %}

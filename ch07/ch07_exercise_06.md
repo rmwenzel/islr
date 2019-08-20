@@ -1,5 +1,14 @@
+---
+layout: page
+title: 7. Moving Beyond Linearity
+---
 
-# Using polynomial and step function regression to predict `wage` using `age` in `Wage` dataset
+{% katexmm %}
+
+# Exercise 6: Using polynomial and step function regression to predict `wage` using `age` in `Wage` dataset
+
+
+<div class="toc"><ul class="toc-item"><li><span><a href="#preparing-the-data" data-toc-modified-id="Preparing-the-data-1">Preparing the data</a></span></li><li><span><a href="#a-predict-wage-with-age-using-polynomial-regression-with-L2-penalty." data-toc-modified-id="a.-Predict-wage-with-age-using-polynomial-regression-with-L2-penalty.-2">a. Predict <code>wage</code> with <code>age</code> using polynomial regression with L2 penalty.</a></span></li><li><span><a href="#b-predict-wage-with-age-using-step-function-regression" data-toc-modified-id="b.-Predict-wage-with-age-using-step-function-regression-3">b. Predict <code>wage</code> with <code>age</code> using step function regression</a></span></li></ul></div>
 
 ## Preparing the data
 
@@ -238,7 +247,7 @@ sns.distplot(X_sc, color='red')
 
 
 
-![png](ch07_exercise_06_files/ch07_exercise_06_15_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_06_15_1.png)
 
 
 Now to use these parameters on the original data to get a real mse test reading
@@ -284,7 +293,7 @@ sns.scatterplot(X, y, color='grey', alpha=0.4)
 
 
 
-![png](ch07_exercise_06_files/ch07_exercise_06_19_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_06_19_1.png)
 
 
 ## b. Predict `wage` with `age` using step function regression
@@ -322,7 +331,7 @@ sns.lineplot(x=bin_reg_df['n_cuts'], y=bin_reg_df['mse_test'], color='red')
 
 
 
-![png](ch07_exercise_06_files/ch07_exercise_06_23_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_06_23_1.png)
 
 
 
@@ -371,5 +380,7 @@ sns.scatterplot(X, y, color='grey', alpha=0.4)
 
 
 
-![png](ch07_exercise_06_files/ch07_exercise_06_26_1.png)
+![png]({{site.baseurl}}/assets/images/ch07_exercise_06_26_1.png)
+
+{% endkatexmm %}
 
