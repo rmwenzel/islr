@@ -1,5 +1,3 @@
-# An Introduction to Statistical Learning
-
 Code and exercises from 
 [An Introduction to Statistical Learning](https://www-bcf.usc.edu/~gareth/ISL/).
 
