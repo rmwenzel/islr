@@ -18,18 +18,19 @@ title: 10. Unsupervised Learning
 
 ## Principal Components Analysis
 
-- Principal components were discussed earlier as a dimensional reduction methof in the [context of regression](#Principal-Components-Regression). They provide a low-dimensional representation of the data that contains as much variation as possible.
+- Principal components were discussed earlier as a dimensional reduction method in the [context of regression](#Principal-Components-Regression). They provide a low-dimensional representation of the data that contains as much variation as possible.
 - ***Principal Components Analysis*** is the process of computing principal components and using them in data analysis.
 
 ### What Are Principal Components?
 
-- The ***first principal component*** of features $X_1, \dots, X_p$ is the normalized linear combination $$ Z_1 = \hat{\phi}_1^\top X$$ 
-  where $X = (X_1, \dots, X_p), \hat{\phi}_1\in \mathbb{R}^p$ and $|| \hat{\phi} ||  = 1$. The vector $\hat{\phi}_1$ is called the ***loading*** vector (its entries are called the ***loadings***) and
+- The ***first principal component*** of features $X_1, \dots, X_p$ is the normalized linear combination $$ Z_1 = \hat{\phi}_1^\top X$$ where $X = (X_1, \dots, X_p)$ and
+
 $$ \hat{\phi}_1 = \underset{\underset{||\phi|| = 1}{\phi \in \mathbb{R}^p}}{\text{argmax}}\left(\frac{1}{n}\sum_{i=1}^n \left(\phi^\top x_i\right)^2\right)$$ 
 
-- Assume we have data $X_i$ with features $X_1, \dots, X_p$ which is centered in the features (each feature has mean zero).  The objective function in the above optimization problem can be rewritten $$ \hat{\phi}_1 = \underset{\phi \in \mathbb{R}^p}{\text{argmax}}\left(\frac{1}{n}\sum_{i=1}^n ||z_i ||^2\right)$$
+  The vector $\hat{\phi}_1$ is called the ***loading*** vector (its entries are called the ***loadings***) 
+- Assume we have data $X_i$ with features $X_1, \dots, X_p$ which is centered in the features (each feature has mean zero).  The objective function in the above optimization problem can be rewritten $$ \hat{\phi}_1 = \underset{\phi \in \mathbb{R}^p}{\text{argmax}}\left(\frac{1}{n}\sum_{i=1}^n ||z_{i1} ||^2\right)$$
   which is just the sample variance. The $z_{i1}$ are called the ***scores*** of the first principal component $Z_1$.
-- The first principal component has a nice geometric interpretation [^1]. The loading vector $\phi_{1}$ defines a direction in $\mathbb{R}^p$ along which the variation is maximized. The principal component scores $z_{i1}$ are the projections of the data $x_i$ onto $\phi_1$ -- that is, the components of the $x_i$ along this direction.
+- The first principal component has a nice geometric interpretation [^1]. The loading vector $\hat{\phi}_{1}$ defines a direction in $\mathbb{R}^p$ along which the variation is maximized. The principal component scores $z_{i1}$ are the projections of the data $x_i$ onto $\hat{\phi}_1$ -- that is, the components of the $x_i$ along this direction.
 - For $j = 2,...,p$ we can compute the $j$-th principal component $\phi_j$ recursively 
 
 $$ \hat{\phi}_j = \underset{\phi \in \mathbb{R}^p}{\text{argmax}}\left(\frac{1}{n}\sum_{i=1}^n \left(\phi^\top x_i\right)^2\right)$$ 
@@ -42,7 +43,7 @@ $$\phi_j^\top \phi_{j - 1} = 0$$.
 ### Another Interpretation of Principal Components
 
 - Principal components can also be seen as providing low-dimensional surfaces that are "closest" to the observations.
-- The span of the first $M$ loading vectors $\phi_1, \dots, \phi_M$ can be seen as the $M$-dimensional linear subspaces of $\mathbb{R}^p$ which is closest to the observations $x_i$ [^4]
+- The span of the first $M$ loading vectors $\phi_1, \dots, \phi_M$ can be seen as the $M$-dimensional linear subspace of $\mathbb{R}^p$ which is closest to the observations $x_i$ [^4]
 - Together the principal components $Z_1, \dots, Z_M$ and loading vectors $\phi_1, \dots, \phi_M$ can be seen as an $M$-dimensional approximation [^5]  of each observation
 
 $$x_{ij} \approx \sum_{m = 1}^M z_{im}\phi_{jm}$$
