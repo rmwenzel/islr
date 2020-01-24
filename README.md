@@ -15,7 +15,7 @@ Find these in `/datasets`
 
 ## Notes and Exercises
 
-Notes and exercises are organized by chapter in a directory `/<chapter name` which contains:
+Notes and exercises are organized by chapter in a directory like `/<chapter name` which contains:
 
 - `<chapter_name>_notes.ipynb` - Jupyter notebook of chapter notes for writing. All cells are Markdown, and there is no executable code. Contains a lot of LaTeX which is slow to render in Jupyter Notebook.
 - `<chapter_name>_notes.slides.html` - Html of chapter notes for easy reading. LaTeX is rendered once-and-for-all, and well.
